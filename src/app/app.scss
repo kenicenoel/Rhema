@@ -1,4 +1,9 @@
+@import './assets/fonts/InterUI/inter-ui.css';
 
+*
+{
+  font-family: 'Inter UI','Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
 .ion-ios-customHome,
 .ion-md-customHome {
   content: url('../assets/imgs/tabs/mobile.svg');

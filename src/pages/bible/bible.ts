@@ -1,8 +1,8 @@
-import { DataProvider } from './../../providers/data/data';
 import { BibleBook } from './../../models/bible-book';
+import { ReadBookPage } from './../read-book/read-book';
+import { DataProvider } from './../../providers/data/data';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Observable } from '../../../node_modules/rxjs';
 
 
 @IonicPage()
@@ -12,12 +12,13 @@ import { Observable } from '../../../node_modules/rxjs';
 })
 export class BiblePage {
   
-  bible$: Observable<BibleBook[]>;
+ 
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) {}
 
-  ionViewWillLoad()
+  loadBook(book: BibleBook)
   {
-    this.bible$ = this.data.getLocalBibleData();
+    this.navCtrl.push(ReadBookPage, {book: book});
   }
+  
 
 }

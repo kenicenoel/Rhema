@@ -1,3 +1,5 @@
+import { ZeroPadPipe } from './../pipes/zero-pad/zero-pad';
+import { ReadBookPage } from './../pages/read-book/read-book';
 import { ProfilePage } from './../pages/profile/profile';
 import { BiblePage } from './../pages/bible/bible';
 import { TabsPage } from './../pages/tabs/tabs';
@@ -20,7 +22,9 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     TabsPage,
     BiblePage,
     ProfilePage,
-    SpeakPage
+    SpeakPage,
+    ReadBookPage,
+    ZeroPadPipe
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     TabsPage,
     BiblePage,
     SpeakPage,
-    ProfilePage
+    ProfilePage,
+    ReadBookPage
   ],
   providers: [
     StatusBar,

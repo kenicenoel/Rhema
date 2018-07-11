@@ -1,6 +1,6 @@
-export interface BibleBook
-{
+export interface BibleBook {
     abbrev: string;
-    chapters: string [];
+    chapters?: ((string)[] | null)[] | null;
     name: string;
-}
+  }
+  

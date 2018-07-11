@@ -1,0 +1,35 @@
+page-read-book 
+{
+    .viewBooksButton
+    {
+        width: 24px;
+        vertical-align: middle;
+    }
+    .bookTitle
+    {
+        font-weight: 900;
+        text-align: center;
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    .chapterNumber
+    {
+        font-size: 1.5em;
+        font-weight: 700;
+        text-align: center;
+
+    }
+
+    .chapterNumber::before, .chapterNumber::after
+    {
+        content: " - "
+    }
+
+  
+    .verseNumber
+    {
+        font-weight: 500;
+        color: #f53d3d;
+    }
+}

@@ -1,26 +1,40 @@
-import { Observable } from 'rxjs/Rx';
+import { BibleBook } from './../../models/bible-book';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { BibleBook } from '../../models/bible-book';
+
 
 @Injectable()
 export class DataProvider {
 
-  bibleData: any;
+  bibleData: BibleBook[];
   constructor(public http: HttpClient) 
   { 
     this.getLocalBibleData();
   }
 
- getLocalBibleData(): Observable<BibleBook[]>
+ getLocalBibleData()
  {
-    return this.http.get('../assets/bibles/kjv_en.json')
-    .map((res: Response) => res.json())
+    this.http.get<BibleBook[]>('../assets/bibles/kjv_en.json').subscribe(response => 
+    {
+     this.bibleData = response;
+     console.log(response);
+     
+    }, 
+    error =>
+    {
+      console.log("Sorry. Something went wrong. Here's the problem: "+ error);
+      
+    })
+  
  }
 
  get bible()
  {
    return this.bibleData;
  }
+
+ 
 }

@@ -1,0 +1,18 @@
+
+<ion-content padding>
+  <div class="container">
+      <ng-container>
+          <img class="viewBooksButton" (click)="returnToBooks()" src="assets/imgs/ui/books.svg" />
+          <h4 class="bookTitle">{{ selectedBook.name }}</h4>
+      </ng-container>
+    <div *ngFor="let chapter of selectedBook.chapters; let chapterNumber = index">
+      <p class="chapterNumber">Chapter {{chapterNumber +1 }}</p>
+      <ng-container class="chapter" *ngFor="let verse of chapter; let verseNumber = index">
+        <p>
+          <span class="verseNumber">{{ verseNumber +1 }}</span>
+          {{ verse }}
+        </p>
+      </ng-container>
+    </div>
+  </div>
+</ion-content>

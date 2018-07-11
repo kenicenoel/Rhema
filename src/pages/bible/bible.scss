@@ -1,3 +1,45 @@
-page-bible {
+page-bible 
+{
 
+   ion-content
+    {
+        background-color: #EBECEE;
+    }
+
+    ion-card
+    {
+        background: #E8E9EB;
+        padding-bottom: 50px;
+        
+    }
+    .card-title
+    {
+        display: inline;
+        font-weight: 900;
+        font-size: 1.1em;
+        color: #222;
+        text-align: center;
+    }
+
+    .card-abbrev
+    {
+        display: inline-block;
+        border-radius: 80%;
+        padding: 10px;
+        float: right;
+        background: #2DD67B;
+        color: #fff;
+        font-weight: 500;
+        min-width: 35px;
+    }
+
+    .card-subtitle
+    {
+        text-align: center;
+        font-size: 0.9em;
+        display: inline;
+        color: #667E96;
+        margin-left: 10px;
+
+    }
 }
