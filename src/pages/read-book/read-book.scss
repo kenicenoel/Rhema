@@ -32,4 +32,10 @@ page-read-book
         font-weight: 500;
         color: #f53d3d;
     }
+
+    .searchbar-md, .searchbar-ios, .searchbar-input
+    {
+        display: inline;
+        max-width: 60%;
+    }
 }

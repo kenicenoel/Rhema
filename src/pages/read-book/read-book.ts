@@ -12,9 +12,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ReadBookPage {
 
   selectedBook: BibleBook;
+  showMenu: boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams) 
   {
     this.selectedBook = navParams.get('book');
+  }
+
+  toggleMenu()
+  {
+    this.showMenu = !this.showMenu;
   }
 
   returnToBooks()
