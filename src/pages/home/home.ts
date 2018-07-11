@@ -1,3 +1,4 @@
+import { DataProvider } from './../../providers/data/data';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -5,10 +6,15 @@ import { NavController } from 'ionic-angular';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage 
+{
 
-  constructor(public navCtrl: NavController) {
+  isListening: boolean = false;
+  constructor(public navCtrl: NavController, public data: DataProvider) {}
+ 
+  
 
-  }
+  
+  
 
 }
