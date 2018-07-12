@@ -1,12 +1,13 @@
 
-<ion-content class="bibleBooks">
+<ion-content class="bgStyle">
   <div class="chapters">
       <ion-grid>
         <ion-row>
           <ion-col col-6 *ngFor="let book of data.bible; let i = index">
-              <ion-card padding  (click)= "loadBook(book)">  
-                  <div class="card-title">{{ book.name }}</div>
+              <ion-card class="bibleCard" padding  (click)= "loadBook(book)">  
                   <div class="card-abbrev"> <img class="bookIcon" [src]="getBibleIcon(book.name)"> </div>
+                  <div class="card-title">{{ book.name }}</div>
+                   <div class="card-footer"><ion-note>{{ book.chapters.length }} Chapters</ion-note></div>
               </ion-card>
           </ion-col>
         </ion-row>

@@ -1,15 +1,11 @@
 page-bible 
 {
 
-   ion-content
+    .bibleCard
     {
-        background-color: #EBECEE;
-    }
-
-    ion-card
-    {
-        background: #E8E9EB;
+        background: #ffffff;
         padding-bottom: 50px;
+        border-radius: 8px;
         
     }
     .card-title
@@ -45,6 +41,10 @@ page-bible
         display: inline;
         color: #667E96;
         margin-left: 10px;
+    }
 
+    .card-footer
+    {
+        margin-top: 20px;
     }
 }

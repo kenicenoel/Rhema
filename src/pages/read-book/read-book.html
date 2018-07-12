@@ -11,13 +11,15 @@
     <ion-toolbar color="highlight" class="submenu" *ngIf="showMenu">
           <ion-grid>
             <ion-row>
-              <ion-col>
+              <ion-col col-5>
                 <ion-label stacked>Chapter</ion-label>
                 <ion-select class="filter" [(ngModel)]="chapter">
                   <ion-option value= -1 >Entire book</ion-option>
                   <ion-option *ngFor="let chapter of placeholderBookChapters" [value]="chapter-1">Chapter {{ chapter }} </ion-option>
                 </ion-select>
               </ion-col>
+              <ion-col><div class="black"></div></ion-col>
+              <ion-col><div class="white"></div></ion-col>
             </ion-row>
           </ion-grid>
       
@@ -30,7 +32,7 @@
     <div *ngFor="let chapter of selectedBook.chapters; let chapterNumber = index">
       <p class="chapterNumber">Chapter {{chapterNumber +1 }}</p>
       <ng-container class="chapter" *ngFor="let verse of chapter; let verseNumber = index">
-        <p>
+        <p class="verse">
           <span class="verseNumber">{{ verseNumber +1 }}</span>
           {{ verse }}
         </p>

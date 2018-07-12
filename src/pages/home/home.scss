@@ -1,19 +1,17 @@
 page-home
 {
-   
-    color: #F0F0F0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   .container
+   {
+       margin-top: 80px;
+   }
 
-
-
-    ion-icon
-    {
-        font-size: 100px;
-        text-align: center;
-        margin: 0 auto;
-        display: block;
-        
-    }
+   .title
+   {
+       display: block;
+       font-weight: 900;
+       font-size: 1.3em;
+       color: #222;
+   }
 
 }
 
