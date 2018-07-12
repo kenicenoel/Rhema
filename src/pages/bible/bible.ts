@@ -85,6 +85,7 @@ const bibleIcons = [
 'assets/imgs/bible/color/zechariah.png',
 'assets/imgs/bible/color/zephaniah.png'
 ]
+
 @IonicPage()
 @Component({
   selector: 'page-bible',
@@ -92,7 +93,7 @@ const bibleIcons = [
 })
 export class BiblePage {
   
- 
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) {}
 
   loadBook(book: BibleBook)
@@ -102,14 +103,15 @@ export class BiblePage {
 
   getBibleIcon(name: string)
   {
-    let lowercaseName = name.toLowerCase().replace(' ', '-');
-    console.log(lowercaseName);
+    let lowercaseName = name.toLowerCase().split(' ').join('-');
+   
     
     let path = bibleIcons.filter(iconPath => 
       
-      iconPath.toLowerCase().includes(lowercaseName))[0];
+      iconPath.toLowerCase().includes(lowercaseName) ||
+      iconPath.toLowerCase().includes(lowercaseName.substr(3)))[0];
     
-    // return path;
+    return path;
       
   }
   

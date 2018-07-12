@@ -14,7 +14,7 @@ page-bible
     }
     .card-title
     {
-        display: inline;
+        display: block;
         font-weight: 900;
         font-size: 1.1em;
         color: #222;
@@ -23,11 +23,9 @@ page-bible
 
     .card-abbrev
     {
-        display: inline-block;
+        display: block;
         border-radius: 80%;
         padding: 10px;
-        float: right;
-        // background: #2DD67B;
         color: #fff;
         font-weight: 500;
         min-width: 35px;
@@ -36,6 +34,8 @@ page-bible
     .bookIcon
     {
         width: 64px;
+        display: block;
+        margin: auto;
     }
 
     .card-subtitle

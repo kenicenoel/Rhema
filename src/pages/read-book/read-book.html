@@ -9,21 +9,24 @@
         </ion-buttons>
     </ion-toolbar>
     <ion-toolbar color="highlight" class="submenu" *ngIf="showMenu">
-      <ng-container>
-          <ion-select class="filter" [(ngModel)]="chapter">
-              <ion-option disabled>Chapter</ion-option>
-              <ion-option *ngFor="let chapter of selectedBook.chapters; let ch = index" [value]="ch+1">Ch {{ ch+1 }} </ion-option>
-          </ion-select>
-<!-- 
-          <ion-select class="filter" [(ngModel)]="verse">
-              <ion-option disabled>Verse</ion-option>
-              <ion-option *ngFor="let verse of chapter; let v = index" [value]="v+1">V {{ v+1 }} </ion-option>
-          </ion-select> -->
-      </ng-container>  
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-label stacked>Chapter</ion-label>
+                <ion-select class="filter" [(ngModel)]="chapter">
+                  <ion-option value= -1 >Entire book</ion-option>
+                  <ion-option *ngFor="let chapter of placeholderBookChapters" [value]="chapter-1">Chapter {{ chapter }} </ion-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      
+
+          
     </ion-toolbar>
   </ion-header>
 <ion-content padding>
-  <div class="container">
+  <div class="container" *ngIf="chapter == -1; else filter">
     <div *ngFor="let chapter of selectedBook.chapters; let chapterNumber = index">
       <p class="chapterNumber">Chapter {{chapterNumber +1 }}</p>
       <ng-container class="chapter" *ngFor="let verse of chapter; let verseNumber = index">
@@ -34,4 +37,15 @@
       </ng-container>
     </div>
   </div>
+  <ng-template #filter>
+      <div>
+          <p class="chapterNumber">Chapter {{ chapter+1 }}</p>
+          <ng-container class="chapter" *ngFor="let verse of filteredChapter; let verseNumber = index">
+            <p>
+              <span class="verseNumber">{{ verseNumber +1 }}</span>
+              {{ verse }}
+            </p>
+          </ng-container>
+        </div>
+  </ng-template>
 </ion-content>
