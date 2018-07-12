@@ -9,10 +9,13 @@ import { NavController } from 'ionic-angular';
 export class HomePage 
 {
 
-  isListening: boolean = false;
+  currentDate: string;
   constructor(public navCtrl: NavController, public data: DataProvider) {}
  
-  
+  ionViewWillEnter()
+  {
+    this.currentDate = new Date().toDateString();
+  }
 
   
   

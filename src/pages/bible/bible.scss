@@ -27,10 +27,15 @@ page-bible
         border-radius: 80%;
         padding: 10px;
         float: right;
-        background: #2DD67B;
+        // background: #2DD67B;
         color: #fff;
         font-weight: 500;
         min-width: 35px;
+    }
+
+    .bookIcon
+    {
+        width: 64px;
     }
 
     .card-subtitle
