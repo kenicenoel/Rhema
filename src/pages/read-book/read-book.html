@@ -5,10 +5,10 @@
       </ion-buttons>
         <h4 class="bookTitle">{{ selectedBook.name }}</h4>
         <ion-buttons end>
-          <button (click)="toggleMenu()" ion-button><img src="assets/imgs/ui/funnel-39.svg" /></button>
+          <button (click)="toggleMenu()" ion-button><img src="assets/imgs/ui/bolt.svg" /></button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar color="grey" class="submenu" *ngIf="showMenu">
+    <ion-toolbar color="secondary" class="submenu" *ngIf="showMenu">
           <ion-grid>
             <ion-row>
               <ion-col col-6>

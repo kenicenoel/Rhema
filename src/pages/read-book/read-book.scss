@@ -70,7 +70,7 @@ page-read-book
     .verseNumber
     {
         font-weight: 500;
-        color: #f53d3d;
+        color: map-get($colors , secondary)
     }
 
     
