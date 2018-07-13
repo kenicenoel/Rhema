@@ -20,6 +20,7 @@ export class ReadBookPage {
   showMenu: boolean = false;
   chapter: number = -1;
   verse: number = 0;
+  light: boolean = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) 
   {
     this.selectedBook = navParams.get('book');
@@ -56,11 +57,15 @@ export class ReadBookPage {
     return this.selectedBook.chapters[this.chapter];
   }
 
-  filter()
+  darkMode()
   {
-
+    this.light = false;
   }
 
+  lightMode()
+  {
+    this.light = true;
+  }
   returnToBooks()
   {
     this.navCtrl.pop();

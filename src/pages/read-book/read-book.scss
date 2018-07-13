@@ -1,5 +1,17 @@
 page-read-book 
 {
+    .darkMode
+    {
+        color: #fff;
+        background: #1f1e1e;
+    }
+
+    .whiteMode
+    {
+        color: #000;
+        background: #f4f4f4;
+    }
+
     .viewBooksButton
     {
         width: 24px;
@@ -13,6 +25,14 @@ page-read-book
         margin-left: 10px;
     }
 
+    .submenu
+    {
+        
+        color: #fff;
+        // height: 40px;
+        display: block;
+    }
+
     .chapterNumber
     {
         font-size: 1.5em;
@@ -20,20 +40,26 @@ page-read-book
         text-align: center;
     }
 
-   .black, .black
+   .black, .white
    {
-       display: inline;
-       border-radius: 50%;
+    display: inline-block;
+    border-radius: 100%;
+    padding: 6px;
+    margin-top: 10px;
+    width: 30px;
+    text-align: center;
    }
 
    .black
    {
-       background: #000;
+       background: #1f1e1e;
    }
 
    .white
    {
        background: #ffffff;
+       color: #000;
+       
    }
 
     .verse
@@ -47,11 +73,6 @@ page-read-book
         color: #f53d3d;
     }
 
-    .searchbar-md, .searchbar-ios, .searchbar-input
-    {
-        display: inline;
-        max-width: 60%;
-    }
-
+    
  
 }

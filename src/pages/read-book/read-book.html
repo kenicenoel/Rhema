@@ -8,26 +8,28 @@
           <button (click)="toggleMenu()" ion-button><img src="assets/imgs/ui/funnel-39.svg" /></button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar color="highlight" class="submenu" *ngIf="showMenu">
+    <ion-toolbar color="grey" class="submenu" *ngIf="showMenu">
           <ion-grid>
             <ion-row>
-              <ion-col col-5>
+              <ion-col col-6>
                 <ion-label stacked>Chapter</ion-label>
                 <ion-select class="filter" [(ngModel)]="chapter">
                   <ion-option value= -1 >Entire book</ion-option>
                   <ion-option *ngFor="let chapter of placeholderBookChapters" [value]="chapter-1">Chapter {{ chapter }} </ion-option>
                 </ion-select>
               </ion-col>
-              <ion-col><div class="black"></div></ion-col>
-              <ion-col><div class="white"></div></ion-col>
+              <ion-col col-6>
+                  <ion-label stacked>Choose page mode</ion-label>
+                  <ion-row>
+                    <ion-col col-2><div class="black" (click)="darkMode()">T</div></ion-col>
+                    <ion-col col-2><div class="white" (click)="lightMode()">T</div></ion-col>
+                  </ion-row>
+              </ion-col>
             </ion-row>
-          </ion-grid>
-      
-
-          
+          </ion-grid>     
     </ion-toolbar>
   </ion-header>
-<ion-content padding>
+<ion-content padding [ngClass]="light ? 'lightMode' : 'darkMode'">
   <div class="container" *ngIf="chapter == -1; else filter">
     <div *ngFor="let chapter of selectedBook.chapters; let chapterNumber = index">
       <p class="chapterNumber">Chapter {{chapterNumber +1 }}</p>
