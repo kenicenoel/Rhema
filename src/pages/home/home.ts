@@ -17,13 +17,9 @@ export class HomePage
   ionViewWillEnter()
   {
     this.currentDate = new Date().toDateString();
-    
-  }
-
-  ionViewWillLoad()
-  {
     this.getVotd();
   }
+
 
   async getVotd()
   {
