@@ -12,6 +12,7 @@ export class HomePage
 
   currentDate: string;
   votd: DailyVerse;
+
   constructor(public navCtrl: NavController, public data: DataProvider) {}
  
   ionViewWillEnter()
@@ -23,7 +24,7 @@ export class HomePage
 
   async getVotd()
   {
-    this.votd = await this.data.generateDailyVerse();
+    // this.votd = await this.data.generateDailyVerse();
     console.log(this.votd);
     
   }

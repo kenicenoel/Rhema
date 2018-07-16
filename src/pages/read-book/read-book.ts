@@ -13,6 +13,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ReadBookPage {
 
+  bookName: string;
   selectedBook: BibleBook;
   bookStats: BookStat;
   placeholderBookChapters: number[] = [];
@@ -23,8 +24,21 @@ export class ReadBookPage {
   light: boolean = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) 
   {
-    this.selectedBook = navParams.get('book');
-    this.populatePlaceholderArrays();
+    this.bookName = navParams.get('book');
+    
+    // this.populatePlaceholderArrays();
+  
+  }
+
+  ionViewDidEnter()
+  {
+    this.getBookData();
+  }
+
+  async getBookData()
+  {
+    this.selectedBook = await this.data.getBibleBook(this.bookName);
+    console.log(this.selectedBook.verses);
     
   }
 
@@ -33,29 +47,29 @@ export class ReadBookPage {
     this.showMenu = !this.showMenu;
   }
 
-  populatePlaceholderArrays()
-  {
-    let name = this.selectedBook.name;
-    for(let i = 0; i<this.data.getBookStats(name)[0].chapters; i++)
-    {
-      this.placeholderBookChapters.push(i+1);
-    }
+  // populatePlaceholderArrays()
+  // {
+  //   let name = this.selectedBook.name;
+  //   for(let i = 0; i<this.data.getBookStats(name)[0].chapters; i++)
+  //   {
+  //     this.placeholderBookChapters.push(i+1);
+  //   }
 
-    for(let i = 0; i<this.data.getBookStats(name)[0].verses; i++)
-    {
-      this.placeholderBookVerses.push(i+1);
-    }
-  }
+  //   for(let i = 0; i<this.data.getBookStats(name)[0].verses; i++)
+  //   {
+  //     this.placeholderBookVerses.push(i+1);
+  //   }
+  // }
 
   get chapterInt()
   {
     return this.chapter;
   }
 
-  get filteredChapter()
-  {
-    return this.selectedBook.chapters[this.chapter];
-  }
+  // get filteredChapter()
+  // {
+  //   return this.selectedBook.chapters[this.chapter];
+  // }
 
   darkMode()
   {

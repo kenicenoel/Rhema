@@ -13,10 +13,10 @@
             <ion-row>
               <ion-col col-6>
                 <ion-label stacked>Chapter</ion-label>
-                <ion-select class="filter" [(ngModel)]="chapter">
+                <!-- <ion-select class="filter" [(ngModel)]="chapter">
                   <ion-option value= -1 >Entire book</ion-option>
-                  <ion-option *ngFor="let chapter of placeholderBookChapters" [value]="chapter-1">Chapter {{ chapter }} </ion-option>
-                </ion-select>
+                  <ion-option *ngFor="let chapter of selectedBook." [value]="chapter-1">Chapter {{ chapter }} </ion-option>
+                </ion-select> -->
               </ion-col>
               <ion-col col-6>
                   <ion-label stacked>Choose page mode</ion-label>
@@ -31,12 +31,12 @@
   </ion-header>
 <ion-content padding [ngClass]="light ? 'lightMode' : 'darkMode'">
   <div class="container" *ngIf="chapter == -1; else filter">
-    <div *ngFor="let chapter of selectedBook.chapters; let chapterNumber = index">
-      <p class="chapterNumber">Chapter {{chapterNumber +1 }}</p>
-      <ng-container class="chapter" *ngFor="let verse of chapter; let verseNumber = index">
+    <div *ngFor="let verse of selectedBook.verses">
+      <p class="chapterNumber">Chapter {{ verse.chapter }}</p>
+      <ng-container class="chapter">
         <p class="verse">
-          <span class="verseNumber">{{ verseNumber +1 }}</span>
-          {{ verse }}
+          <span class="verseNumber">{{ verse.verse }}</span>
+          {{ verse.text }}
         </p>
       </ng-container>
     </div>
