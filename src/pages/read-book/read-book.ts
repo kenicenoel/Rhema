@@ -3,6 +3,7 @@ import { BookStat } from './../../models/book-stat';
 import { BibleBook } from './../../models/bible-book';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Observable } from '../../../node_modules/rxjs/Observable';
 
 
 
@@ -14,10 +15,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ReadBookPage {
 
   bookName: string;
-  selectedBook: BibleBook;
+  selectedBook: Observable<BibleBook>;
   bookStats: BookStat;
-  placeholderBookChapters: number[] = [];
-  placeholderBookVerses: number[] = [];
+
   showMenu: boolean = false;
   chapter: number = -1;
   verse: number = 0;
@@ -25,21 +25,24 @@ export class ReadBookPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) 
   {
     this.bookName = navParams.get('book');
-    
-    // this.populatePlaceholderArrays();
-  
+    // this.getBookData();
   }
 
-  ionViewDidEnter()
+  ionViewDidLoad()
   {
-    this.getBookData();
+    
   }
 
-  async getBookData()
+  getBookData()
   {
-    this.selectedBook = await this.data.getBibleBook(this.bookName);
-    console.log(this.selectedBook.verses);
-    
+    let book = null;
+   this.data.getBibleBook(this.bookName).subscribe(data =>
+  {
+    book = data;
+   
+  })
+  this.selectedBook = book;
+  console.log(book);
   }
 
   toggleMenu()
@@ -47,25 +50,12 @@ export class ReadBookPage {
     this.showMenu = !this.showMenu;
   }
 
-  // populatePlaceholderArrays()
-  // {
-  //   let name = this.selectedBook.name;
-  //   for(let i = 0; i<this.data.getBookStats(name)[0].chapters; i++)
-  //   {
-  //     this.placeholderBookChapters.push(i+1);
-  //   }
-
-  //   for(let i = 0; i<this.data.getBookStats(name)[0].verses; i++)
-  //   {
-  //     this.placeholderBookVerses.push(i+1);
-  //   }
-  // }
-
   get chapterInt()
   {
     return this.chapter;
   }
 
+  
   // get filteredChapter()
   // {
   //   return this.selectedBook.chapters[this.chapter];
@@ -80,6 +70,7 @@ export class ReadBookPage {
   {
     this.light = true;
   }
+
   returnToBooks()
   {
     this.navCtrl.pop();

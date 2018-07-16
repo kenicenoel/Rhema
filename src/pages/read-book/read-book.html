@@ -3,7 +3,7 @@
       <ion-buttons start>
           <button ion-button clear (click)="returnToBooks()"> <img class="viewBooksButton"  src="assets/imgs/ui/books.svg" /></button>
       </ion-buttons>
-        <h4 class="bookTitle">{{ selectedBook.name }}</h4>
+        <h4 class="bookTitle">{{ data.getBibleBook(bookName).id | async }}</h4>
         <ion-buttons end>
           <button (click)="toggleMenu()" ion-button><img src="assets/imgs/ui/bolt.svg" /></button>
         </ion-buttons>
@@ -30,18 +30,21 @@
     </ion-toolbar>
   </ion-header>
 <ion-content padding [ngClass]="light ? 'lightMode' : 'darkMode'">
-  <div class="container" *ngIf="chapter == -1; else filter">
-    <div *ngFor="let verse of selectedBook.verses">
-      <p class="chapterNumber">Chapter {{ verse.chapter }}</p>
-      <ng-container class="chapter">
-        <p class="verse">
-          <span class="verseNumber">{{ verse.verse }}</span>
-          {{ verse.text }}
-        </p>
-      </ng-container>
+  <div class="container">
+    <div *ngFor="let verses of data.getBibleBook(bookName).verses | async">
+        <ng-container>
+            <p class="chapterNumber">Chapter {{ verses.chapter |async }}</p>
+            <ng-container class="chapter">
+              <p class="verse">
+                <span class="verseNumber">{{ verses.verse }}</span>
+                {{ verses.text }}
+              </p>
+            </ng-container>
+        </ng-container>
+     
     </div>
   </div>
-  <ng-template #filter>
+  <!-- <ng-template #filter>
       <div>
           <p class="chapterNumber">Chapter {{ chapter+1 }}</p>
           <ng-container class="chapter" *ngFor="let verse of filteredChapter; let verseNumber = index">
@@ -51,5 +54,5 @@
             </p>
           </ng-container>
         </div>
-  </ng-template>
+  </ng-template> -->
 </ion-content>
