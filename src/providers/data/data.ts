@@ -73,14 +73,14 @@ export class DataProvider {
     "James",
     "1 Peter",
     "2 Peter",
-    "1John",
+    "1 John",
     "2 John",
     "3 John",
     "Jude",
     "Revelation"
     ]
     bibleBooks: string [] = [
-      "assets/bibles/kjv/1Chron.json",
+    "assets/bibles/kjv/1Chron.json",
     "assets/bibles/kjv/1Cor.json",
     "assets/bibles/kjv/1John.json",
     "assets/bibles/kjv/1Kings.json",
@@ -172,16 +172,10 @@ export class DataProvider {
     'assets/imgs/bible/color/ezekiel.png',
     'assets/imgs/bible/color/ezra.png.png',
     'assets/imgs/bible/color/galatians.png',
-    'assets/imgs/bible/color/general-epistles.png',
-    'assets/imgs/bible/color/general-epistles-notext.png',
     'assets/imgs/bible/color/genesis.png',
-    'assets/imgs/bible/color/gospels.png',
-    'assets/imgs/bible/color/gospels-notext.png',
     'assets/imgs/bible/color/habakkuk.png',
     'assets/imgs/bible/color/haggai.png',
     'assets/imgs/bible/color/hebrews.png',
-    'assets/imgs/bible/color/history.png',
-    'assets/imgs/bible/color/history-notext.png',
     'assets/imgs/bible/color/hosea.png',
     'assets/imgs/bible/color/isaiah.png',
     'assets/imgs/bible/color/james.png',
@@ -199,24 +193,17 @@ export class DataProvider {
     'assets/imgs/bible/color/law-notext.png',
     'assets/imgs/bible/color/leviticus.png',
     'assets/imgs/bible/color/luke.png',
-    'assets/imgs/bible/color/major-prophets.png',
-    'assets/imgs/bible/color/major-prophets-notext.png',
     'assets/imgs/bible/color/malachi.png',
     'assets/imgs/bible/color/mark.png',
     'assets/imgs/bible/color/matthew.png',
     'assets/imgs/bible/color/micah.png',
-    'assets/imgs/bible/color/minor-prophets.png',
-    'assets/imgs/bible/color/minor-prophets-notext.png',
     'assets/imgs/bible/color/nahum.png',
     'assets/imgs/bible/color/nehemiah.png',
     'assets/imgs/bible/color/numbers.png',
     'assets/imgs/bible/color/obadiah.png',
-    'assets/imgs/bible/color/pauline-epistles.png',
-    'assets/imgs/bible/color/pauline-epistles-notext.png',
     'assets/imgs/bible/color/philemon.png',
     'assets/imgs/bible/color/philippians.png.png',
     'assets/imgs/bible/color/poetry.png',
-    'assets/imgs/bible/color/poetry-notext.png',
     'assets/imgs/bible/color/proverbs.png.png',
     'assets/imgs/bible/color/psalms.png.png',
     'assets/imgs/bible/color/revelation.png',
@@ -236,7 +223,12 @@ export class DataProvider {
   dailyVerse: DailyVerse = null;
   constructor(public http: HttpClient) 
   { 
-      // this.getBibleBook(name);
+      this.prepare()
+  }
+
+  prepare()
+  {
+
   }
 
  getBibleBook(bookName): Observable<BibleBook>
