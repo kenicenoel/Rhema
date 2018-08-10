@@ -5,6 +5,25 @@
   font-family: 'Inter UI','Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
+.container
+{
+    margin-top: 80px;
+}
+
+.title
+{
+    display: block;
+    font-weight: 900;
+    font-size: 1.1em;
+    color:color($colors, primary, base)
+}
+
+section
+{
+    margin: 50px 0;
+  
+}
+
 .page-title
 {
   font-weight: 700;
