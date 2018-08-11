@@ -14,10 +14,15 @@ export class SpeakPage {
   status: string = "Ready to listen";
   isListening: boolean = false;
   speechRecognizer: SDK.Recognizer;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController)
+   {
+    this.speechRecognizer = this.recognizerSetup(SDK, SDK.RecognitionMode.Interactive, "en-US", SDK.SpeechResultFormat.Simple, BING_SPEECH_API_KEY);
+   }
 
-  ionViewDidLoad() {
-   this.speechRecognizer = this.recognizerSetup(SDK, SDK.RecognitionMode.Interactive, "en-US", SDK.SpeechResultFormat.Simple, BING_SPEECH_API_KEY);
+  ionViewDidEnter() 
+  {
+    console.log(this.speechRecognizer);
+    
   }
 
   recognizerSetup(SDK, recognitionMode, language, format, subscriptionKey) {
@@ -33,7 +38,7 @@ export class SpeakPage {
     // Alternatively use SDK.CognitiveTokenAuthentication(fetchCallback, fetchOnExpiryCallback) for token auth
     let authentication = new SDK.CognitiveSubscriptionKeyAuthentication(subscriptionKey);
 
-    return SDK.Recognizer.Create(recognizerConfig, authentication);
+    return SDK.CreateRecognizer(recognizerConfig, authentication);
   }
 
   toggleListening()
@@ -76,7 +81,7 @@ export class SpeakPage {
                 this.status = "Listening";
                 break;
             case "RecognitionStartedEvent" :
-                this.status = "Listening_Recognizing";
+                this.status = "Recognizing";
                 break;
             case "SpeechStartDetectedEvent" :
                 this.status = "Listening_DetectedSpeech_Recognizing";
@@ -92,7 +97,7 @@ export class SpeakPage {
                 break;
             case "SpeechEndDetectedEvent" :
                 this.onSpeechEndDetected();
-                this.status = "Processing_Adding_Final_Touches";
+                this.status = "Adding final touches";
                 console.log(JSON.stringify(event.Result)); // check console for other information in result
                 break;
             case "SpeechSimplePhraseEvent" :
@@ -129,6 +134,7 @@ onSpeechEndDetected()
   
   onComplete()
   {
+    this.isListening = false;
     this.recognizerStop(SDK, this.speechRecognizer);
   }
 

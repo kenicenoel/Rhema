@@ -3,7 +3,10 @@
   <div class="container">
     <section>
       <button padding class="startSpeech" (click)="toggleListening()" ion-button clear large >
-        <img class="micImage" src="assets/imgs/ui/audio-91.svg">
+        <img *ngIf="!isListening; else listening" class="micImage" src="assets/imgs/ui/audio-91.svg">
+       <ng-template #listening> 
+         <img class="micImage" src="assets/imgs/anim/bars-2.svg">
+        </ng-template>
       </button>
       <p class="status">{{ status }}</p>
     </section>
