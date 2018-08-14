@@ -23,13 +23,13 @@ export class BiblePage {
 
  
 
-  // ionViewDidEnter()
-  // {
-  //   this.data.bible.forEach(book =>
-  //     {
-  //       console.log(book.name);
-  //    });
-  // }
+  ionViewDidEnter()
+  {
+    this.data.bible.forEach(book =>
+      {
+        console.log(book.name);
+     });
+  }
   
 
 }

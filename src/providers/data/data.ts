@@ -7,12 +7,24 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Observable } from '../../../node_modules/rxjs/Observable';
+import { Book } from '../../models/book';
 @Injectable()
 export class DataProvider {
 
-
+  kjvBibleData: Book[] = [
+    {
+      data: "assets/bibles/kjv/Genesis.json",
+      icon: 'assets/imgs/bible/color/genesis.png',
+      title: "Genesis"
+    },
+    {
+      data: "",
+      icon: "",
+      title: ""
+    }
+  ];
   bibleBookNames: string [] = [
-    "Genesis",
+   
     "Exodus",
     "Leviticus",
     "Numbers",
@@ -109,7 +121,7 @@ export class DataProvider {
     "assets/bibles/kjv/Ezekiel.json",
     "assets/bibles/kjv/Ezra.json",
     "assets/bibles/kjv/Gal.json",
-    "assets/bibles/kjv/Genesis.json",
+    
     "assets/bibles/kjv/Habakkuk.json",
     "assets/bibles/kjv/Haggai.json",
     "assets/bibles/kjv/Hebrews.json",
@@ -172,7 +184,7 @@ export class DataProvider {
     'assets/imgs/bible/color/ezekiel.png',
     'assets/imgs/bible/color/ezra.png.png',
     'assets/imgs/bible/color/galatians.png',
-    'assets/imgs/bible/color/genesis.png',
+    
     'assets/imgs/bible/color/habakkuk.png',
     'assets/imgs/bible/color/haggai.png',
     'assets/imgs/bible/color/hebrews.png',
@@ -215,15 +227,14 @@ export class DataProvider {
     'assets/imgs/bible/color/zechariah.png',
     'assets/imgs/bible/color/zephaniah.png'
     ]
-    
-
+  
   bibleBooksStats: BookStat[] = [];
   bibleBookData: BibleBook = null;
   bibleBook: any [];
   dailyVerse: DailyVerse = null;
   constructor(public http: HttpClient) 
   { 
-      this.prepare()
+    this.prepare()
   }
 
   prepare()
