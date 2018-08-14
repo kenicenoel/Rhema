@@ -3,7 +3,7 @@
       <ion-buttons start>
           <button ion-button clear (click)="returnToBooks()"> <img class="viewBooksButton"  src="assets/imgs/ui/books.svg" /></button>
       </ion-buttons>
-        <h4 class="bookTitle">{{ data.getBibleBook(bookName).id | async }}</h4>
+        <h4 class="bookTitle">{{ bookName }}</h4>
         <ion-buttons end>
           <button (click)="toggleMenu()" ion-button><img src="assets/imgs/ui/bolt.svg" /></button>
         </ion-buttons>
@@ -31,9 +31,9 @@
   </ion-header>
 <ion-content padding [ngClass]="light ? 'lightMode' : 'darkMode'">
   <div class="container">
-    <div *ngFor="let verses of data.getBibleBook(bookName).verses | async">
+    <div *ngFor="let verses of getBookData().verses | async">
         <ng-container>
-            <p class="chapterNumber">Chapter {{ verses.chapter |async }}</p>
+            <p class="chapterNumber">Chapter {{ verses.chapter | async }}</p>
             <ng-container class="chapter">
               <p class="verse">
                 <span class="verseNumber">{{ verses.verse }}</span>

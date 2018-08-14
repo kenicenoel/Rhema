@@ -25,7 +25,7 @@ export class ReadBookPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) 
   {
     this.bookName = navParams.get('book');
-    // this.getBookData();
+    this.getBookData();
   }
 
   ionViewDidLoad()
@@ -37,12 +37,12 @@ export class ReadBookPage {
   {
     let book = null;
    this.data.getBibleBook(this.bookName).subscribe(data =>
-  {
-    book = data;
-   
-  })
-  this.selectedBook = book;
-  console.log(book);
+    {
+      book = data;
+      this.selectedBook = book;
+      return book;
+    })
+  
   }
 
   toggleMenu()
