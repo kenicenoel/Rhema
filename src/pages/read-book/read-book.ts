@@ -57,10 +57,11 @@ export class ReadBookPage {
   }
 
   
-  // get filteredChapter()
-  // {
-  //   return this.selectedBook.chapters[this.chapter];
-  // }
+  get filteredVerses()
+  {
+    let filtered = this.verses.filter(verse=> verse.chapter == this.chapter);
+    return this.verses.filter(verse=> verse.chapter == this.chapter);
+  }
 
   darkMode()
   {

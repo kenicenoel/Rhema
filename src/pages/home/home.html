@@ -1,24 +1,34 @@
 <ion-content>
-  <h1 class="page-title">Explore</h1>
-  <ion-buttons end>
-    <button ion-button ></button>
-    
-  </ion-buttons>
-    <div class="hero">
-        <div class="verseOfTheDay">
-            <div class="wrapper">
-              <img class="votdIcon" src="assets/imgs/ui/workout-plan.svg">
-              <p class="votdText">Trust in the lord with all your heart and lean not to your own understanding.</p>
-              <!-- <ion-note>{{ votd?.book }} {{ votd?.chapter }}:{{ votd?.verse }}</ion-note> -->
-            </div>
-        </div>
-    </div>
-   
+  <ion-row>
+    <ion-col>
+      <h1 class="page-title">Explore</h1>
+    </ion-col>
+    <ion-col>
+      <ion-buttons end class="homeActionButtons">
+        <button ion-button clear (click)="viewFavourites()">
+          <img src="assets/imgs/ui/book-bookmark.svg">
+        </button>
 
-    <section class="recentlyRead">
-        <h3 class="subtitle"> Recent reads </h3>
-        <div class="wrapper">
-          <p class="text" text-center>You were recently reading these books</p>
-        </div>
-    </section>
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
+
+
+  <div class="hero">
+    <div class="verseOfTheDay">
+      <div class="wrapper">
+        <img class="votdIcon" src="assets/imgs/ui/calendar-grid-58.svg">
+        <p class="votdText">Trust in the lord with all your heart and lean not to your own understanding.</p>
+        <!-- <ion-note>{{ votd?.book }} {{ votd?.chapter }}:{{ votd?.verse }}</ion-note> -->
+      </div>
+    </div>
+  </div>
+
+
+  <section class="recentlyRead">
+    <h3 class="subtitle"> Recent reads </h3>
+    <div class="wrapper">
+      <p class="text" text-center>You were recently reading these books</p>
+    </div>
+  </section>
 </ion-content>

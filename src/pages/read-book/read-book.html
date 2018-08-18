@@ -13,16 +13,18 @@
             <ion-row>
               <ion-col col-6>
                 <ion-label stacked>Chapter</ion-label>
-                <!-- <ion-select class="filter" [(ngModel)]="chapter">
-                  <ion-option value= -1 >Entire book</ion-option>
-                  <ion-option *ngFor="let chapter of selectedBook." [value]="chapter-1">Chapter {{ chapter }} </ion-option>
-                </ion-select> -->
+                <ion-select class="filter" [(ngModel)]="chapter">
+                    <ion-option value= -1 >Entire book</ion-option>
+                  <ng-container *ngFor="let verse of verses; let i=index">
+                      <ion-option  *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter" [value]="verse.chapter">Chapter {{ verse.chapter }} </ion-option>
+                  </ng-container>
+                </ion-select>
               </ion-col>
               <ion-col col-6>
                   <ion-label stacked>Choose page mode</ion-label>
                   <ion-row>
-                    <ion-col col-2><div class="black" (click)="darkMode()">T</div></ion-col>
-                    <ion-col col-2><div class="white" (click)="lightMode()">T</div></ion-col>
+                    <ion-col col-2><ion-badge (click)="darkMode()" color="dark">T</ion-badge></ion-col>
+                    <ion-col col-2><ion-badge (click)="lightMode()" color="light">T</ion-badge></ion-col>
                   </ion-row>
               </ion-col>
             </ion-row>
@@ -30,7 +32,7 @@
     </ion-toolbar>
   </ion-header>
 <ion-content padding [ngClass]="light ? 'lightMode' : 'darkMode'">
-  <div class="container">
+  <div class="container" *ngIf="chapter == -1; else filter">
     <div *ngFor="let verse of verses; let i = index">
         <ng-container>
             <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
@@ -44,15 +46,15 @@
      
     </div>
   </div>
-  <!-- <ng-template #filter>
+  <ng-template #filter>
       <div>
-          <p class="chapterNumber">Chapter {{ chapter+1 }}</p>
-          <ng-container class="chapter" *ngFor="let verse of filteredChapter; let verseNumber = index">
+          <p class="chapterNumber">Chapter {{ chapter }}</p>
+          <ng-container class="chapter" *ngFor="let verse of filteredVerses">
             <p>
-              <span class="verseNumber">{{ verseNumber +1 }}</span>
-              {{ verse }}
+              <span class="verseNumber">{{ verse.verse }}</span>
+              {{ verse.text }}
             </p>
           </ng-container>
         </div>
-  </ng-template> -->
+  </ng-template>
 </ion-content>

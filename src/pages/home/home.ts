@@ -22,11 +22,16 @@ export class HomePage
   }
 
 
-  async getVotd()
+  getVotd()
   {
     // this.votd = await this.data.generateDailyVerse();
     console.log(this.votd);
     
+  }
+
+  viewFavourites()
+  {
+
   }
 
   
