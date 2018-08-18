@@ -1,13 +1,8 @@
 import { DataProvider } from './../../providers/data/data';
-import { BookStat } from './../../models/book-stat';
 import { BibleBook } from './../../models/bible-book';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Observable } from '../../../node_modules/rxjs/Observable';
+import { NavController, NavParams } from 'ionic-angular';
 
-
-
-@IonicPage()
 @Component({
   selector: 'page-read-book',
   templateUrl: 'read-book.html',
@@ -15,9 +10,8 @@ import { Observable } from '../../../node_modules/rxjs/Observable';
 export class ReadBookPage {
 
   bookName: string;
-  selectedBook: Observable<BibleBook>;
-  bookStats: BookStat;
-
+  selectedBook: BibleBook;
+  verses: any[];
   showMenu: boolean = false;
   chapter: number = -1;
   verse: number = 0;
@@ -25,23 +19,30 @@ export class ReadBookPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) 
   {
     this.bookName = navParams.get('book');
-    this.getBookData();
+    
   }
 
   ionViewDidLoad()
   {
-    
+    this.selectedBook = null;
+    this.getBookData();
   }
 
   getBookData()
   {
-    let book = null;
-   this.data.getBibleBook(this.bookName).subscribe(data =>
+    this.data.getBibleBook(this.bookName)
+    .subscribe((bookData: BibleBook) =>
     {
-      book = data;
-      this.selectedBook = book;
-      return book;
-    })
+        
+       
+        this.selectedBook = bookData;
+        this.verses = bookData.verses;
+        console.log(this.verses);
+    },
+    error=> console.log(error)
+  );
+    console.log(this.selectedBook);
+    
   
   }
 

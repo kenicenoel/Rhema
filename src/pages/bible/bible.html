@@ -5,7 +5,7 @@
       <ion-grid>
         <h3 class="subtitle">King James Version</h3>
         <ion-row>
-          <ion-col col-12 *ngFor="let name of data.bookNames; let i = index">
+          <ion-col col-4 *ngFor="let name of data.bookNames; let i = index">
               <ion-card class="bibleCard" padding  (click)= "loadBook(name)">  
                   <div class="card-abbrev"> <img class="bookIcon" [src]="data.getBibleIcon(name)"> </div>
                   <div class="card-title">{{ name }}</div>

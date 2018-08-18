@@ -31,13 +31,13 @@
   </ion-header>
 <ion-content padding [ngClass]="light ? 'lightMode' : 'darkMode'">
   <div class="container">
-    <div *ngFor="let verses of getBookData().verses | async">
+    <div *ngFor="let verse of verses; let i = index">
         <ng-container>
-            <p class="chapterNumber">Chapter {{ verses.chapter | async }}</p>
+            <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
             <ng-container class="chapter">
               <p class="verse">
-                <span class="verseNumber">{{ verses.verse }}</span>
-                {{ verses.text }}
+                <span class="verseNumber">{{ verse.verse }}</span>
+                {{ verse.text }}
               </p>
             </ng-container>
         </ng-container>

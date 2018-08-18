@@ -1,6 +1,38 @@
 page-home
 {
-  
+
+  .hero
+  {
+      background-color: #ebebeb;
+      padding: 20px;
+      margin-left: 0px;
+      margin-right: 0px;
+      color: #000000;
+  }
+
+  .votdIcon
+  {
+      width: 128px;
+      height: 128px;
+      display: block;
+      margin: 0 auto;
+  }
+
+  .votdText
+  {
+      text-align: center;
+  }
+
+  .page-title, .subtitle
+  {
+    margin-left: 10px;
+  }
+
+  .title, .subtitle
+  {
+     
+      color: #111111;
+  }
 
    .subtitle
    {
@@ -15,8 +47,7 @@ page-home
 
    .verseOfTheDay
    {
-       border: 1px solid #c0c0c05d;
-       border-radius: 5px;
+       
        padding: 10px;
    }
 

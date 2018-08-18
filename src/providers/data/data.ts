@@ -1,13 +1,10 @@
 import { DailyVerse } from './../../models/daily-verse';
-import { BookStat } from './../../models/book-stat';
 import { BibleBook } from './../../models/bible-book';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import { Observable } from '../../../node_modules/rxjs/Observable';
 import { Book } from '../../models/book';
+import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class DataProvider {
 
@@ -85,7 +82,7 @@ export class DataProvider {
     },
     {
       data: "assets/bibles/kjv/Ezra.json",
-      icon: "assets/imgs/bible/color/ezra.png",
+      icon: "assets/imgs/bible/color/ezra.png.png",
       title: "Ezra"
     },
     {
@@ -343,9 +340,8 @@ export class DataProvider {
       icon: "assets/imgs/bible/color/revelation.png",
       title: "Revelation"
     }
-  ]
-  ;
- 
+  ];
+  bookDataSubject = new Subject();
   dailyVerse: DailyVerse = null;
   constructor(public http: HttpClient) 
   { 
@@ -356,21 +352,6 @@ export class DataProvider {
   {
 
   }
-
-
- getBibleStats()
- {
-//    this.bibleBookData.forEach(book => {
-//      book.chapters.forEach(chapter => {
-//        let stat: BookStat = {
-//          name: book.name,
-//          chapters: book.chapters.length,
-//         verses: chapter.length
-//        }
-//        this.bibleBooksStats.push(stat);
-//      })
-//    });
- }
 
 
  get bookNames()
@@ -394,13 +375,10 @@ export class DataProvider {
   return this.kjvBibleData[index].data;     
  }
 
- getBibleBook(bookName): Observable<BibleBook>
+ getBibleBook(bookName)
  {
     let fetchPath = this.kjvBibleData.filter(details => details.title == bookName)[0].data;
-    return this.http.get<BibleBook>(fetchPath)
-    
-
-    // return this.bibleBookData;
+   return this.http.get<BibleBook>(fetchPath);
  }
 
 
