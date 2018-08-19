@@ -6,6 +6,10 @@
         <h4 class="bookTitle">{{ bookName }}</h4>
         <ion-buttons end>
           <button (click)="toggleMenu()" ion-button><img src="assets/imgs/ui/bolt.svg" /></button>
+          <button  *ngIf="isPlayingAudio; else notPlaying" (click)="toggleReadAloud()" ion-button ><img src="assets/imgs/ui/volume-off.svg" /></button>
+          <ng-template #notPlaying>
+              <button (click)="toggleReadAloud()" ion-button ><img src="assets/imgs/ui/volume-98.svg" /></button>
+          </ng-template>
         </ion-buttons>
     </ion-toolbar>
     <ion-toolbar color="secondary" class="submenu" *ngIf="showMenu">
