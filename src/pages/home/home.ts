@@ -1,3 +1,4 @@
+import { FavouritePage } from './../favourite/favourite';
 import { DailyVerse } from './../../models/daily-verse';
 import { DataProvider } from './../../providers/data/data';
 import { Component } from '@angular/core';
@@ -31,7 +32,7 @@ export class HomePage
 
   viewFavourites()
   {
-
+    this.navCtrl.push(FavouritePage);
   }
 
   

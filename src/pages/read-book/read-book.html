@@ -15,7 +15,7 @@
     <ion-toolbar color="secondary" class="submenu" *ngIf="showMenu">
           <ion-grid>
             <ion-row>
-              <ion-col col-6>
+              <ion-col col-7>
                 <ion-label stacked>Chapter</ion-label>
                 <ion-select class="filter" [(ngModel)]="chapter">
                     <ion-option value= -1 >Entire book</ion-option>
@@ -24,11 +24,11 @@
                   </ng-container>
                 </ion-select>
               </ion-col>
-              <ion-col col-6>
+              <ion-col>
                   <ion-label stacked>Choose page mode</ion-label>
                   <ion-row>
-                    <ion-col col-2><ion-badge (click)="darkMode()" color="dark">T</ion-badge></ion-col>
-                    <ion-col col-2><ion-badge (click)="lightMode()" color="light">T</ion-badge></ion-col>
+                    <ion-col col-2><ion-badge class="pageMode" (click)="darkMode()" color="dark">T</ion-badge></ion-col>
+                    <ion-col col-2><ion-badge class="pageMode" (click)="lightMode()" color="light">T</ion-badge></ion-col>
                   </ion-row>
               </ion-col>
             </ion-row>

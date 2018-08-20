@@ -74,36 +74,53 @@ export class ReadBookPage {
   }
 
   toggleReadAloud() {
-    if (this.isPlayingAudio) {
-      this.tts.stop();
+    if (this.isPlayingAudio) 
+    {
+      this.tts.speak("")
+      .then(()=> 
+    {
+      this.isPlayingAudio = false;
+    })
+      // this.tts.stop();
+      // this.isPlayingAudio = false;
     }
     else {
-      let speachText = [];
+     this.playAudio();
 
-      if (this.chapter == -1) {
-        speachText.push("Now reading " + this.bookName);
-        this.verses.forEach(verse => {
-          speachText.push(verse.text);
-        });
-        this.ttsOptions.text = speachText;
-        this.tts.speak(this.ttsOptions)
-          .then(() => {
-            this.isPlayingAudio = false;
-          });
-      }
-      else {
-        let speakText = [];
-        speakText.push("Now reading Chapter " + this.chapter + " from " + this.bookName);
-        this.filteredVerses.forEach(verse => {
-          speakText.push(verse.text);
-        });
-        this.ttsOptions.text = speachText;
-        this.tts.speak(this.ttsOptions)
-          .then(() => {
-            this.isPlayingAudio = false;
-          });
-      };
+    }
+  }
 
+  playAudio()
+  {
+    let speechText = [];
+
+    if (this.chapter == -1) {
+      speechText.push("Now reading " + this.bookName);
+      this.verses.forEach(verse => {
+        speechText.push(verse.text);
+      });
+       console.log(speechText);
+     
+      this.isPlayingAudio = true;
+      this.tts.speak(speechText.toString())
+      .then(() => 
+      {
+        this.isPlayingAudio = false;
+      });
+      
+    }
+    else {
+      speechText = [];
+      speechText.push("Now reading Chapter " + this.chapter + " from " + this.bookName);
+      this.filteredVerses.forEach(verse => {
+        speechText.push(verse.text);
+      });
+      console.log(speechText);
+      this.isPlayingAudio = true;
+      this.tts.speak(speechText.toString()).then(() => 
+      {
+        this.isPlayingAudio = false;
+      });
     }
   }
 }

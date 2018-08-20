@@ -1,5 +1,10 @@
 page-read-book 
 {
+    .pageMode
+    {
+        margin-right: 4px;
+        padding: 5px;
+    }
     .darkMode
     {
         color: #fff;
@@ -70,7 +75,7 @@ page-read-book
     .verseNumber
     {
         font-weight: 500;
-        color: map-get($colors , secondary)
+        color: #ff006a;
     }
 
     

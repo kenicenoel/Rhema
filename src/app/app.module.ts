@@ -1,3 +1,4 @@
+import { FavouritePage } from './../pages/favourite/favourite';
 import { ZeroPadPipe } from './../pipes/zero-pad/zero-pad';
 import { ReadBookPage } from './../pages/read-book/read-book';
 import { ProfilePage } from './../pages/profile/profile';
@@ -24,6 +25,7 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     ProfilePage,
     SpeakPage,
     ReadBookPage,
+    FavouritePage,
     ZeroPadPipe
   ],
   imports: [
@@ -39,7 +41,8 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     BiblePage,
     SpeakPage,
     ProfilePage,
-    ReadBookPage
+    ReadBookPage,
+    FavouritePage
   ],
   providers: [
     StatusBar,
