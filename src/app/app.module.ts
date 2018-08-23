@@ -1,4 +1,5 @@
 import { LoadingComponent } from './../components/loading/loading';
+import { VerseOptionsPopOverPage } from './../pages/verse-options-pop-over/verse-options-pop-over';
 import { FavouritePage } from './../pages/favourite/favourite';
 import { ZeroPadPipe } from './../pipes/zero-pad/zero-pad';
 import { ReadBookPage } from './../pages/read-book/read-book';
@@ -18,6 +19,7 @@ import { SpeakPage } from '../pages/speak/speak';
 import { DataProvider } from '../providers/data/data';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LottieAnimationViewModule } from 'ng-lottie';
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [
     MyApp,
@@ -29,13 +31,15 @@ import { LottieAnimationViewModule } from 'ng-lottie';
     ReadBookPage,
     FavouritePage,
     ZeroPadPipe,
-    LoadingComponent
+    LoadingComponent,
+    VerseOptionsPopOverPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    LottieAnimationViewModule
+    LottieAnimationViewModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,7 +51,8 @@ import { LottieAnimationViewModule } from 'ng-lottie';
     ProfilePage,
     ReadBookPage,
     FavouritePage,
-    LoadingComponent
+    LoadingComponent,
+    VerseOptionsPopOverPage
   ],
   providers: [
     StatusBar,

@@ -36,33 +36,31 @@
     </ion-toolbar>
   </ion-header>
 <ion-content padding [ngClass]="light ? 'lightMode' : 'darkMode'">
-  <loading *ngIf="isLoading" key="progress-bar"></loading>
-  <ng-container *ngIf="!isLoading">
-      <div class="container" *ngIf="chapter == -1; else filter">
-          <div *ngFor="let verse of verses; let i = index">
-              <ng-container>
-                  <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
-                  <ng-container class="chapter">
-                    <p class="verse">
-                      <span class="verseNumber">{{ verse.verse }}</span>
-                      {{ verse.text }}
-                    </p>
-                  </ng-container>
-              </ng-container>
-           
-          </div>
-        </div>
-        <ng-template #filter>
-            <div>
-                <p class="chapterNumber">Chapter {{ chapter }}</p>
-                <ng-container class="chapter" *ngFor="let verse of filteredVerses">
-                  <p>
+  <div class="container" *ngIf="chapter == -1; else filter">
+    <div *ngFor="let verse of verses; let i = index">
+        <ng-container>
+            <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
+            <ng-container class="chapter">
+                <p (press)="toggleFooterMenu($event)"  class="verse verseDetails selectable">
+                <span class="verseNumber">{{ verse.verse }}</span>
+                {{ verse.text }}
+              </p>
+            </ng-container>
+        </ng-container>
+     
+    </div>
+  </div>
+  <ng-template #filter>
+      <div>
+          <p class="chapterNumber">Chapter {{ chapter }}</p>
+          <ng-container class="chapter" *ngFor="let verse of filteredVerses">
+                <p (press)="toggleFooterMenu($event)"  class="verse verseDetails selectable">
                     <span class="verseNumber">{{ verse.verse }}</span>
                     {{ verse.text }}
-                  </p>
-                </ng-container>
-              </div>
-        </ng-template>
-  </ng-container>
- 
+                </p>
+           
+          </ng-container>
+        </div>
+  </ng-template>
+  
 </ion-content>
