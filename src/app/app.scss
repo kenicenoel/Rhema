@@ -5,6 +5,16 @@
   font-family: 'Inter UI','Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
+* ::-webkit-scrollbar {
+  display: none;
+}
+
+.selectable
+{
+  -webkit-user-select: text;
+    user-select: text;
+}
+
 .container
 {
     margin-top: 80px;

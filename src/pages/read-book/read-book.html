@@ -41,7 +41,7 @@
         <ng-container>
             <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
             <ng-container class="chapter">
-              <p class="verse">
+                <p (press)="toggleFooterMenu($event)"  class="verse verseDetails selectable">
                 <span class="verseNumber">{{ verse.verse }}</span>
                 {{ verse.text }}
               </p>
@@ -54,11 +54,13 @@
       <div>
           <p class="chapterNumber">Chapter {{ chapter }}</p>
           <ng-container class="chapter" *ngFor="let verse of filteredVerses">
-            <p>
-              <span class="verseNumber">{{ verse.verse }}</span>
-              {{ verse.text }}
-            </p>
+                <p (press)="toggleFooterMenu($event)"  class="verse verseDetails selectable">
+                    <span class="verseNumber">{{ verse.verse }}</span>
+                    {{ verse.text }}
+                </p>
+           
           </ng-container>
         </div>
   </ng-template>
+  
 </ion-content>

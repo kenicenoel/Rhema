@@ -1,3 +1,4 @@
+import { VerseOptionsPopOverPage } from './../pages/verse-options-pop-over/verse-options-pop-over';
 import { FavouritePage } from './../pages/favourite/favourite';
 import { ZeroPadPipe } from './../pipes/zero-pad/zero-pad';
 import { ReadBookPage } from './../pages/read-book/read-book';
@@ -27,7 +28,8 @@ import { IonicStorageModule } from '@ionic/storage';
     SpeakPage,
     ReadBookPage,
     FavouritePage,
-    ZeroPadPipe
+    ZeroPadPipe,
+    VerseOptionsPopOverPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { IonicStorageModule } from '@ionic/storage';
     SpeakPage,
     ProfilePage,
     ReadBookPage,
-    FavouritePage
+    FavouritePage,
+    VerseOptionsPopOverPage
   ],
   providers: [
     StatusBar,

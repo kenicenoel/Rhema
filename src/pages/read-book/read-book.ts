@@ -1,7 +1,8 @@
+import { VerseOptionsPopOverPage } from './../verse-options-pop-over/verse-options-pop-over';
 import { DataProvider } from './../../providers/data/data';
 import { BibleBook } from './../../models/bible-book';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 @Component({
@@ -14,6 +15,7 @@ export class ReadBookPage {
   selectedBook: BibleBook;
   verses: any[];
   showMenu: boolean = false;
+  showFooterMenu: boolean = false;
   chapter: number = -1;
   verse: number = 0;
   light: boolean = true;
@@ -23,7 +25,7 @@ export class ReadBookPage {
     rate: 1,
     locale: 'en-US'
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider, private tts: TextToSpeech) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider, private tts: TextToSpeech, public popoverCtrl: PopoverController) {
     this.bookName = navParams.get('book');
 
   }
@@ -122,6 +124,15 @@ export class ReadBookPage {
         this.isPlayingAudio = false;
       });
     }
+  }
+
+  
+  toggleFooterMenu(myEvent)
+  {
+    let popover = this.popoverCtrl.create(VerseOptionsPopOverPage);
+    popover.present({
+      ev: myEvent
+    });
   }
 }
 
