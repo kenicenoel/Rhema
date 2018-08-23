@@ -1,3 +1,4 @@
+import { LoadingComponent } from './../components/loading/loading';
 import { FavouritePage } from './../pages/favourite/favourite';
 import { ZeroPadPipe } from './../pipes/zero-pad/zero-pad';
 import { ReadBookPage } from './../pages/read-book/read-book';
@@ -16,6 +17,7 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { SpeakPage } from '../pages/speak/speak';
 import { DataProvider } from '../providers/data/data';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
+import { LottieAnimationViewModule } from 'ng-lottie';
 @NgModule({
   declarations: [
     MyApp,
@@ -26,12 +28,14 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     SpeakPage,
     ReadBookPage,
     FavouritePage,
-    ZeroPadPipe
+    ZeroPadPipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    LottieAnimationViewModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,7 +46,8 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     SpeakPage,
     ProfilePage,
     ReadBookPage,
-    FavouritePage
+    FavouritePage,
+    LoadingComponent
   ],
   providers: [
     StatusBar,

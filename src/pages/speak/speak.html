@@ -5,7 +5,7 @@
       <button padding class="startSpeech" (click)="toggleListening()" ion-button clear large >
         <img *ngIf="!isListening; else listening" class="micImage" src="assets/imgs/ui/audio-91.svg">
        <ng-template #listening> 
-         <img class="micImage" src="assets/imgs/anim/bars-2.svg">
+          <loading animationKey="wave"></loading>
         </ng-template>
       </button>
       <p class="status">{{ status }}</p>

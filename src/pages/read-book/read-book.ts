@@ -18,6 +18,7 @@ export class ReadBookPage {
   verse: number = 0;
   light: boolean = true;
   isPlayingAudio: boolean = false;
+  isLoading: boolean = true;
   ttsOptions: any = {
     text: 'This feature is not ready yet.',
     rate: 1,
@@ -39,9 +40,10 @@ export class ReadBookPage {
         this.selectedBook = bookData;
         this.verses = bookData.verses;
         console.log(this.verses);
+        this.isLoading = false;
       },
         error => console.log(error)
-      );
+      )
     console.log(this.selectedBook);
 
 
