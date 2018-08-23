@@ -116,7 +116,7 @@ export class DataProvider {
       title: "Ecclesiastes"
     },
     {
-      data: "assets/bibles/kjv/SongofSolomon.json",
+      data: "assets/bibles/kjv/SongOfSolomon.json",
       icon: "assets/imgs/bible/color/song-of-solomon.png",
       title: "Song of Solomon"
     },
@@ -336,7 +336,7 @@ export class DataProvider {
       title: "Jude"
     },
     {
-      data: "assets/bibles/kjv/Revelation.json",
+      data: "assets/bibles/kjv/Revelations.json",
       icon: "assets/imgs/bible/color/revelation.png",
       title: "Revelation"
     }
