@@ -14,12 +14,12 @@
   </ion-row>
 
 
-  <div class="hero">
+  <div class="hero crossesBackground">
     <div class="verseOfTheDay">
       <div class="wrapper">
-        <img class="votdIcon" src="assets/imgs/ui/calendar-grid-58.svg">
-        <p class="votdText">The verse of the day feature will show up here (:</p>
-        <!-- <ion-note>{{ votd?.book }} {{ votd?.chapter }}:{{ votd?.verse }}</ion-note> -->
+        <!-- <img class="votdIcon" src="assets/imgs/ui/calendar-grid-58.svg"> -->
+        <p class="votdText">{{ votd?.text }}</p>
+        <ion-note text-right>{{ votd?.book }} {{ votd?.chapter }}:{{ votd?.verse }}</ion-note>
       </div>
     </div>
   </div>

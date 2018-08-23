@@ -1,10 +1,10 @@
 import { DailyVerse } from './../../models/daily-verse';
 import { BibleBook } from './../../models/bible-book';
-
+import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Book } from '../../models/book';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class DataProvider {
 
@@ -341,16 +341,16 @@ export class DataProvider {
       title: "Revelation"
     }
   ];
-  bookDataSubject = new Subject();
-  dailyVerse: DailyVerse = null;
-  constructor(public http: HttpClient) 
+  private dailyVerse: DailyVerse;
+  dailyBibleVerse: BehaviorSubject<DailyVerse> = new BehaviorSubject<DailyVerse>(null);
+  constructor(public http: HttpClient, private storage: Storage) 
   { 
-    this.prepare()
+    this.init()
   }
 
-  prepare()
+  init()
   {
-
+    this.getDailyVerse();
   }
 
 
@@ -381,40 +381,58 @@ export class DataProvider {
    return this.http.get<BibleBook>(fetchPath);
  }
 
+getDailyVerse()
+{
+  this.storage.get('votd')
+  .then((data) => 
+  {
+      if(data)
+      {
+        if(Date.now() > data.expires)
+        {
+          this.generateDailyVerse();
+        }
+        else
+        {
+          this.dailyBibleVerse.next(data);
+        }
+      }
+      else
+      {
+        this.generateDailyVerse();
+      }
 
+  });
+}
 
-//  generateDailyVerse()
-//  {
-//    let date = new Date().toDateString();
-//    let books = this.bibleBookData.length ? this.bibleBookData.length : 0;
-//    if(this.dailyVerse == null || this.dailyVerse == undefined || this.dailyVerse.date != date)
-//    {
-//     let randomBookIndex = Math.floor((Math.random() * books) + 1);
-//     let randomBook = this.bibleBookData[randomBookIndex];
+ generateDailyVerse()
+ {
 
-//     let chapterCount = randomBook.chapters.length;
-//     let randomChapterIndex = Math.floor((Math.random() * chapterCount) + 1);
-//     let randomChapter = randomBook.chapters[randomChapterIndex];
-
-//     let verseCount = randomChapter.length;
-//     let randomVerse = Math.floor((Math.random() * verseCount) + 1);
-//     let text = randomChapter[randomVerse];
-//     let votd =
-//     {
-//       book: randomBook.name,
-//       chapter: randomChapterIndex +1,
-//       verse: randomVerse,
-//       text: text,
-//       date: new Date().toDateString()
-//     };
-
-//     this.dailyVerse = votd;
-//    }
-
-//    return this.dailyVerse;
    
-    
-//  }
+    let randomBookIndex = Math.floor((Math.random() * 66) + 1);
+    let randomBook = this.kjvBibleData[randomBookIndex];
+    this.getBibleBook(randomBook.title)
+    .subscribe(bookData =>
+    {
+      let bookLength = bookData.verses.length;
+      let randomItem = Math.floor((Math.random() * bookLength) + 1);
+      let data = bookData.verses;
+      let randomScripture = data[randomItem];
+        this.dailyVerse =
+        {
+          book: randomBook.title,
+          chapter: randomScripture.chapter,
+          verse: randomScripture.verse,
+          text: randomScripture.text.replace("[","").replace("]",""),
+          expires: Date.now() + (60 * 60 * 1000) * 24
+        };
+        this.storage.set('votd', this.dailyVerse);
+        this.dailyBibleVerse.next(this.dailyVerse);
+      });
+         
+   
+ }
+
 
  
 }

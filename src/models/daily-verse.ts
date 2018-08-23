@@ -4,5 +4,5 @@ export interface DailyVerse
     chapter: number;
     verse: number;
     text: string;
-    date: string;
+    expires: number;
 }

@@ -7,7 +7,8 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-bible',
   templateUrl: 'bible.html',
 })
-export class BiblePage {
+export class BiblePage 
+{
   
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) {}
@@ -17,15 +18,6 @@ export class BiblePage {
     this.navCtrl.push(ReadBookPage, {book: book});
   }
 
- 
-
-  ionViewDidEnter()
-  {
-    // this.data.bible.forEach(book =>
-    //   {
-    //     console.log(book.name);
-    //  });
-  }
   
 
 }

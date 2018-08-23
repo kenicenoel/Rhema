@@ -16,6 +16,7 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { SpeakPage } from '../pages/speak/speak';
 import { DataProvider } from '../providers/data/data';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [
     MyApp,
@@ -31,7 +32,8 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

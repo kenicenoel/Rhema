@@ -12,22 +12,25 @@ export class HomePage
 {
 
   currentDate: string;
-  votd: DailyVerse;
-
+  votd: DailyVerse = null;
   constructor(public navCtrl: NavController, public data: DataProvider) {}
  
-  ionViewWillEnter()
+  ionViewDidEnter()
   {
     this.currentDate = new Date().toDateString();
-    this.getVotd();
+    this.loadDailyVerse();
   }
 
 
-  getVotd()
+  loadDailyVerse()
   {
-    // this.votd = await this.data.generateDailyVerse();
-    console.log(this.votd);
-    
+    this.data.dailyBibleVerse
+    .subscribe(data =>
+    {
+      this.votd = data;
+      console.log(this.votd);
+      
+    })
   }
 
   viewFavourites()
@@ -35,7 +38,7 @@ export class HomePage
     this.navCtrl.push(FavouritePage);
   }
 
-  
+ 
   
 
 }
