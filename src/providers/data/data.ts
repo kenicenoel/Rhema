@@ -407,8 +407,6 @@ getDailyVerse()
 
  generateDailyVerse()
  {
-
-   
     let randomBookIndex = Math.floor((Math.random() * 66) + 1);
     let randomBook = this.kjvBibleData[randomBookIndex];
     this.getBibleBook(randomBook.title)

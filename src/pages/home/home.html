@@ -17,7 +17,7 @@
   <div class="hero crossesBackground">
     <div class="verseOfTheDay">
       <div class="wrapper">
-        <!-- <img class="votdIcon" src="assets/imgs/ui/calendar-grid-58.svg"> -->
+        <!-- <img class="featureIcon" src="assets/imgs/ui/calendar-grid-58.svg"> -->
         <p class="votdText selectable">{{ votd?.text }}</p>
         <ion-note text-right>{{ votd?.book }} {{ votd?.chapter }}:{{ votd?.verse }}</ion-note>
       </div>
@@ -29,6 +29,15 @@
     <h3 class="subtitle"> Recent reads </h3>
     <div class="wrapper">
       <p class="text" text-center>You were recently reading these books</p>
+    </div>
+  </section>
+
+  <section class="audioSermons">
+    <h3 class="subtitle"> Audio sermons </h3>
+    <div class="wrapper">
+      <img class="featureIcon" src="assets/imgs/ui/music-album.svg">
+      <p class="text" text-center>Coming soon. Powered by TOD.</p>
+      <img class="tod" src="assets/imgs/tod.jpg">
     </div>
   </section>
 </ion-content>
