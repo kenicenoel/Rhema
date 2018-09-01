@@ -1,5 +1,9 @@
 page-read-book 
 {
+    .readingBackground
+    {
+        background: #ebebeb;
+    }
     .pageMode
     {
         margin-right: 4px;
@@ -11,10 +15,10 @@ page-read-book
         background: #1f1e1e;
     }
 
-    .whiteMode
+    .lightMode
     {
         color: #000;
-        background: #f4f4f4;
+        background: #ebebeb;
     }
 
     .viewBooksButton
@@ -84,6 +88,16 @@ page-read-book
         color: #ff006a;
     }
 
+    .scriptureCard
+    {
+        margin-bottom: 3px;
+    }
+
+
+    .actionIcon
+    {
+        width: 18px;
+    }
       
  
 }

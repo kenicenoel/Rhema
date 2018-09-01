@@ -20,6 +20,9 @@ import { DataProvider } from '../providers/data/data';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { IonicStorageModule } from '@ionic/storage';
+import { StreamingMedia } from '@ionic-native/streaming-media';
+import { Clipboard } from '@ionic-native/clipboard';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -60,7 +63,9 @@ import { IonicStorageModule } from '@ionic/storage';
     SpeechRecognition,
     TextToSpeech,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider
+    DataProvider,
+    StreamingMedia,
+    Clipboard
   ]
 })
 export class AppModule {}

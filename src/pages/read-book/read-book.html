@@ -1,7 +1,7 @@
 <ion-header no-border>
     <ion-toolbar color="white">
       <ion-buttons start>
-          <button ion-button clear (click)="returnToBooks()"> <img class="viewBooksButton"  src="assets/imgs/ui/books.svg" /></button>
+          <button class="card-action" ion-button clear (click)="returnToBooks()"> <img class="viewBooksButton"  src="assets/imgs/ui/books.svg" /></button>
       </ion-buttons>
         <h4 class="bookTitle">{{ bookName }}</h4>
         <ion-buttons end>
@@ -16,8 +16,8 @@
           <ion-grid>
             <ion-row>
               <ion-col col-7>
-                <ion-label stacked>Chapter</ion-label>
-                <ion-select class="filter" [(ngModel)]="chapter">
+                <ion-label stacked>Filter</ion-label>
+                <ion-select class="filter" [(ngModel)]="chapter" okText="Done">
                     <ion-option value= -1 >Entire book</ion-option>
                   <ng-container *ngFor="let verse of verses; let i=index">
                       <ion-option  *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter" [value]="verse.chapter">Chapter {{ verse.chapter }} </ion-option>
@@ -25,7 +25,7 @@
                 </ion-select>
               </ion-col>
               <ion-col>
-                  <ion-label stacked>Choose page mode</ion-label>
+                  <ion-label stacked>Background</ion-label>
                   <ion-row>
                     <ion-col col-2><ion-badge class="pageMode" (click)="darkMode()" color="dark">T</ion-badge></ion-col>
                     <ion-col col-2><ion-badge class="pageMode" (click)="lightMode()" color="light">T</ion-badge></ion-col>
@@ -41,10 +41,36 @@
         <ng-container>
             <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
             <ng-container class="chapter">
-                <p (press)="toggleFooterMenu($event)"  class="verse verseDetails selectable">
-                <span class="verseNumber">{{ verse.verse }}</span>
-                {{ verse.text }}
-              </p>
+              <ion-card class="scriptureCard">
+                <ion-card-header><span class="verseNumber">{{ verse.verse }}</span></ion-card-header>
+                <ion-card-content>
+                    <p class="verse verseDetails selectable">
+                
+                        {{ verse.text }}
+                      </p>
+                </ion-card-content>
+                <ion-row>
+
+                  <ion-col col-2>
+                  <button icon-start ion-button clear small (click)="share(verse)">
+                    <img class="actionIcon"  src="assets/imgs/ui/share-2.svg">
+                  </button>
+                  </ion-col>
+
+                  <ion-col col-2>
+                  <button icon-start ion-button clear small (click)="favourite(verse)">
+                    <img class="actionIcon"  src="assets/imgs/ui/book-bookmark.svg">
+                  </button>
+                  </ion-col>
+                  
+                  <ion-col col-2>
+                      <button icon-start ion-button clear small (click)="copy(verse)">
+                          <img class="actionIcon"  src="assets/imgs/ui/copy-2.svg">
+                        </button>
+                  </ion-col>
+                </ion-row>
+              </ion-card> 
+                 
             </ng-container>
         </ng-container>
      
@@ -54,12 +80,35 @@
       <div>
           <p class="chapterNumber">Chapter {{ chapter }}</p>
           <ng-container class="chapter" *ngFor="let verse of filteredVerses">
-                <p (press)="toggleFooterMenu($event)"  class="verse verseDetails selectable">
-                    <span class="verseNumber">{{ verse.verse }}</span>
-                    {{ verse.text }}
-                </p>
-           
-          </ng-container>
+              <ion-card class="scriptureCard">
+                <ion-card-header><span class="verseNumber">{{ verse.verse }}</span></ion-card-header>
+                <ion-card-content>
+                    <p class="verse verseDetails selectable">
+                
+                        {{ verse.text }}
+                      </p>
+                </ion-card-content>
+                <ion-row>
+                  <ion-col col-2>
+                  <button icon-start ion-button clear small (click)="share(verse)">
+                    <img class="actionIcon"  src="assets/imgs/ui/share-2.svg">
+                  </button>
+                  </ion-col>
+
+                  <ion-col col-2>
+                  <button icon-start ion-button clear small (click)="favourite(verse)">
+                    <img class="actionIcon"  src="assets/imgs/ui/book-bookmark.svg">
+                  </button>
+                  </ion-col>
+                  
+                  <ion-col col-2>
+                      <button icon-start ion-button clear small (click)="copy(verse)">
+                          <img class="actionIcon"  src="assets/imgs/ui/copy-2.svg">
+                        </button>
+                  </ion-col>
+                </ion-row>
+              </ion-card> 
+              </ng-container>
         </div>
   </ng-template>
   
