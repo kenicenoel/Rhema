@@ -35,9 +35,33 @@
   <section class="audioSermons">
     <h3 class="subtitle"> Audio sermons </h3>
     <div class="wrapper">
-      <img class="featureIcon" src="assets/imgs/ui/music-album.svg">
-      <p class="text" text-center>Coming soon. Powered by TOD.</p>
-      <img class="tod" src="assets/imgs/tod.jpg">
+      <ion-row>
+        <ion-col *ngFor="let sermon of sermonsList">
+            <ion-card class="sermonCard">
+                <ion-card-header class="sermonTitle">
+                 {{ sermon.title }}
+                </ion-card-header>
+                <ion-card-content>
+                  <img class="defaultAlbumIcon" src="assets/imgs/audio/music-album.svg">
+                </ion-card-content>
+                <ion-row>
+                  <ion-col>
+                    <button ion-button clear small (click)="playAudio(sermon.url)">
+                        <img class="mini" src="assets/imgs/audio/button-play.svg">
+                    </button>
+                  </ion-col>
+                  <ion-col>
+                    <button ion-button clear small (click)="stopAudio()">
+                        <img class="mini" src="assets/imgs/audio/button-stop.svg">
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ion-card>
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      
     </div>
   </section>
 </ion-content>
