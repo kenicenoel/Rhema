@@ -15,7 +15,8 @@ export class HomePage
   sermonsList: Sermon[] = [
     {
       title: 'Greatness as a father',
-      url: 'https://kenicenoel.com/files/auido/sermons/GreatnessAsAFather_2018-06-07.mp3'
+      url: 'https://kenicenoel.com/files/auido/sermons/GreatnessAsAFather_2018-06-07.mp3',
+      author: 'Temple of Deliverance'
     }
   ]
   currentDate: string;

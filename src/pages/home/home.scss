@@ -71,14 +71,24 @@ page-home
        
        padding: 10px;
    }
+   
+   .sermonCard
+   {
+       width: 150px;
+       cursor: pointer;
+   }
 
 
 //    Audio sermon
 
    .sermonTitle
    {
-    padding: 10px;
-    font-size: 0.9em;
+    // padding: 10px;
+    // width: 50%;
+    // word-wrap: break-word;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    font-weight: 700;
    }
 
    .defaultAlbumIcon
@@ -90,7 +100,7 @@ page-home
 
    .mini
    {
-       width: 20px;
+       width: 18px;
    }
 
 }

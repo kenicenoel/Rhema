@@ -1,17 +1,14 @@
+<ion-header no-border>
+    <ion-toolbar class="topBar" color="white">
+        <ion-title class="subtitle" text-center>Rhema</ion-title>
+        <ion-buttons end>
+            <button ion-button clear (click)="viewFavourites()">
+                <img src="assets/imgs/ui/favourite-31.svg">
+              </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-row>
-    <ion-col>
-      <h1 class="page-title">Explore</h1>
-    </ion-col>
-    <ion-col>
-      <ion-buttons end class="homeActionButtons">
-        <button ion-button clear (click)="viewFavourites()">
-          <img src="assets/imgs/ui/heart.svg">
-        </button>
-
-      </ion-buttons>
-    </ion-col>
-  </ion-row>
 
 
   <div class="hero crossesBackground">
@@ -42,20 +39,10 @@
                  {{ sermon.title }}
                 </ion-card-header>
                 <ion-card-content>
-                  <img class="defaultAlbumIcon" src="assets/imgs/audio/music-album.svg">
+                  <img class="defaultAlbumIcon" src="assets/imgs/audio/audio.svg">
                 </ion-card-content>
-                <ion-row>
-                  <ion-col>
-                    <button ion-button clear small (click)="playAudio(sermon.url)">
-                        <img class="mini" src="assets/imgs/audio/button-play.svg">
-                    </button>
-                  </ion-col>
-                  <ion-col>
-                    <button ion-button clear small (click)="stopAudio()">
-                        <img class="mini" src="assets/imgs/audio/button-stop.svg">
-                    </button>
-                  </ion-col>
-                </ion-row>
+                <ion-note text-center>{{ sermon.author }}</ion-note>
+
               </ion-card>
         </ion-col>
         <ion-col></ion-col>
