@@ -1,11 +1,21 @@
-
-<ion-content padding>
-    <h1 class="page-title">Read</h1>
-  <div class="chapters">
-      <ion-grid>
+<ion-header no-border>
+    <ion-toolbar class="topBar" color="white">
         <h3 class="subtitle">King James Version</h3>
+        <ion-buttons end>
+            <button ion-button clear padding (click)="toggleDisplayMode()">
+                <img *ngIf="displayMode == 'cards'" src="assets/imgs/ui/list-bullet.svg">
+                <img *ngIf="displayMode == 'list'" src="assets/imgs/ui/cards.svg">
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <!-- <h1 class="page-title">Read</h1> -->
+   
+  <div class="chapters">
+      <ion-grid *ngIf="displayMode == 'cards'">
         <ion-row>
-          <ion-col col-4 *ngFor="let name of data.bookNames; let i = index">
+          <ion-col col-6 *ngFor="let name of data.bookNames; let i = index">
               <ion-card class="bibleCard" padding  (click)= "loadBook(name)">  
                   <div class="card-abbrev"> <img class="bookIcon" [src]="data.getBibleIcon(name)"> </div>
                   <div class="card-title">{{ name }}</div>
@@ -15,10 +25,16 @@
         </ion-row>
       </ion-grid>
      
-    <!-- <ion-list>
-      <ion-item *ngFor="let book of data.bible; let i = index" (click)= "loadBook(book)">
-        <span class="bookNumber">{{ i+1 }} -</span> {{ book.name }}
+    <ion-list *ngIf="displayMode == 'list'">
+      <ion-item *ngFor="let name of data.bookNames; let i = index" (click)= "loadBook(bookName)">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3><img class="bookIcon" [src]="data.getBibleIcon(name)"></ion-col>
+            <ion-col col-9> {{ name }}</ion-col>
+          </ion-row>
+        </ion-grid>
+          <!-- <div class="card-title">{{ name }}</div> -->
       </ion-item>
-    </ion-list> -->
+    </ion-list>
   </div>
 </ion-content>
