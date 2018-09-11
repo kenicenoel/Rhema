@@ -79,18 +79,22 @@ page-read-book
 
     .verse
     {
-        padding: 10px 0;
+        padding: 10px;
+        margin: 5px;
     }
   
     .verseNumber
     {
         font-weight: 500;
+        padding: 10px;
         color: #ff006a;
     }
 
     .scriptureCard
     {
-        margin-bottom: 3px;
+        // margin-bottom: 3px;
+        border-bottom: 1px solid #cccccc;
+        background: #ffffff;
     }
 
 

@@ -1,11 +1,13 @@
 <ion-header no-border>
     <ion-toolbar color="white">
       <ion-buttons start>
-          <button class="card-action" ion-button clear (click)="returnToBooks()"> <img class="viewBooksButton"  src="assets/imgs/ui/books.svg" /></button>
+          <button class="card-action" ion-button clear (click)="returnToBooks()"> 
+            <img class="viewBooksButton"  src="assets/imgs/ui/books.svg" />
+          </button>
       </ion-buttons>
         <h4 class="bookTitle">{{ bookName }}</h4>
         <ion-buttons end>
-          <button (click)="toggleMenu()" ion-button><img src="assets/imgs/ui/bolt.svg" /></button>
+          <button (click)="toggleMenu()" ion-button><img src="assets/imgs/ui/filter.svg" /></button>
           <button  *ngIf="isPlayingAudio; else notPlaying" (click)="toggleReadAloud()" ion-button ><img src="assets/imgs/ui/volume-off.svg" /></button>
           <ng-template #notPlaying>
               <button (click)="toggleReadAloud()" ion-button ><img src="assets/imgs/ui/volume-98.svg" /></button>
@@ -35,22 +37,19 @@
           </ion-grid>     
     </ion-toolbar>
   </ion-header>
-<ion-content padding [ngClass]="light ? 'lightMode' : 'darkMode'">
+<ion-content padding  [ngClass]="light ? 'lightMode' : 'darkMode'">
   <div class="container" *ngIf="chapter == -1; else filter">
     <div *ngFor="let verse of verses; let i = index">
         <ng-container>
             <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
             <ng-container class="chapter">
-              <ion-card class="scriptureCard">
-                <ion-card-header><span class="verseNumber">{{ verse.verse }}</span></ion-card-header>
-                <ion-card-content>
-                    <p class="verse verseDetails selectable">
+              <div class="scriptureCard">
                 
+                    <p class="verse verseDetails selectable">
+                        <span class="verseNumber">{{ verse.verse }}</span>
                         {{ verse.text }}
                       </p>
-                </ion-card-content>
                 <ion-row>
-
                   <ion-col col-2>
                   <button icon-start ion-button clear small (click)="share(verse)">
                     <img class="actionIcon"  src="assets/imgs/ui/share-2.svg">
@@ -59,17 +58,17 @@
 
                   <ion-col col-2>
                   <button icon-start ion-button clear small (click)="favourite(verse)">
-                    <img class="actionIcon"  src="assets/imgs/ui/book-bookmark.svg">
+                    <img class="actionIcon"  src="assets/imgs/ui/favourite-add-32.svg">
                   </button>
                   </ion-col>
                   
                   <ion-col col-2>
                       <button icon-start ion-button clear small (click)="copy(verse)">
-                          <img class="actionIcon"  src="assets/imgs/ui/copy-2.svg">
+                          <img class="actionIcon"  src="assets/imgs/ui/single-copy-04.svg">
                         </button>
                   </ion-col>
                 </ion-row>
-              </ion-card> 
+              </div> 
                  
             </ng-container>
         </ng-container>

@@ -28,7 +28,8 @@ export class ReadBookPage {
     locale: 'en-US'
   }
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider, 
-    private tts: TextToSpeech, public popoverCtrl: PopoverController, private clipboard: Clipboard, private alertCtrl: AlertController)  {
+    private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard, 
+    private alertCtrl: AlertController)  {
     this.bookName = navParams.get('book');
 
   }
@@ -155,6 +156,13 @@ export class ReadBookPage {
       message: message
     });
     alert.present();
+  }
+
+  showOptionsPopOver()
+  {
+    let popover = this.popoverCtrl.create({
+      
+    })
   }
 }
 

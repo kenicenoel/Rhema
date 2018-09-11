@@ -24,7 +24,7 @@
       </ion-grid>
      
     <ion-list *ngIf="displayMode == 'list'">
-      <ion-item *ngFor="let name of data.bookNames; let i = index" (click)= "loadBook(bookName)">
+      <ion-item *ngFor="let name of data.bookNames; let i = index" (click)= "loadBook(name)">
         <ion-grid>
           <ion-row>
             <ion-col col-3><img class="bookIcon" [src]="data.getBibleIcon(name)"></ion-col>
