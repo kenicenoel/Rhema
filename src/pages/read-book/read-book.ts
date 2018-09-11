@@ -1,9 +1,10 @@
 import { VerseOptionsPopOverPage } from './../verse-options-pop-over/verse-options-pop-over';
 import { DataProvider } from './../../providers/data/data';
-import { BibleBook } from './../../models/bible-book';
+import { BibleBook, VersesEntity } from './../../models/bible-book';
 import { Component } from '@angular/core';
-import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { Clipboard } from '@ionic-native/clipboard';
 
 @Component({
   selector: 'page-read-book',
@@ -26,7 +27,9 @@ export class ReadBookPage {
     rate: 1,
     locale: 'en-US'
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider, private tts: TextToSpeech, public popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider, 
+    private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard, 
+    private alertCtrl: AlertController)  {
     this.bookName = navParams.get('book');
 
   }
@@ -67,6 +70,7 @@ export class ReadBookPage {
 
   darkMode() {
     this.light = false;
+    
   }
 
   lightMode() {
@@ -128,13 +132,37 @@ export class ReadBookPage {
     }
   }
 
-  
-  toggleFooterMenu(myEvent)
+  copy(verse:VersesEntity)
   {
-    let popover = this.popoverCtrl.create(VerseOptionsPopOverPage);
-    popover.present({
-      ev: myEvent
+    let chapter = verse.chapter;
+    let reference = verse.verse;
+    let text = verse.text;
+    this.clipboard.copy(`Chapter ${chapter} verse ${reference}\n${text}.`);
+    this.showAlert("Copied verse to your phone's clipboard.");
+  }
+
+  favourite()
+  {
+
+  }
+
+  share()
+  {
+
+  }
+  showAlert(message: string)
+  {
+    let alert = this.alertCtrl.create({
+      message: message
     });
+    alert.present();
+  }
+
+  showOptionsPopOver()
+  {
+    let popover = this.popoverCtrl.create({
+      
+    })
   }
 }
 

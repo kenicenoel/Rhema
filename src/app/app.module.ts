@@ -21,6 +21,9 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { IonicStorageModule } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { StreamingMedia } from '@ionic-native/streaming-media';
+import { Clipboard } from '@ionic-native/clipboard';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -63,6 +66,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
     SocialSharing
+    StreamingMedia,
+    Clipboard
   ]
 })
 export class AppModule {}

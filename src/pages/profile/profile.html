@@ -1,4 +1,20 @@
-
 <ion-content padding>
-    <h1 class="page-title">Me </h1>
+  <h1 class="page-title">Me </h1>
+  <section class="options">
+    <ion-list>
+      <ion-list-header>
+        General
+      </ion-list-header>
+      <ion-item>
+          <ion-label>Enable dark mode</ion-label>
+        <ion-toggle [(ngModel)]="darkMode"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Enable daily bible verse alerts</ion-label>
+        <ion-toggle [(ngModel)]="enableNotifications"></ion-toggle>
+      </ion-item>
+
+    </ion-list>
+  </section>
 </ion-content>

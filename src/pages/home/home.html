@@ -1,17 +1,14 @@
+<ion-header no-border>
+    <ion-toolbar class="topBar" color="white">
+        <ion-title class="subtitle" text-center>Rhema</ion-title>
+        <ion-buttons end>
+            <button ion-button clear (click)="viewFavourites()">
+                <img src="assets/imgs/ui/favourite-31.svg">
+              </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-row>
-    <ion-col>
-      <h1 class="page-title">Explore</h1>
-    </ion-col>
-    <ion-col>
-      <ion-buttons end class="homeActionButtons">
-        <button ion-button clear (click)="viewFavourites()">
-          <img src="assets/imgs/ui/book-bookmark.svg">
-        </button>
-
-      </ion-buttons>
-    </ion-col>
-  </ion-row>
 
 
   <div class="hero crossesBackground">
@@ -19,7 +16,7 @@
       <div class="wrapper">
         <!-- <img class="featureIcon" src="assets/imgs/ui/calendar-grid-58.svg"> -->
         <p class="votdText selectable">{{ votd?.text }}</p>
-        <ion-note text-right>{{ votd?.book }} {{ votd?.chapter }}:{{ votd?.verse }}</ion-note>
+        <ion-note class="reference" text-right>{{ votd?.book }} {{ votd?.chapter }}:{{ votd?.verse }}</ion-note>
       </div>
     </div>
   </div>
@@ -35,9 +32,23 @@
   <section class="audioSermons">
     <h3 class="subtitle"> Audio sermons </h3>
     <div class="wrapper">
-      <img class="featureIcon" src="assets/imgs/ui/music-album.svg">
-      <p class="text" text-center>Coming soon. Powered by TOD.</p>
-      <img class="tod" src="assets/imgs/tod.jpg">
+      <ion-row>
+        <ion-col *ngFor="let sermon of sermonsList">
+            <ion-card class="sermonCard">
+                <ion-card-header class="sermonTitle">
+                 {{ sermon.title }}
+                </ion-card-header>
+                <ion-card-content>
+                  <img class="defaultAlbumIcon" src="assets/imgs/audio/audio.svg">
+                </ion-card-content>
+                <ion-note text-center>{{ sermon.author }}</ion-note>
+
+              </ion-card>
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      
     </div>
   </section>
 </ion-content>
