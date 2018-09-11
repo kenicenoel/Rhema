@@ -1,3 +1,5 @@
+import { Favourite } from './../../models/favourite';
+import { FavouriteProvider } from './../../providers/favourite/favourite';
 import { VerseOptionsPopOverPage } from './../verse-options-pop-over/verse-options-pop-over';
 import { DataProvider } from './../../providers/data/data';
 import { BibleBook, VersesEntity } from './../../models/bible-book';
@@ -5,6 +7,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { Clipboard } from '@ionic-native/clipboard';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { ReadOptionsPopOverPage } from '../read-options-pop-over/read-options-pop-over';
 
 @Component({
   selector: 'page-read-book',
@@ -29,7 +33,7 @@ export class ReadBookPage {
   }
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider, 
     private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard, 
-    private alertCtrl: AlertController)  {
+    private alertCtrl: AlertController, private socialSharing: SocialSharing, public favouriteProvider: FavouriteProvider)  {
     this.bookName = navParams.get('book');
 
   }
@@ -137,19 +141,75 @@ export class ReadBookPage {
     let chapter = verse.chapter;
     let reference = verse.verse;
     let text = verse.text;
-    this.clipboard.copy(`Chapter ${chapter} verse ${reference}\n${text}.`);
+    this.clipboard.copy(`${this.bookName} Chapter ${chapter} verse ${reference}\n${text}.`);
     this.showAlert("Copied verse to your phone's clipboard.");
   }
 
-  favourite()
+  favourite(verse:VersesEntity)
   {
+    
+    let chapter = verse.chapter;
+    let reference = verse.verse;
+    let text = verse.text;
+    let id = this.bookName.substr(0,3) + chapter+reference;
+    var favourite: Favourite = {
+      id: id,
+      text: text,
+      reference: `${this.bookName} ${chapter}: ${reference}`,
+      created: new Date()
+    };
+    
+    if(!this.favouriteProvider.isFavorite(favourite))
+    {
+      this.favouriteProvider.favoriteVerse(favourite);
+      let alert = this.alertCtrl.create({
+        message: "Saved to favourites"
+      })
+      alert.present();
+
+
+    }   
+    else
+    {
+      this.favouriteProvider.favoriteVerse(favourite);
+      let alert = this.alertCtrl.create({
+        message: "Removed from favourites"
+      })
+      alert.present();
+    }
 
   }
 
-  share()
+  isFavorite(verse: VersesEntity)
   {
+    let chapter = verse.chapter;
+    let reference = verse.verse;
+    let text = verse.text;
+    let id = this.bookName.substr(0,3) + chapter+reference;
+    var favourite: Favourite = {
+      id: id,
+      text: text,
+      reference: `${this.bookName} ${chapter}: ${reference}`,
+      created: new Date()
+    };
+
+    return this.favouriteProvider.isFavorite(favourite);
+    
 
   }
+
+  share(verse:VersesEntity)
+  {
+    let chapter = verse.chapter;
+    let reference = verse.verse;
+    let text = verse.text;
+    let footer = "Shared from Rhema Bible App!"
+    let textToShare = `${this.bookName} Chapter ${chapter} verse ${reference}\n${text}.\n${footer}`;
+    this.socialSharing.share(textToShare, null, null, null);
+  }
+
+
+
   showAlert(message: string)
   {
     let alert = this.alertCtrl.create({
@@ -158,11 +218,30 @@ export class ReadBookPage {
     alert.present();
   }
 
-  showOptionsPopOver()
+  showOptionsPopOver(myEvent)
   {
-    let popover = this.popoverCtrl.create({
-      
+    let popover = this.popoverCtrl.create(ReadOptionsPopOverPage, {verses: this.verses});
+    popover.present({
+      ev: myEvent
+    });
+
+    popover.onDidDismiss(chapter => 
+      {
+      console.log(chapter);
+      if(chapter != null)
+      {
+         this.chapter = chapter;
+      }
     })
+  }
+
+  getFavouriteId(verse:VersesEntity)
+  {
+    let chapter = verse.chapter;
+    let reference = verse.verse;
+    let text = verse.text;
+    let id = this.bookName.substr(0,3) + chapter+reference;
+    return id;
   }
 }
 

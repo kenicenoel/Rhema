@@ -1,25 +1,43 @@
-<ion-content>
-  <ion-row>
-    <ion-col>
-      <h1 class="page-title">Favourites</h1>
-    </ion-col>
-    <ion-col>
-    </ion-col>
-  </ion-row>
-
-
-  <div class="hero">
-    <div class="verseOfTheDay">
+<ion-header no-border>
+    <ion-toolbar color="white">
+        <h3 class="subtitle">Favourites</h3>
+    </ion-toolbar>
+<ion-content padding>
+  <div class="hero" *ngIf="!favourites || favourites.length == 0">
+    <div>
       <div class="wrapper">
         <img class="favouritesIcon" src="assets/imgs/ui/favourite-28.svg">
-        <p text-center>Your favourites will show up here.</p>
-        <!-- <ion-note>{{ votd?.book }} {{ votd?.chapter }}:{{ votd?.verse }}</ion-note> -->
+        <p text-center>Your favourite verses</p>
       </div>
     </div>
   </div>
 
+  <section class="favourites">
+      <ion-card class="bibleCard">
+          <ng-container *ngFor="let favourite of favourites">
+                  <p class="verse verseDetails selectable">
+                      {{ favourite.text }}
+                    </p>
+              <ion-row>
+                <ion-col col-2>
+                <button icon-start ion-button clear small (click)="share(verse)">
+                  <img class="actionIcon"  src="assets/imgs/ui/share-2.svg">
+                </button>
+                </ion-col>
 
-  <section class="recentlyRead">
-  
+                <ion-col col-2>
+                <button icon-start ion-button clear small (click)="favourite(verse)">
+                  <img class="actionIcon" src="assets/imgs/ui/star.svg" >
+                </button>
+                </ion-col>
+                
+                <ion-col col-2>
+                    <button icon-start ion-button clear small (click)="copy(verse)">
+                        <img class="actionIcon"  src="assets/imgs/ui/single-copy-04.svg">
+                      </button>
+                </ion-col>
+              </ion-row>                 
+          </ng-container>
+      </ion-card>
   </section>
 </ion-content>

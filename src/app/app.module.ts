@@ -1,3 +1,4 @@
+import { ReadOptionsPopOverPage } from './../pages/read-options-pop-over/read-options-pop-over';
 import { LoadingComponent } from './../components/loading/loading';
 import { VerseOptionsPopOverPage } from './../pages/verse-options-pop-over/verse-options-pop-over';
 import { FavouritePage } from './../pages/favourite/favourite';
@@ -23,6 +24,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { StreamingMedia } from '@ionic-native/streaming-media';
 import { Clipboard } from '@ionic-native/clipboard';
+import { FavouriteProvider } from '../providers/favourite/favourite';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { Clipboard } from '@ionic-native/clipboard';
     FavouritePage,
     ZeroPadPipe,
     LoadingComponent,
-    VerseOptionsPopOverPage
+    VerseOptionsPopOverPage,
+    ReadOptionsPopOverPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { Clipboard } from '@ionic-native/clipboard';
     ReadBookPage,
     FavouritePage,
     LoadingComponent,
-    VerseOptionsPopOverPage
+    VerseOptionsPopOverPage,
+    ReadOptionsPopOverPage
   ],
   providers: [
     StatusBar,
@@ -65,9 +69,10 @@ import { Clipboard } from '@ionic-native/clipboard';
     TextToSpeech,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
-    SocialSharing
+    SocialSharing,
     StreamingMedia,
-    Clipboard
+    Clipboard,
+    FavouriteProvider
   ]
 })
 export class AppModule {}

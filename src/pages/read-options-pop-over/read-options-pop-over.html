@@ -1,0 +1,13 @@
+
+<ion-content padding class="filterPopover">
+            <ion-label stacked>Filter by chapter</ion-label>
+            <ion-select class="filter" [(ngModel)]="selectedChapter" okText="Pick">
+                <ion-option value= -1 >Entire book</ion-option>
+              <ng-container *ngFor="let verse of verses; let i=index">
+                  <ion-option  *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter" [value]="verse.chapter">Chapter {{ verse.chapter }} </ion-option>
+              </ng-container>
+            </ion-select>  
+            <ion-buttons end>
+              <button ion-button small (click)="close()">Apply</button>
+            </ion-buttons>
+</ion-content>

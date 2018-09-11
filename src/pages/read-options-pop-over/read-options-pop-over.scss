@@ -1,0 +1,17 @@
+page-read-options-pop-over 
+{
+    $popover-ios-border-radius: 5px;
+    $popover-md-border-radius: 5px;
+    $popover-ios-background: #d6d8dd;
+    $popover-md-background: #d6d8dd;
+
+    .filterPopover
+    {
+        border-radius: 10px;
+    }
+
+    ion-select
+    {
+        max-width: 80%;
+    }
+}
