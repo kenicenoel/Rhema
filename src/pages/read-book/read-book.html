@@ -38,7 +38,7 @@
 <ion-content padding [ngClass]="light ? 'lightMode' : 'darkMode'">
   <div class="container" *ngIf="chapter == -1; else filter">
     <div *ngFor="let verse of verses; let i = index">
-        <ng-container>
+        <ion-card class="bibleCard">
             <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
             <ng-container class="chapter">
                 <p (press)="toggleFooterMenu($event)"  class="verse verseDetails selectable">
@@ -46,7 +46,7 @@
                 {{ verse.text }}
               </p>
             </ng-container>
-        </ng-container>
+        </ion-card>
      
     </div>
   </div>
