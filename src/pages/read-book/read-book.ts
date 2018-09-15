@@ -1,6 +1,5 @@
 import { Favourite } from './../../models/favourite';
 import { FavouriteProvider } from './../../providers/favourite/favourite';
-import { VerseOptionsPopOverPage } from './../verse-options-pop-over/verse-options-pop-over';
 import { DataProvider } from './../../providers/data/data';
 import { BibleBook, VersesEntity } from './../../models/bible-book';
 import { Component } from '@angular/core';
@@ -31,11 +30,12 @@ export class ReadBookPage {
     rate: 1,
     locale: 'en-US'
   }
+  favourites: Favourite[] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider, 
     private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard, 
     private alertCtrl: AlertController, private socialSharing: SocialSharing, public favouriteProvider: FavouriteProvider)  {
     this.bookName = navParams.get('book');
-
+      // favouriteProvider.deleteAllFavourites();
   }
 
   ionViewDidLoad() {
@@ -49,13 +49,20 @@ export class ReadBookPage {
         this.selectedBook = bookData;
         this.verses = bookData.verses;
         console.log(this.verses);
+        this.getBookFavourites();
         this.isLoading = false;
       },
         error => console.log(error)
       )
-    console.log(this.selectedBook);
+  }
 
-
+  getBookFavourites()
+  {
+    this.favouriteProvider.getFavouritesForBook(this.bookName)
+    .then(favourites =>
+      {
+        this.favourites = favourites;
+      })
   }
 
   toggleMenu() {
@@ -72,14 +79,6 @@ export class ReadBookPage {
     return this.verses.filter(verse => verse.chapter == this.chapter);
   }
 
-  darkMode() {
-    this.light = false;
-    
-  }
-
-  lightMode() {
-    this.light = true;
-  }
 
   returnToBooks() {
     this.navCtrl.pop();
@@ -142,40 +141,32 @@ export class ReadBookPage {
     let reference = verse.verse;
     let text = verse.text;
     this.clipboard.copy(`${this.bookName} Chapter ${chapter} verse ${reference}\n${text}.`);
-    this.showAlert("Copied verse to your phone's clipboard.");
+    this.data.showToast("Copied verse to your phone's clipboard.");
   }
 
   favourite(verse:VersesEntity)
   {
     
     let chapter = verse.chapter;
-    let reference = verse.verse;
-    let text = verse.text;
-    let id = this.bookName.substr(0,3) + chapter+reference;
+    let verseNumber = verse.verse;
+    let scriptureText = verse.text;
+    let id = this.bookName.substr(0,3) + chapter+verseNumber;
     var favourite: Favourite = {
       id: id,
-      text: text,
-      reference: `${this.bookName} ${chapter}: ${reference}`,
+      bookName: this.bookName,
+      text: scriptureText,
+      chapter: chapter,
+      verse: verseNumber,
       created: new Date()
     };
     
-    if(!this.favouriteProvider.isFavorite(favourite))
+    if(this.favouriteProvider.isFavorite(favourite))
     {
       this.favouriteProvider.favoriteVerse(favourite);
-      let alert = this.alertCtrl.create({
-        message: "Saved to favourites"
-      })
-      alert.present();
-
-
     }   
     else
     {
       this.favouriteProvider.favoriteVerse(favourite);
-      let alert = this.alertCtrl.create({
-        message: "Removed from favourites"
-      })
-      alert.present();
     }
 
   }
@@ -183,16 +174,17 @@ export class ReadBookPage {
   isFavorite(verse: VersesEntity)
   {
     let chapter = verse.chapter;
-    let reference = verse.verse;
-    let text = verse.text;
-    let id = this.bookName.substr(0,3) + chapter+reference;
+    let verseNumber = verse.verse;
+    let scriptureText = verse.text;
+    let id = this.bookName.substr(0,3) + chapter+verseNumber;
     var favourite: Favourite = {
       id: id,
-      text: text,
-      reference: `${this.bookName} ${chapter}: ${reference}`,
+      bookName: this.bookName,
+      text: scriptureText,
+      chapter: chapter,
+      verse: verseNumber,
       created: new Date()
     };
-
     return this.favouriteProvider.isFavorite(favourite);
     
 
@@ -235,14 +227,18 @@ export class ReadBookPage {
     })
   }
 
-  getFavouriteId(verse:VersesEntity)
+  isFavourite(verse: VersesEntity)
   {
-    let chapter = verse.chapter;
-    let reference = verse.verse;
-    let text = verse.text;
-    let id = this.bookName.substr(0,3) + chapter+reference;
-    return id;
+    let index = this.favourites.findIndex(favourite => favourite.verse == verse.verse && favourite.chapter == verse.chapter && favourite.text == verse.text);
+    if(index != -1)
+    {
+      return true;
+    }
+
+    return false;
   }
+
+
 }
 
 

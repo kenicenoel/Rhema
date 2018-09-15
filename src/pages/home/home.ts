@@ -59,7 +59,7 @@ export class HomePage
 
   viewFavourites()
   {
-    this.navCtrl.push(FavouritePage);
+    this.navCtrl.setRoot(FavouritePage);
   }
 
  

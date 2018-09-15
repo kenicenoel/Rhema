@@ -2,12 +2,39 @@ page-favourite {
 
     .hero
     {
-        margin-top: 50%;
+        margin-top: 5%;
     }
+
+    
+   .bibleCard
+   {
+    //    border-radius: 5px;
+       border-bottom: 1px solid #e9e0e0;
+   }
 
     .favouritesIcon
     {
         display: block;
+        width: 64px;
         margin: 0 auto;
     }
+
+    .actionIcon
+    {
+        width: 18px;
+    }
+
+    .verseDetails
+    {
+        padding-left: 10px;
+    }
+
+    .reference
+    {
+        font-weight: 500;
+        padding: 10px;
+        color: #ff006a;
+        display: block;
+    }
+      
 }

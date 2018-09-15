@@ -1,20 +1,31 @@
 <ion-header no-border>
-    <ion-toolbar color="white">
-        <h3 class="subtitle">Favourites</h3>
-    </ion-toolbar>
-<ion-content padding>
-  <div class="hero" *ngIf="!favourites || favourites.length == 0">
+  <ion-toolbar class="topBar" color="white">
+      <ion-title class="subtitle" text-center>Favourites</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <section class="hero">
     <div>
       <div class="wrapper">
-        <img class="favouritesIcon" src="assets/imgs/ui/favourite-28.svg">
-        <p text-center>Your favourite verses</p>
+        <img class="favouritesIcon" src="assets/imgs/ui/star-circle.svg">
+        <p text-center *ngIf="favourites && favourites.length == 0">You don' t have any favourites</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <section class="favourites">
-      <ion-card class="bibleCard">
+  <section class="favourites" padding *ngIf="favourites && favourites.length > 0">
+      <div class="bibleCard">
           <ng-container *ngFor="let favourite of favourites">
+            <ion-row>
+              <ion-col col-10>
+                <p class="reference">{{ favourite.bookName }} {{favourite.chapter }}:{{ favourite.verse }}</p>
+              </ion-col>
+              <ion-col>
+                <button icon-start ion-button clear (click)="unfavourite(favourite)">
+                  <img src="assets/imgs/ui/star.svg" >
+              </button>
+            </ion-col>
+            </ion-row>
                   <p class="verse verseDetails selectable">
                       {{ favourite.text }}
                     </p>
@@ -26,18 +37,12 @@
                 </ion-col>
 
                 <ion-col col-2>
-                <button icon-start ion-button clear small (click)="favourite(verse)">
-                  <img class="actionIcon" src="assets/imgs/ui/star.svg" >
-                </button>
-                </ion-col>
-                
-                <ion-col col-2>
                     <button icon-start ion-button clear small (click)="copy(verse)">
                         <img class="actionIcon"  src="assets/imgs/ui/single-copy-04.svg">
                       </button>
                 </ion-col>
               </ion-row>                 
           </ng-container>
-      </ion-card>
+      </div>
   </section>
 </ion-content>

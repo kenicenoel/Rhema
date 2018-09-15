@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Book } from '../../models/book';
 import { BehaviorSubject } from 'rxjs';
+import { ToastController } from 'ionic-angular';
 @Injectable()
 export class DataProvider {
 
@@ -343,7 +344,7 @@ export class DataProvider {
   ];
   private dailyVerse: DailyVerse;
   dailyBibleVerse: BehaviorSubject<DailyVerse> = new BehaviorSubject<DailyVerse>(null);
-  constructor(public http: HttpClient, private storage: Storage) 
+  constructor(public http: HttpClient, private storage: Storage, private toastCtrl: ToastController) 
   { 
     this.init()
   }
@@ -429,6 +430,16 @@ getDailyVerse()
       });
          
    
+ }
+
+ showToast(messageToShow: string)
+ {
+   let toast = this.toastCtrl.create({
+     message: messageToShow,
+     duration: 3000
+   });
+
+   toast.present();
  }
 
 

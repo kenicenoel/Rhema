@@ -1,8 +1,10 @@
 export interface Favourite
 {
     id: string;
+    bookName: string;
+    chapter: number;
+    verse: number;
     text: string;
-    reference: string;
     created: Date;
 
 }

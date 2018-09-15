@@ -16,11 +16,11 @@
     </ion-toolbar>
 
   </ion-header>
-<ion-content padding  [ngClass]="light ? 'lightMode' : 'darkMode'">
+<ion-content class="bgStyle" padding>
   <div class="container" *ngIf="chapter == -1; else filter">
     <div *ngFor="let verse of verses; let i = index">
         <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
-        <ion-card class="bibleCard">
+        <div class="bibleCard">
             <ng-container class="chapter">
                     <p class="verse verseDetails selectable">
                         <span class="verseNumber">{{ verse.verse }}</span>
@@ -35,34 +35,30 @@
 
                   <ion-col col-2>
                   <button icon-start ion-button clear small (click)="favourite(verse)">
-                    <img class="actionIcon"  src="assets/imgs/ui/star-outline.svg">
-                     <!-- <img *ngIf="isFavorite(verse)" class="actionIcon"  src="assets/imgs/ui/star.svg"> -->
+                    <img *ngIf="!isFavourite(verse)" class="actionIcon"  src="assets/imgs/ui/star-outline.svg">
+                    <img *ngIf="isFavourite(verse)" class="actionIcon"  src="assets/imgs/ui/star.svg">
                   </button>
                   </ion-col>
                   
                   <ion-col col-2>
                       <button icon-start ion-button clear small (click)="copy(verse)">
                           <img class="actionIcon"  src="assets/imgs/ui/single-copy-04.svg">
-                        </button>
+                      </button>
                   </ion-col>
                 </ion-row>                 
             </ng-container>
-        </ion-card>
-     
+        </div>
     </div>
   </div>
   <ng-template #filter>
       <div>
           <p class="chapterNumber">Chapter {{ chapter }}</p>
           <ng-container class="chapter" *ngFor="let verse of filteredVerses">
-              <ion-card class="bibleCard">
-                <ion-card-content>
+              <div class="bibleCard">
                     <span class="verseNumber">{{ verse.verse }}</span>
                     <p class="verse verseDetails selectable">
-                
                         {{ verse.text }}
-                      </p>
-                </ion-card-content>
+                    </p>
                 <ion-row>
                     <ion-col col-2>
                     <button icon-start ion-button clear small (click)="share(verse)">
@@ -73,7 +69,6 @@
                     <ion-col col-2>
                     <button icon-start ion-button clear small (click)="favourite(verse)">
                       <img class="actionIcon"  src="assets/imgs/ui/star-outline.svg">
-                       <!-- <img *ngIf="isFavorite(verse)" class="actionIcon"  src="assets/imgs/ui/star.svg"> -->
                     </button>
                     </ion-col>
                     
@@ -83,7 +78,7 @@
                           </button>
                     </ion-col>
                   </ion-row>
-              </ion-card> 
+              </div> 
               </ng-container>
         </div>
   </ng-template>

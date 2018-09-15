@@ -14,11 +14,21 @@ export class FavouritePage {
 
   ionViewDidLoad()
   {
-  this.favouritesProvider.getAllFavoriteVerses()
-  .then((favourites)=>
+    this.getFavourites();
+  }
+
+  getFavourites()
   {
-    this.favourites = favourites;
-  })
+    this.favouritesProvider.getAllFavoriteVerses()
+    .then(favourites =>
+    {
+      this.favourites = favourites;
+    })
+  }
+
+  unfavourite(favourite: Favourite)
+  {
+    this.favouritesProvider.unfavoriteVerse(favourite);
   }
 
 }
