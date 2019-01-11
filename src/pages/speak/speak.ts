@@ -1,11 +1,10 @@
 import { BibleProvider } from './../../providers/bible/bible';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import * as SDK from 'microsoft-speech-browser-sdk';
 
 const BING_SPEECH_API_KEY = "2cf1e40d197347e48ccc7ae4d66dbe5c";
 
-@IonicPage()
 @Component({
   selector: 'page-speak',
   templateUrl: 'speak.html',
@@ -16,7 +15,6 @@ export class SpeakPage {
   isListening: boolean = false;
   speechRecognizer: SDK.Recognizer;
   speakAnimationConfig: Object;
-  private anim: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController, private bibleProvider: BibleProvider)
    {
     this.speechRecognizer = this.recognizerSetup(SDK, SDK.RecognitionMode.Interactive, "en-US", SDK.SpeechResultFormat.Simple, BING_SPEECH_API_KEY);
@@ -48,14 +46,14 @@ export class SpeakPage {
   {
     if(this.isListening)
     {
-      this.recognizerStop(SDK, this.speechRecognizer);
+      this.recognizerStop(this.speechRecognizer);
       this.isListening = false;
     }
     else
     {
       if(this.speechRecognizer)
       {
-        this.recognizerStart(SDK, this.speechRecognizer);
+        this.recognizerStart(this.speechRecognizer);
         this.isListening = true;
       }
       else
@@ -70,7 +68,7 @@ export class SpeakPage {
    
   }
 
-  recognizerStart(SDK, recognizer) {
+  recognizerStart(recognizer) {
     recognizer.Recognize((event) => {
         /*
             Alternative syntax for typescript devs.
@@ -129,7 +127,7 @@ onSpeechEndDetected()
 
 }
 
-  recognizerStop(SDK, recognizer) 
+  recognizerStop(recognizer) 
   {
     // recognizer.AudioSource.Detach(audioNodeId) can be also used here. (audioNodeId is part of ListeningStartedEvent)
     recognizer.AudioSource.TurnOff();
@@ -138,11 +136,10 @@ onSpeechEndDetected()
   onComplete()
   {
     this.isListening = false;
-    this.recognizerStop(SDK, this.speechRecognizer);
+    this.recognizerStop(this.speechRecognizer);
   }
 
   handleAnimation(anim: any) {
-    this.anim = anim;
 }
 
 }
