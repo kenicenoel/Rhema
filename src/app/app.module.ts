@@ -1,5 +1,4 @@
 import { ReadOptionsPopOverPage } from './../pages/read-options-pop-over/read-options-pop-over';
-import { LoadingComponent } from './../components/loading/loading';
 import { VerseOptionsPopOverPage } from './../pages/verse-options-pop-over/verse-options-pop-over';
 import { FavouritePage } from './../pages/favourite/favourite';
 import { ZeroPadPipe } from './../pipes/zero-pad/zero-pad';
@@ -17,7 +16,6 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { SpeakPage } from '../pages/speak/speak';
-import { DataProvider } from '../providers/data/data';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { IonicStorageModule } from '@ionic/storage';
@@ -38,7 +36,6 @@ import { BibleProvider } from '../providers/bible/bible';
     ReadBookPage,
     FavouritePage,
     ZeroPadPipe,
-    LoadingComponent,
     VerseOptionsPopOverPage,
     ReadOptionsPopOverPage
   ],
@@ -59,7 +56,6 @@ import { BibleProvider } from '../providers/bible/bible';
     ProfilePage,
     ReadBookPage,
     FavouritePage,
-    LoadingComponent,
     VerseOptionsPopOverPage,
     ReadOptionsPopOverPage
   ],
@@ -69,7 +65,6 @@ import { BibleProvider } from '../providers/bible/bible';
     SpeechRecognition,
     TextToSpeech,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider,
     SocialSharing,
     StreamingMedia,
     Clipboard,

@@ -1,9 +1,7 @@
 import { Storage } from '@ionic/storage';
-import { Sermon } from './../../models/sermon';
 import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media';
 import { FavouritePage } from './../favourite/favourite';
 import { DailyVerse } from './../../models/daily-verse';
-import { DataProvider } from './../../providers/data/data';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BibleProvider } from '../../providers/bible/bible';
@@ -16,7 +14,6 @@ import { BehaviorSubject } from 'rxjs';
 export class HomePage 
 {
   public booksAnimationConfig: Object;
-  private anim: any;
   currentDate: string;
   votd: DailyVerse;
   dailyBibleVerse: BehaviorSubject<DailyVerse> = new BehaviorSubject<DailyVerse>(null);
@@ -110,7 +107,6 @@ export class HomePage
   
   handleAnimation(anim: any) 
   {
-    this.anim = anim;
   }
   //#endregion
 

@@ -1,7 +1,6 @@
 import { BibleProvider } from './../../providers/bible/bible';
 import { Favourite } from './../../models/favourite';
 import { FavouriteProvider } from './../../providers/favourite/favourite';
-import { DataProvider } from './../../providers/data/data';
 import { BibleBook } from './../../models/bible-book';
 import { Component } from '@angular/core';
 import { NavController, NavParams, PopoverController, AlertController, Platform } from 'ionic-angular';

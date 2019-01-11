@@ -1,4 +1,4 @@
-import { DataProvider } from './../data/data';
+import { BibleProvider } from './../bible/bible';
 import { Storage } from '@ionic/storage';
 import { Favourite } from './../../models/favourite';
 import { Injectable } from '@angular/core';
@@ -7,7 +7,7 @@ const STORAGE_KEY = 'favouriteVerses';
 @Injectable()
 export class FavouriteProvider {
 
-  constructor(public storage: Storage, private dataProvider: DataProvider) {}
+  constructor(public storage: Storage, private bibleProvider: BibleProvider) {}
 
   isFavorite(favourite: Favourite) 
   {
@@ -34,10 +34,10 @@ export class FavouriteProvider {
     .then(result => {
       if (result) {
         result.push(favourite);
-        this.dataProvider.showToast("Added to favourites");
+        this.bibleProvider.showToast("Added to favourites");
         return this.storage.set(STORAGE_KEY, result);
       } else {
-        this.dataProvider.showToast("Added to favourites");
+        this.bibleProvider.showToast("Added to favourites");
         return this.storage.set(STORAGE_KEY, [favourite]);
       }
     });
@@ -54,7 +54,7 @@ export class FavouriteProvider {
         if(index != -1)
         {
           result.splice(index, 1);
-          this.dataProvider.showToast("Removed from favourites");
+          this.bibleProvider.showToast("Removed from favourites");
         }
         return this.storage.set(STORAGE_KEY, result);
       }
@@ -81,7 +81,7 @@ export class FavouriteProvider {
     this.storage.remove(STORAGE_KEY)
     .then(()=>
     {
-      this.dataProvider.showToast("Finished clearing favourites");
+      this.bibleProvider.showToast("Finished clearing favourites");
     })
   }
 
