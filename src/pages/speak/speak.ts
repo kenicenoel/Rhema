@@ -15,15 +15,17 @@ export class SpeakPage {
   isListening: boolean = false;
   speechRecognizer: SDK.Recognizer;
   speakAnimationConfig: Object;
+  private anim: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController, private bibleProvider: BibleProvider)
    {
     this.speechRecognizer = this.recognizerSetup(SDK, SDK.RecognitionMode.Interactive, "en-US", SDK.SpeechResultFormat.Simple, BING_SPEECH_API_KEY);
+    this.speakAnimationConfig = this.bibleProvider.getAnimation("speak", true);
+
    }
 
   ionViewDidEnter() 
   {
     console.log(this.speechRecognizer);
-    this.speakAnimationConfig = this.bibleProvider.getAnimation("speak", true);
   }
 
   recognizerSetup(SDK, recognitionMode, language, format, subscriptionKey) {
@@ -139,8 +141,10 @@ onSpeechEndDetected()
     this.recognizerStop(this.speechRecognizer);
   }
 
-  handleAnimation(anim: any) {
-}
+  handleAnimation(anim: any) 
+  {
+    this.anim = anim;
+  }
 
 }
 

@@ -25,6 +25,8 @@
     <h3 class="subtitle"> Recent reads </h3>
     <div class="wrapper">
         <lottie-animation-view
+        [width]="300"
+        [height]="500"
         [options]="booksAnimationConfig"
         (animCreated)="handleAnimation($event)">
       </lottie-animation-view>

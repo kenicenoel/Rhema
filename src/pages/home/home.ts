@@ -17,13 +17,16 @@ export class HomePage
   currentDate: string;
   votd: DailyVerse;
   dailyBibleVerse: BehaviorSubject<DailyVerse> = new BehaviorSubject<DailyVerse>(null);
-  constructor(public navCtrl: NavController, public bibleProvider: BibleProvider, private streamer: StreamingMedia, private storage: Storage) { }
+  private anim: any;
+  constructor(public navCtrl: NavController, public bibleProvider: BibleProvider, private streamer: StreamingMedia, private storage: Storage)
+  {
+    this.booksAnimationConfig = this.bibleProvider.getAnimation("books", true);
+   }
 
   ionViewDidEnter()
   {
     this.currentDate = new Date().toDateString();
     this.loadDailyVerse();
-    this.booksAnimationConfig = this.bibleProvider.getAnimation("books", true);
     
   }
 
@@ -107,6 +110,7 @@ export class HomePage
   
   handleAnimation(anim: any) 
   {
+    this.anim = anim;
   }
   //#endregion
 

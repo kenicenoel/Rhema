@@ -72,16 +72,20 @@ export class BibleProvider
     toast.present();
   }
 
-  getAnimation(key: string, loop: boolean = false)
+  getAnimation(key: string, repeat: boolean = false)
   {
     var animPath = this.animations.find(animation => animation.key == key).anim;
     if (animPath)
     {
-      return  {
+      var config =
+      {
         path: animPath,
+        renderer: 'canvas',
         autoplay: true,
-        loop: loop
+        loop: repeat
       };
+
+      return config;
     }
 
   }

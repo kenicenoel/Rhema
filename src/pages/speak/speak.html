@@ -7,6 +7,8 @@
        <ng-template #listening> 
           <lottie-animation-view
           [options]="speakAnimationConfig"
+          [width]="300"
+          [height]="500"
           (animCreated)="handleAnimation($event)">
         </lottie-animation-view>
         </ng-template>
