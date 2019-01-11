@@ -1,8 +1,6 @@
+import { BibleBook } from './bible-book';
 export interface DailyVerse
 {
-    book: string;
-    chapter: number;
-    verse: number;
-    text: string;
+    data: BibleBook;
     expires: number;
 }

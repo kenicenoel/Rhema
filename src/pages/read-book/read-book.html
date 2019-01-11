@@ -18,34 +18,14 @@
   </ion-header>
 <ion-content class="bgStyle" padding>
   <div class="container" *ngIf="chapter == -1; else filter">
-    <div *ngFor="let verse of verses; let i = index">
-        <p class="chapterNumber" *ngIf="i == 0 || verses[i-1].chapter != verses[i].chapter">Chapter {{ verse.chapter }}</p>
+    <div *ngFor="let passage of selectedBook; let i = index">
+        <p class="chapterNumber" *ngIf="i == 0 || selectedBook[i-1].chapter != selectedBook[i].chapter">Chapter {{ passage.chapter }}</p>
         <div class="bibleCard">
             <ng-container class="chapter">
                     <p class="verse verseDetails selectable">
-                        <span class="verseNumber">{{ verse.verse }}</span>
-                        {{ verse.text }}
-                      </p>
-                <ion-row>
-                  <ion-col col-2>
-                  <button icon-start ion-button clear small (click)="share(verse)">
-                    <img class="actionIcon"  src="assets/imgs/ui/share-2.svg">
-                  </button>
-                  </ion-col>
-
-                  <ion-col col-2>
-                  <button icon-start ion-button clear small (click)="favourite(verse)">
-                    <img *ngIf="!isFavourite(verse)" class="actionIcon"  src="assets/imgs/ui/star-outline.svg">
-                    <img *ngIf="isFavourite(verse)" class="actionIcon"  src="assets/imgs/ui/star.svg">
-                  </button>
-                  </ion-col>
-                  
-                  <ion-col col-2>
-                      <button icon-start ion-button clear small (click)="copy(verse)">
-                          <img class="actionIcon"  src="assets/imgs/ui/single-copy-04.svg">
-                      </button>
-                  </ion-col>
-                </ion-row>                 
+                        <span class="verseNumber">{{ passage.verse }}</span>
+                        {{ passage.text }}
+                    </p>
             </ng-container>
         </div>
     </div>
@@ -53,31 +33,12 @@
   <ng-template #filter>
       <div>
           <p class="chapterNumber">Chapter {{ chapter }}</p>
-          <ng-container class="chapter" *ngFor="let verse of filteredVerses">
+          <ng-container class="chapter" *ngFor="let passage of filteredChapters">
               <div class="bibleCard">
-                    <span class="verseNumber">{{ verse.verse }}</span>
+                    <span class="verseNumber">{{ passage.verse }}</span>
                     <p class="verse verseDetails selectable">
-                        {{ verse.text }}
+                        {{ passage.text }}
                     </p>
-                <ion-row>
-                    <ion-col col-2>
-                    <button icon-start ion-button clear small (click)="share(verse)">
-                      <img class="actionIcon"  src="assets/imgs/ui/share-2.svg">
-                    </button>
-                    </ion-col>
-  
-                    <ion-col col-2>
-                    <button icon-start ion-button clear small (click)="favourite(verse)">
-                      <img class="actionIcon"  src="assets/imgs/ui/star-outline.svg">
-                    </button>
-                    </ion-col>
-                    
-                    <ion-col col-2>
-                        <button icon-start ion-button clear small (click)="copy(verse)">
-                            <img class="actionIcon"  src="assets/imgs/ui/single-copy-04.svg">
-                          </button>
-                    </ion-col>
-                  </ion-row>
               </div> 
               </ng-container>
         </div>

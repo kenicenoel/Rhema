@@ -6,9 +6,9 @@
 <ion-content>
   <section class="hero">
     <div>
-      <div class="wrapper">
+      <div class="wrapper" *ngIf="favourites && favourites.length == 0">
         <img class="favouritesIcon" src="assets/imgs/ui/star-circle.svg">
-        <p text-center *ngIf="favourites && favourites.length == 0">You don' t have any favourites</p>
+        <p text-center>You don't have any favourites</p>
       </div>
     </div>
   </section>

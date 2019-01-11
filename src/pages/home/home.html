@@ -1,6 +1,6 @@
-<ion-header no-border>
+<ion-header>
     <ion-toolbar class="topBar" color="white">
-        <ion-title class="subtitle" text-center>Rhema</ion-title>
+        <ion-title class="subtitle" text-center>Discover</ion-title>
         <ion-buttons end>
             <button ion-button clear (click)="viewFavourites()">
                 <img src="assets/imgs/ui/favourite-31.svg">
@@ -14,8 +14,8 @@
     <div class="verseOfTheDay">
       <div class="wrapper">
         <!-- <img class="featureIcon" src="assets/imgs/ui/calendar-grid-58.svg"> -->
-        <p class="votdText selectable">{{ votd?.text }}</p>
-        <ion-note class="reference" text-right>{{ votd?.book }} {{ votd?.chapter }}:{{ votd?.verse }}</ion-note>
+        <p class="votdText selectable">{{ votd?.data.text }}</p>
+        <ion-note class="reference" text-right>{{ votd?.data.book_name }} {{ votd?.data.chapter }}:{{ votd?.data.verse }}</ion-note>
       </div>
     </div>
   </div>
@@ -24,13 +24,17 @@
   <section class="recentlyRead">
     <h3 class="subtitle"> Recent reads </h3>
     <div class="wrapper">
+        <lottie-animation-view
+        [options]="booksAnimationConfig"
+        (animCreated)="handleAnimation($event)">
+      </lottie-animation-view>
       <p class="text" text-center>You were recently reading these books</p>
     </div>
   </section>
 
   <section class="audioSermons">
     <h3 class="subtitle"> Audio sermons </h3>
-    <div class="wrapper">
+    <!-- <div class="wrapper">
       <ion-row>
         <ion-col *ngFor="let sermon of sermonsList">
             <ion-card class="sermonCard">
@@ -48,6 +52,6 @@
         <ion-col></ion-col>
       </ion-row>
       
-    </div>
+    </div> -->
   </section>
 </ion-content>

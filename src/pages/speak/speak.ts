@@ -1,3 +1,4 @@
+import { BibleProvider } from './../../providers/bible/bible';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import * as SDK from 'microsoft-speech-browser-sdk';
@@ -14,7 +15,9 @@ export class SpeakPage {
   status: string = "Ready to listen";
   isListening: boolean = false;
   speechRecognizer: SDK.Recognizer;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController)
+  speakAnimationConfig: Object;
+  private anim: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController, private bibleProvider: BibleProvider)
    {
     this.speechRecognizer = this.recognizerSetup(SDK, SDK.RecognitionMode.Interactive, "en-US", SDK.SpeechResultFormat.Simple, BING_SPEECH_API_KEY);
    }
@@ -22,7 +25,7 @@ export class SpeakPage {
   ionViewDidEnter() 
   {
     console.log(this.speechRecognizer);
-    
+    this.speakAnimationConfig = this.bibleProvider.getAnimation("speak", true);
   }
 
   recognizerSetup(SDK, recognitionMode, language, format, subscriptionKey) {
@@ -138,6 +141,9 @@ onSpeechEndDetected()
     this.recognizerStop(SDK, this.speechRecognizer);
   }
 
+  handleAnimation(anim: any) {
+    this.anim = anim;
+}
 
 }
 

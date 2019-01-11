@@ -7,6 +7,7 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-favourite',
   templateUrl: 'favourite.html',
 })
+
 export class FavouritePage {
 
   favourites: Favourite[] = [];
@@ -23,12 +24,13 @@ export class FavouritePage {
     .then(favourites =>
     {
       this.favourites = favourites;
-    })
+    });
   }
 
   unfavourite(favourite: Favourite)
   {
     this.favouritesProvider.unfavoriteVerse(favourite);
+    this.navCtrl.push(FavouritePage);
   }
 
 }

@@ -1,8 +1,8 @@
 {
-  "name": "Rhema",
+  "name": "Rhema Bible",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Kenice Noel",
+  "homepage": "http://kenicenoel.com/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -41,6 +41,7 @@
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-plugin-x-socialsharing": "^5.4.1",
     "cordova-sqlite-storage": "^2.4.0",
+    "es6-promise-plugin": "^4.2.2",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "microsoft-speech-browser-sdk": "0.0.12",
@@ -53,7 +54,7 @@
     "@ionic/app-scripts": "3.1.8",
     "typescript": "2.4.2"
   },
-  "description": "An Ionic project",
+  "description": "Discover the bible.",
   "cordova": {
     "plugins": {
       "cordova-plugin-speechrecognition": {},

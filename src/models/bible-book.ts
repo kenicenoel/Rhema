@@ -1,10 +1,9 @@
-export interface BibleBook {
-  verses?: (VersesEntity)[] | null;
-  id: string;
-  title: string;
-}
-export interface VersesEntity {
+export interface BibleBook 
+{
   chapter: number;
-  text: string;
   verse: number;
+  text: string;
+  translation_id: string;
+  book_id: string;
+  book_name: string;
 }

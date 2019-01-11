@@ -1,9 +1,10 @@
+import { BibleProvider } from './../../providers/bible/bible';
 import { Favourite } from './../../models/favourite';
 import { FavouriteProvider } from './../../providers/favourite/favourite';
 import { DataProvider } from './../../providers/data/data';
-import { BibleBook, VersesEntity } from './../../models/bible-book';
+import { BibleBook } from './../../models/bible-book';
 import { Component } from '@angular/core';
-import { NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, AlertController, Platform } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { Clipboard } from '@ionic-native/clipboard';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -13,11 +14,11 @@ import { ReadOptionsPopOverPage } from '../read-options-pop-over/read-options-po
   selector: 'page-read-book',
   templateUrl: 'read-book.html',
 })
-export class ReadBookPage {
+export class ReadBookPage
+{
 
   bookName: string;
-  selectedBook: BibleBook;
-  verses: any[];
+  selectedBook: BibleBook[];
   showMenu: boolean = false;
   showFooterMenu: boolean = false;
   chapter: number = -1;
@@ -31,25 +32,27 @@ export class ReadBookPage {
     locale: 'en-US'
   }
   favourites: Favourite[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider, 
-    private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard, 
-    private alertCtrl: AlertController, private socialSharing: SocialSharing, public favouriteProvider: FavouriteProvider)  {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public bibleProvider: BibleProvider,
+    private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard,
+    private alertCtrl: AlertController, private socialSharing: SocialSharing, public favouriteProvider: FavouriteProvider, private platform: Platform)
+  {
     this.bookName = navParams.get('book');
-      // favouriteProvider.deleteAllFavourites();
+    // favouriteProvider.deleteAllFavourites();
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad()
+  {
     this.selectedBook = null;
     this.getBookData();
   }
 
-  getBookData() {
-    this.data.getBibleBook(this.bookName)
-      .subscribe((bookData: BibleBook) => {
-        this.selectedBook = bookData;
-        this.verses = bookData.verses;
-        console.log(this.verses);
-        this.getBookFavourites();
+  getBookData()
+  {
+    this.bibleProvider.getBibleBook()
+      .subscribe(bibleText => 
+      {
+        let filteredBookText = bibleText.filter(text => text.book_name == this.bookName);
+        this.selectedBook = filteredBookText;
         this.isLoading = false;
       },
         error => console.log(error)
@@ -59,72 +62,85 @@ export class ReadBookPage {
   getBookFavourites()
   {
     this.favouriteProvider.getFavouritesForBook(this.bookName)
-    .then(favourites =>
+      .then(favourites =>
       {
         this.favourites = favourites;
       })
   }
 
-  toggleMenu() {
+  toggleMenu()
+  {
     this.showMenu = !this.showMenu;
   }
 
-  get chapterInt() {
+  get chapterInt()
+  {
     return this.chapter;
   }
 
 
-  get filteredVerses() {
-    // let filtered = this.verses.filter(verse=> verse.chapter == this.chapter);
-    return this.verses.filter(verse => verse.chapter == this.chapter);
+  get filteredChapters()
+  {
+    return this.selectedBook.filter(passage => passage.chapter == this.chapter);
   }
 
 
-  returnToBooks() {
+  returnToBooks()
+  {
     this.navCtrl.pop();
   }
 
-  toggleReadAloud() {
-    if (this.isPlayingAudio) 
+  toggleReadAloud() 
+  {
+    if (this.platform.is("cordova"))
     {
-      this.tts.speak("")
-      .then(()=> 
-    {
-      this.isPlayingAudio = false;
-    })
-      // this.tts.stop();
-      // this.isPlayingAudio = false;
-    }
-    else {
-     this.playAudio();
+      if (this.isPlayingAudio) 
+      {
+        this.tts.speak("")
+          .then(() => 
+          {
+            this.isPlayingAudio = false;
+          })
+        // this.tts.stop();
+        // this.isPlayingAudio = false;
+      }
+      else
+      {
+        this.playAudio();
 
+      }
     }
+
   }
 
   playAudio()
   {
     let speechText = [];
 
-    if (this.chapter == -1) {
+    if (this.chapter == -1)
+    {
       speechText.push("Now reading " + this.bookName);
-      this.verses.forEach(verse => {
-        speechText.push(verse.text);
+      this.selectedBook.forEach(passage =>
+      {
+        speechText.push(passage.text);
       });
-       console.log(speechText);
-     
+      console.log(speechText);
+
       this.isPlayingAudio = true;
       this.tts.speak(speechText.toString())
-      .then(() => 
-      {
-        this.isPlayingAudio = false;
-      });
-      
+        .then(() => 
+        {
+          this.isPlayingAudio = false;
+        });
+
     }
-    else {
+    else
+    {
       speechText = [];
       speechText.push("Now reading Chapter " + this.chapter + " from " + this.bookName);
-      this.filteredVerses.forEach(verse => {
-        speechText.push(verse.text);
+      this.filteredChapters.forEach(passage =>
+      {
+        speechText.push(passage.text);
       });
       console.log(speechText);
       this.isPlayingAudio = true;
@@ -135,35 +151,35 @@ export class ReadBookPage {
     }
   }
 
-  copy(verse:VersesEntity)
+  copy(passage: BibleBook)
   {
-    let chapter = verse.chapter;
-    let reference = verse.verse;
-    let text = verse.text;
-    this.clipboard.copy(`${this.bookName} Chapter ${chapter} verse ${reference}\n${text}.`);
-    this.data.showToast("Copied verse to your phone's clipboard.");
+    let chapter = passage.chapter;
+    let verse = passage.verse;
+    let text = passage.text;
+    this.clipboard.copy(`${this.bookName} Chapter ${chapter} verse ${verse}\n${text}.`);
+    this.bibleProvider.showToast("Copied verse to your phone's clipboard.");
   }
 
-  favourite(verse:VersesEntity)
+  favourite(passage: BibleBook)
   {
-    
-    let chapter = verse.chapter;
-    let verseNumber = verse.verse;
-    let scriptureText = verse.text;
-    let id = this.bookName.substr(0,3) + chapter+verseNumber;
+
+    let chapter = passage.chapter;
+    let verse = passage.verse;
+    let text = passage.text;
+    let id = this.bookName.substr(0, 3) + chapter + verse;
     var favourite: Favourite = {
       id: id,
       bookName: this.bookName,
-      text: scriptureText,
+      text: text,
       chapter: chapter,
-      verse: verseNumber,
+      verse: verse,
       created: new Date()
     };
-    
-    if(this.favouriteProvider.isFavorite(favourite))
+
+    if (this.favouriteProvider.isFavorite(favourite))
     {
       this.favouriteProvider.favoriteVerse(favourite);
-    }   
+    }
     else
     {
       this.favouriteProvider.favoriteVerse(favourite);
@@ -171,12 +187,12 @@ export class ReadBookPage {
 
   }
 
-  isFavorite(verse: VersesEntity)
+  isFavorite(passage: BibleBook)
   {
-    let chapter = verse.chapter;
-    let verseNumber = verse.verse;
-    let scriptureText = verse.text;
-    let id = this.bookName.substr(0,3) + chapter+verseNumber;
+    let chapter = passage.chapter;
+    let verseNumber = passage.verse;
+    let scriptureText = passage.text;
+    let id = this.bookName.substr(0, 3) + chapter + verseNumber;
     var favourite: Favourite = {
       id: id,
       bookName: this.bookName,
@@ -186,15 +202,15 @@ export class ReadBookPage {
       created: new Date()
     };
     return this.favouriteProvider.isFavorite(favourite);
-    
+
 
   }
 
-  share(verse:VersesEntity)
+  share(passage: BibleBook)
   {
-    let chapter = verse.chapter;
-    let reference = verse.verse;
-    let text = verse.text;
+    let chapter = passage.chapter;
+    let reference = passage.verse;
+    let text = passage.text;
     let footer = "Shared from Rhema Bible App!"
     let textToShare = `${this.bookName} Chapter ${chapter} verse ${reference}\n${text}.\n${footer}`;
     this.socialSharing.share(textToShare, null, null, null);
@@ -212,30 +228,19 @@ export class ReadBookPage {
 
   showOptionsPopOver(myEvent)
   {
-    let popover = this.popoverCtrl.create(ReadOptionsPopOverPage, {verses: this.verses});
+    let popover = this.popoverCtrl.create(ReadOptionsPopOverPage, { verses: this.selectedBook });
     popover.present({
       ev: myEvent
     });
 
     popover.onDidDismiss(chapter => 
-      {
+    {
       console.log(chapter);
-      if(chapter != null)
+      if (chapter != null)
       {
-         this.chapter = chapter;
+        this.chapter = chapter;
       }
     })
-  }
-
-  isFavourite(verse: VersesEntity)
-  {
-    let index = this.favourites.findIndex(favourite => favourite.verse == verse.verse && favourite.chapter == verse.chapter && favourite.text == verse.text);
-    if(index != -1)
-    {
-      return true;
-    }
-
-    return false;
   }
 
 

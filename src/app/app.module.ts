@@ -25,6 +25,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { StreamingMedia } from '@ionic-native/streaming-media';
 import { Clipboard } from '@ionic-native/clipboard';
 import { FavouriteProvider } from '../providers/favourite/favourite';
+import { BibleProvider } from '../providers/bible/bible';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { FavouriteProvider } from '../providers/favourite/favourite';
     SocialSharing,
     StreamingMedia,
     Clipboard,
-    FavouriteProvider
+    FavouriteProvider,
+    BibleProvider
   ]
 })
 export class AppModule {}

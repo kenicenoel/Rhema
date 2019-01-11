@@ -1,5 +1,6 @@
+import { BookData } from './../../models/bookdata';
+import { BibleProvider } from './../../providers/bible/bible';
 import { ReadBookPage } from './../read-book/read-book';
-import { DataProvider } from './../../providers/data/data';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -9,13 +10,17 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class BiblePage 
 {
-  
+  bibleBookData: BookData[] = [];
   displayMode: string = "cards";
-  constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public bibleProvider: BibleProvider) {}
 
-  ionViewDidLoad()
+  ionViewWillLoad()
   {
-
+    this.bibleProvider.getBibleBookData()
+    .subscribe(bookData =>
+    {
+      this.bibleBookData = bookData;
+    })
   }
 
   loadBook(book: string)
