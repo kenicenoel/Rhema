@@ -1,9 +1,9 @@
 <ion-header no-border>
-  <ion-toolbar class="topBar" color="white">
-      <ion-title class="subtitle" text-center>Favourites</ion-title>
-  </ion-toolbar>
+    <ion-toolbar [color]="darkMode ? 'dark' : 'light'">
+        <ion-title class="subtitle" text-center>Favourites</ion-title>
+    </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [class.darkMode]="darkMode">
   <section class="hero">
     <div>
       <div class="wrapper" *ngIf="favourites && favourites.length == 0">

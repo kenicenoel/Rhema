@@ -12,9 +12,29 @@ export class BiblePage
 {
   bibleBookData: BookData[] = [];
   displayMode: string = "cards";
-  constructor(public navCtrl: NavController, public navParams: NavParams, public bibleProvider: BibleProvider) {}
+  searchText: string;
+  shouldShowCancel: true;
+  darkMode: boolean;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public bibleProvider: BibleProvider)
+  {
+    this.getBibleBookData();
+   }
 
-  ionViewWillLoad()
+  ionViewWillEnter()
+  {
+    this.getDarkModeEnabled();
+  }
+
+  getDarkModeEnabled()
+  {
+    this.bibleProvider.getDarkModeEnabled()
+    .then(status =>
+      {
+        this.darkMode = status == 'enabled' ? true : false;
+
+      });
+  }
+  getBibleBookData()
   {
     this.bibleProvider.getBibleBookData()
     .subscribe(bookData =>
@@ -31,6 +51,16 @@ export class BiblePage
   toggleDisplayMode()
   {
     this.displayMode = this.displayMode == 'cards' ? this.displayMode = 'list' : 'cards';
+  }
+
+  onInput($event)
+  {
+
+  }
+
+  onCancel($event)
+  {
+
   }
   
 

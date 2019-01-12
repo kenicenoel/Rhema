@@ -3,6 +3,7 @@ import { SpeakPage } from './../speak/speak';
 import { BiblePage } from './../bible/bible';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
+import { BibleProvider } from '../../providers/bible/bible';
 
 
 @Component({
@@ -16,5 +17,22 @@ export class TabsPage
   biblePage = BiblePage;
   speakPage = SpeakPage;
   profilePage = ProfilePage
+
+  darkMode: boolean = false;
+  constructor(private bibleProvider: BibleProvider)
+  {
+    this.getDarkModeEnabled();
+  }
+
+
+  getDarkModeEnabled()
+  {
+    this.bibleProvider.getDarkModeEnabled()
+    .then(status =>
+      {
+        this.darkMode = status == 'enabled' ? true : false;
+
+      });
+  }
   
 }

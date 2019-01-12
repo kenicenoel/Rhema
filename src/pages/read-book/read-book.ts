@@ -33,12 +33,28 @@ export class ReadBookPage
   favourites: Favourite[] = [];
   loadingAnimationConfig: Object;
   private anim: any;
+  darkMode: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public bibleProvider: BibleProvider,
     private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard,
     private alertCtrl: AlertController, private socialSharing: SocialSharing, public favouriteProvider: FavouriteProvider, private platform: Platform)
   {
     this.bookName = navParams.get('book');
     this.loadingAnimationConfig = this.bibleProvider.getAnimation("loading", true);
+  }
+
+  ionViewWillEnter()
+  {
+    this.getDarkModeEnabled();
+  }
+
+  getDarkModeEnabled()
+  {
+    this.bibleProvider.getDarkModeEnabled()
+    .then(status =>
+      {
+        this.darkMode = status == 'enabled' ? true : false;
+
+      });
   }
 
   ionViewDidLoad()
@@ -140,7 +156,7 @@ export class ReadBookPage
       });
 
       speechText.forEach(text => this.tts.speak(text));
-      
+
     }
   }
 

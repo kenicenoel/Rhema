@@ -1,13 +1,12 @@
 <ion-header no-border>
-    <ion-toolbar color="white">
+    <ion-toolbar [color]="darkMode ? 'dark' : 'light'">
         <ion-buttons start>
             <button class="card-action" ion-button clear (click)="returnToBooks()">
                 <img class="viewBooksButton" src="assets/imgs/ui/books.svg" />
             </button>
         </ion-buttons>
-        <h4 class="bookTitle">{{ bookName }}</h4>
+        <ion-title class="subtitle">{{ bookName }}</ion-title>
         <ion-buttons end>
-            <!-- <button (click)="showOptionsPopOver()" ion-button><img src="assets/imgs/ui/filter.svg" /></button> -->
             <button *ngIf="isPlayingAudio; else notPlaying" (click)="toggleReadAloud()" ion-button><img src="assets/imgs/ui/volume-off.svg" /></button>
             <ng-template #notPlaying>
                 <button (click)="toggleReadAloud()" ion-button><img src="assets/imgs/ui/volume-98.svg" /></button>
@@ -16,7 +15,7 @@
     </ion-toolbar>
 
 </ion-header>
-<ion-content class="bgStyle" padding>
+<ion-content [class.darkMode]="darkMode" padding>
     <div id="loading" *ngIf="isLoading">
         <lottie-animation-view [width]="300" [height]="500" [options]="loadingAnimationConfig" (animCreated)="handleAnimation($event)">
         </lottie-animation-view>
@@ -54,8 +53,8 @@
     </div>
 
     <ion-fab bottom right>
-        <button ion-fab color="primary" (click)="showOptionsPopOver()">
-            <img src="assets/imgs/ui/filter.svg" />
+        <button ion-fab color="dark" (click)="showOptionsPopOver()">
+            <img src="assets/imgs/ui/filter-white.svg" />
         </button>
     </ion-fab>
 </ion-content>

@@ -1,25 +1,45 @@
+import { BibleProvider } from './../../providers/bible/bible';
+import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  darkMode: boolean = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private bibleProvider: BibleProvider) {}
+
+  ionViewWillEnter()
+  {
+    this.getDarkModeEnabled();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  getDarkModeEnabled()
+  {
+    this.bibleProvider.getDarkModeEnabled()
+    .then(status =>
+      {
+        this.darkMode = status == 'enabled' ? true : false;
+
+      });
+  }
+
+  ionViewDidLoad() 
+  {
+ 
+  }
+
+  toggleDarkMode()
+  {
+    let darkModeEnabled = this.darkMode ? 'enabled' : 'disabled';
+    this.storage.set('darkMode', darkModeEnabled)
+      .then(() =>
+      {
+        this.bibleProvider.showToast("You might need to restart the app to apply changes everywhere");
+    })
   }
 
 }

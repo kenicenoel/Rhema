@@ -18,17 +18,35 @@ export class HomePage
   votd: DailyVerse;
   dailyBibleVerse: BehaviorSubject<DailyVerse> = new BehaviorSubject<DailyVerse>(null);
   private anim: any;
+  darkMode: boolean;
   constructor(public navCtrl: NavController, public bibleProvider: BibleProvider, private streamer: StreamingMedia, private storage: Storage)
   {
     this.booksAnimationConfig = this.bibleProvider.getAnimation("books", false);
    }
 
+  ionViewWillEnter()
+  {
+    this.getDarkModeEnabled();
+  }
+
+  getDarkModeEnabled()
+  {
+    this.bibleProvider.getDarkModeEnabled()
+    .then(status =>
+      {
+        this.darkMode = status == 'enabled' ? true : false;
+
+      });
+  }
+
   ionViewDidEnter()
   {
     this.currentDate = new Date().toDateString();
     this.loadDailyVerse();
-    
+   
   }
+
+
 
 
   loadDailyVerse()

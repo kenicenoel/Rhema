@@ -1,6 +1,6 @@
-<ion-header>
-    <ion-toolbar class="topBar" color="white">
-        <h3 class="title">Read</h3>
+<ion-header no-border>
+    <ion-toolbar  [color]="darkMode ? 'dark' : 'light'">
+        <ion-title class="subtitle">Read</ion-title>
         <ion-buttons end>
             <button ion-button clear padding (click)="toggleDisplayMode()">
                 <img *ngIf="displayMode == 'cards'" src="assets/imgs/ui/list-bullet.svg">
@@ -9,7 +9,14 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content padding>   
+<ion-content [class.darkMode]="darkMode" padding>   
+    <ion-searchbar
+    [(ngModel)]="searchText"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onInput($event)"
+    placeholder="Search the bible"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
   <div class="chapters">
       <ion-grid *ngIf="displayMode == 'cards'">
         <ion-row>

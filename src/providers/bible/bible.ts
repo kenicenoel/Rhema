@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { ToastController } from 'ionic-angular';
 import { BookData } from './../../models/bookdata';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +14,7 @@ export class BibleProvider
 
   bookdataUrl: string = "assets/bibles/bookdata.json";
   kjvBibleUrl: string = "assets/bibles/kjv.json";
+  darkModeEnabled: string;
   animations: AnimationData[] = [
     {
       key: 'progress-bar',
@@ -47,7 +49,7 @@ export class BibleProvider
       anim: 'assets/imgs/anim/wakeup_speaking.json'
     }
   ]
-  constructor(public http: HttpClient, private toastCtrl: ToastController) { }
+  constructor(public http: HttpClient, private toastCtrl: ToastController, private storage: Storage) { }
 
 
   getBibleBookData()
@@ -88,6 +90,13 @@ export class BibleProvider
       return config;
     }
 
+  }
+
+  getDarkModeEnabled()
+  {
+    this.darkModeEnabled = 'disabled';
+    return this.storage.get("darkMode");
+  
   }
 
 

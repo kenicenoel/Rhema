@@ -1,17 +1,18 @@
-<ion-content padding>
-  <h1 class="page-title">Me </h1>
+<ion-header no-border>
+    <ion-toolbar [color]="darkMode ? 'dark' : 'light'">
+        <ion-title class="subtitle" text-center>More</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding [class.darkMode]="darkMode">
   <section class="options">
     <ion-list>
-      <ion-list-header>
-        General
-      </ion-list-header>
       <ion-item>
           <ion-label>Enable dark mode</ion-label>
-        <ion-toggle [(ngModel)]="darkMode"></ion-toggle>
+        <ion-toggle [(ngModel)]="darkMode" (ionChange)="toggleDarkMode()"></ion-toggle>
       </ion-item>
 
       <ion-item>
-          <ion-label>Enable daily bible verse alerts</ion-label>
+          <ion-label>Enable daily bible verse alert</ion-label>
         <ion-toggle [(ngModel)]="enableNotifications"></ion-toggle>
       </ion-item>
 

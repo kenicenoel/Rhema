@@ -16,12 +16,27 @@ export class SpeakPage {
   speechRecognizer: SDK.Recognizer;
   speakAnimationConfig: Object;
   private anim: any;
+  darkMode: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController, private bibleProvider: BibleProvider)
    {
     this.speechRecognizer = this.recognizerSetup(SDK, SDK.RecognitionMode.Interactive, "en-US", SDK.SpeechResultFormat.Simple, BING_SPEECH_API_KEY);
     this.speakAnimationConfig = this.bibleProvider.getAnimation("speak", true);
+  }
+  
+  ionViewWillEnter()
+  {
+    this.getDarkModeEnabled();
+  }
 
-   }
+  getDarkModeEnabled()
+  {
+    this.bibleProvider.getDarkModeEnabled()
+    .then(status =>
+      {
+        this.darkMode = status == 'enabled' ? true : false;
+
+      });
+  }
 
   ionViewDidEnter() 
   {

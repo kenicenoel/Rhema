@@ -20,6 +20,17 @@
     margin-top: 80px;
 }
 
+.lightMode
+{
+  background: #ffffff;
+}
+
+.darkMode
+{
+  background:color($colors, dark, base);
+  color:color($colors, white, base);
+}
+
 
 .title
 {
@@ -64,15 +75,14 @@ section
 {
 
  font-size: 1.2em;
- color: #111111;
  margin-left: 10px;
 //  font-weight: 600;
 }
 
-ion-tabs
-{
-  background: #ffffff;
-}
+// ion-tabs
+// {
+//   background: #ffffff;
+// }
 
 .ion-ios-customHome,
 .ion-md-customHome {

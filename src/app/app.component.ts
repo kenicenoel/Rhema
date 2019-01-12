@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { TabsPage } from './../pages/tabs/tabs';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController } from 'ionic-angular';
@@ -10,18 +11,22 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp
 {
   tabsPage = TabsPage;
+  appTheme: boolean;
   @ViewChild('nav') nav: NavController;
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    platform.ready().then(() => {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen)
+  {
+    platform.ready().then(() =>
+    {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+    
     });
   }
 
   onLoad(page: any)
-  { 
+  {
     this.nav.setRoot(page);
   }
 }

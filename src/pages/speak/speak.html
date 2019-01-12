@@ -1,10 +1,15 @@
-<ion-content padding>
-  <h1 class="page-title">Speak</h1>
+<ion-header no-border>
+    <ion-toolbar [color]="darkMode ? 'dark' : 'light'">
+        <ion-title class="subtitle" text-center>Listen</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding [class.darkMode]="darkMode">
   <div class="container">
     <section>
-      <button padding class="startSpeech" (click)="toggleListening()" ion-button clear large >
-        <img *ngIf="!isListening; else listening" class="micImage" src="assets/imgs/ui/audio-91.svg">
-       <ng-template #listening> 
+      <button *ngIf="!isListening else listening" padding class="startSpeech" (click)="toggleListening()" ion-button clear large >
+        <img  class="micImage" src="assets/imgs/ui/audio-91.svg">
+      </button>
+      <ng-template #listening> 
           <lottie-animation-view
           [options]="speakAnimationConfig"
           [width]="300"
@@ -12,7 +17,6 @@
           (animCreated)="handleAnimation($event)">
         </lottie-animation-view>
         </ng-template>
-      </button>
       <p class="status">{{ status }}</p>
     </section>
   </div>

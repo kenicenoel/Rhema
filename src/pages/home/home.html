@@ -1,5 +1,5 @@
-<ion-header>
-    <ion-toolbar class="topBar" color="white">
+<ion-header no-border>
+    <ion-toolbar [color]="darkMode ? 'dark' : 'light'">
         <ion-title class="subtitle" text-center>Discover</ion-title>
         <ion-buttons end>
             <button ion-button clear (click)="viewFavourites()">
@@ -8,12 +8,11 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-
-<ion-content>
+<ion-content [class.darkMode]="darkMode">
+   
   <div class="hero crossesBackground">
     <div class="verseOfTheDay">
       <div class="wrapper">
-        <!-- <img class="featureIcon" src="assets/imgs/ui/calendar-grid-58.svg"> -->
         <p class="votdText selectable">{{ votd?.data.text }}</p>
         <ion-note class="reference" text-right>{{ votd?.data.book_name }} {{ votd?.data.chapter }}:{{ votd?.data.verse }}</ion-note>
       </div>
