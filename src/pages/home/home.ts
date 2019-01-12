@@ -20,7 +20,7 @@ export class HomePage
   private anim: any;
   constructor(public navCtrl: NavController, public bibleProvider: BibleProvider, private streamer: StreamingMedia, private storage: Storage)
   {
-    this.booksAnimationConfig = this.bibleProvider.getAnimation("books", true);
+    this.booksAnimationConfig = this.bibleProvider.getAnimation("books", false);
    }
 
   ionViewDidEnter()

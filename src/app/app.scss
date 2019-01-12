@@ -35,12 +35,20 @@ section
     margin: 50px 0;
 }
 
-.page-title
+.bookTitle, .page-title
 {
-  font-weight: 700;
-  font-size: 2em;
-  margin-top: 10%;
+    font-weight: 700;
+    text-align: center;
+    display: inline-block;
+    margin-left: 10px;
 }
+
+// .page-title
+// {
+//   font-weight: 700;
+//   font-size: 2em;
+//   margin-top: 10%;
+// }
 
 .bgStyle
 {
@@ -55,7 +63,7 @@ section
 .subtitle
 {
 
- font-size: 1em;
+ font-size: 1.2em;
  color: #111111;
  margin-left: 10px;
 //  font-weight: 600;

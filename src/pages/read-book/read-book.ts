@@ -31,12 +31,14 @@ export class ReadBookPage
     locale: 'en-US'
   }
   favourites: Favourite[] = [];
+  loadingAnimationConfig: Object;
+  private anim: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public bibleProvider: BibleProvider,
     private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard,
     private alertCtrl: AlertController, private socialSharing: SocialSharing, public favouriteProvider: FavouriteProvider, private platform: Platform)
   {
     this.bookName = navParams.get('book');
-    // favouriteProvider.deleteAllFavourites();
+    this.loadingAnimationConfig = this.bibleProvider.getAnimation("loading", true);
   }
 
   ionViewDidLoad()
@@ -95,18 +97,12 @@ export class ReadBookPage
     {
       if (this.isPlayingAudio) 
       {
-        this.tts.speak("")
-          .then(() => 
-          {
-            this.isPlayingAudio = false;
-          })
-        // this.tts.stop();
-        // this.isPlayingAudio = false;
+        this.tts.stop();
+        this.isPlayingAudio = false;
       }
       else
       {
         this.playAudio();
-
       }
     }
 
@@ -123,14 +119,15 @@ export class ReadBookPage
       {
         speechText.push(passage.text);
       });
-      console.log(speechText);
 
       this.isPlayingAudio = true;
-      this.tts.speak(speechText.toString())
-        .then(() => 
-        {
-          this.isPlayingAudio = false;
-        });
+      speechText.forEach(text => this.tts.speak(text));
+
+      // this.tts.speak(speechText.toString())
+      //   .then(() => 
+      //   {
+      //     this.isPlayingAudio = false;
+      //   });
 
     }
     else
@@ -141,12 +138,9 @@ export class ReadBookPage
       {
         speechText.push(passage.text);
       });
-      console.log(speechText);
-      this.isPlayingAudio = true;
-      this.tts.speak(speechText.toString()).then(() => 
-      {
-        this.isPlayingAudio = false;
-      });
+
+      speechText.forEach(text => this.tts.speak(text));
+      
     }
   }
 
@@ -242,6 +236,10 @@ export class ReadBookPage
     })
   }
 
+  handleAnimation(anim: any) 
+  {
+    this.anim = anim;
+  }
 
 }
 
