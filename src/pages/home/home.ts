@@ -51,36 +51,36 @@ export class HomePage
 
   loadDailyVerse()
   {
-    this.getDailyVerse();
+    this.generateRandomVerse();
   }
 
-  getDailyVerse()
-  {
-    this.storage.get('votd')
-      .then((votd) => 
-      {
-        if (votd.data || votd.data != undefined)
-        {
-          if (Date.now() > votd.expires)
-          {
-            this.generateDailyVerse();
-          }
-          else
-          {
-            console.log(votd.data);
+  // getDailyVerse()
+  // {
+  //   this.storage.get('votd')
+  //     .then((votd) => 
+  //     {
+  //       if (votd.data || votd.data != undefined)
+  //       {
+  //         if (Date.now() > votd.expires)
+  //         {
+  //           this.generateRandomVerse();
+  //         }
+  //         else
+  //         {
+  //           console.log(votd.data);
 
-            this.votd = votd;
-          }
-        }
-        else
-        {
-          this.generateDailyVerse();
-        }
+  //           this.votd = votd;
+  //         }
+  //       }
+  //       else
+  //       {
+  //         this.generateRandomVerse();
+  //       }
 
-      });
-  }
+  //     });
+  // }
 
-  generateDailyVerse()
+  generateRandomVerse()
   {
      this.bibleProvider.getBibleBook()
       .subscribe(bookText =>
