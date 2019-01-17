@@ -22,7 +22,7 @@
 
   <section class="recentlyRead">
     <h3 class="subtitle"> Recent reads </h3>
-    <div class="wrapper">
+    <div class="wrapper" *ngIf="recentlyReadBooks.length == 0; else recentReads">
         <lottie-animation-view
         [width]="300"
         [height]="200"
@@ -31,6 +31,13 @@
       </lottie-animation-view>
       <p class="text" text-center>Recently read books will show up here</p>
     </div>
+    <ng-template #recentReads>
+      <ion-list no-border>
+        <ion-item *ngFor="let book of recentlyReadBooks" (click)="readBook()" >
+          {{ book }}
+        </ion-item>
+      </ion-list>
+    </ng-template>
   </section>
 
   <section class="audioSermons">

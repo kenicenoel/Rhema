@@ -19,14 +19,16 @@ export class HomePage
   dailyBibleVerse: BehaviorSubject<DailyVerse> = new BehaviorSubject<DailyVerse>(null);
   private anim: any;
   darkMode: boolean;
+  recentlyReadBooks: string[] = [];
   constructor(public navCtrl: NavController, public bibleProvider: BibleProvider, private streamer: StreamingMedia, private storage: Storage)
   {
     this.booksAnimationConfig = this.bibleProvider.getAnimation("books", false);
-   }
+  }
 
   ionViewWillEnter()
   {
     this.getDarkModeEnabled();
+    this.recentlyReadBooks = this.bibleProvider.getRecentlyReadBooks();
   }
 
   getDarkModeEnabled()

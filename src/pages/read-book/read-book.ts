@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { BibleProvider } from './../../providers/bible/bible';
 import { Favourite } from './../../models/favourite';
 import { FavouriteProvider } from './../../providers/favourite/favourite';
@@ -36,7 +37,8 @@ export class ReadBookPage
   darkMode: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public bibleProvider: BibleProvider,
     private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard,
-    private alertCtrl: AlertController, private socialSharing: SocialSharing, public favouriteProvider: FavouriteProvider, private platform: Platform)
+    private alertCtrl: AlertController, private socialSharing: SocialSharing, public favouriteProvider: FavouriteProvider,
+    private platform: Platform, private storage: Storage)
   {
     this.bookName = navParams.get('book');
     this.loadingAnimationConfig = this.bibleProvider.getAnimation("loading", true);
@@ -61,6 +63,11 @@ export class ReadBookPage
   {
     this.selectedBook = null;
     this.getBookData();
+  }
+
+  ionViewWillLeave()
+  {
+    this.bibleProvider.saveBookToRecentlyRead(this.bookName);
   }
 
   getBookData()

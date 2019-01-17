@@ -15,6 +15,7 @@ export class BibleProvider
   bookdataUrl: string = "assets/bibles/bookdata.json";
   kjvBibleUrl: string = "assets/bibles/kjv.json";
   darkModeEnabled: string;
+  recentlyReadBooks: string[] = [];
   animations: AnimationData[] = [
     {
       key: 'progress-bar',
@@ -49,7 +50,16 @@ export class BibleProvider
       anim: 'assets/imgs/anim/wakeup_speaking.json'
     }
   ]
-  constructor(public http: HttpClient, private toastCtrl: ToastController, private storage: Storage) { }
+  constructor(public http: HttpClient, private toastCtrl: ToastController, private storage: Storage)
+  {
+    this.bootstrap();
+  }
+
+  bootstrap()
+  {
+    this.fetchRecentlyReadBooks();
+  }
+
 
 
   getBibleBookData()
@@ -61,6 +71,41 @@ export class BibleProvider
   getBibleBook()
   {
     return this.http.get<BibleBook[]>(this.kjvBibleUrl);
+  }
+
+  getRecentlyReadBooks()
+  {
+    return this.recentlyReadBooks || [];
+  }
+
+  saveBookToRecentlyRead(bookName: string)
+  {
+    if (this.recentlyReadBooks == null)
+    {
+      this.recentlyReadBooks = [];
+    }
+    if (this.recentlyReadBooks != null && this.recentlyReadBooks != undefined && this.recentlyReadBooks.length == 5)
+    {
+      this.recentlyReadBooks.pop();
+    }
+    let isInArray = this.recentlyReadBooks.indexOf(bookName);
+    if (isInArray == -1)
+    {
+      this.recentlyReadBooks.push(bookName);
+    }
+
+    this.storage.set("recentlyRead", this.recentlyReadBooks);
+  }
+
+
+  fetchRecentlyReadBooks()
+  {
+    this.storage.get("recentlyRead")
+      .then(recentlyRead =>
+      {
+        this.recentlyReadBooks = recentlyRead;
+      })
+
   }
 
 
@@ -96,7 +141,7 @@ export class BibleProvider
   {
     this.darkModeEnabled = 'disabled';
     return this.storage.get("darkMode");
-  
+
   }
 
 
