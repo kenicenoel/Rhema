@@ -1,6 +1,6 @@
 {
   "name": "Rhema Bible",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "author": "Kenice Noel",
   "homepage": "http://kenicenoel.com/",
   "private": true,
@@ -55,6 +55,7 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {
+    "@ionic/lab": "1.0.18",
     "typescript": "2.4.2"
   },
   "description": "Discover the bible.",
