@@ -6,10 +6,10 @@ import * as SDK from 'microsoft-speech-browser-sdk';
 const BING_SPEECH_API_KEY = "2cf1e40d197347e48ccc7ae4d66dbe5c";
 
 @Component({
-  selector: 'page-speak',
-  templateUrl: 'speak.html',
+  selector: 'page-search',
+  templateUrl: 'search.html',
 })
-export class SpeakPage {
+export class SearchPage {
 
   status: string = "Ready to listen";
   isListening: boolean = false;

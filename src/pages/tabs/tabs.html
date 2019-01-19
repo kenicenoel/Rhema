@@ -1,6 +1,6 @@
 <ion-tabs [color]="darkMode ? 'shadow' : 'light'">
-  <ion-tab tabIcon="customHome"  [root]="homePage" tabTitle="Discover"></ion-tab>
-  <ion-tab tabIcon="customBook" [root]="biblePage" tabTitle="Read"></ion-tab>
-  <ion-tab tabIcon="customSpeak"  [root]="speakPage" tabTitle="Listen"></ion-tab>
-  <ion-tab tabIcon="customProfile" [root]="profilePage" tabTitle="More"></ion-tab>
+  <ion-tab [tabIcon]="darkMode ? 'customHomeLight' : 'customHome'"  [root]="homePage" tabTitle="Discover"></ion-tab>
+  <ion-tab [tabIcon]="darkMode ? 'customBookLight' : 'customBook'" [root]="biblePage" tabTitle="Read"></ion-tab>
+  <ion-tab [tabIcon]="darkMode ? 'customSearchLight' : 'customSearch'"  [root]="searchPage" tabTitle="Search"></ion-tab>
+  <ion-tab [tabIcon]="darkMode ? 'customMoreLight' : 'customMore'" [root]="morePage" tabTitle="More"></ion-tab>
 </ion-tabs>

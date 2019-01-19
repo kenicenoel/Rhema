@@ -1,9 +1,9 @@
+import { MorePage } from './../pages/More/more';
 import { ReadOptionsPopOverPage } from './../pages/read-options-pop-over/read-options-pop-over';
 import { VerseOptionsPopOverPage } from './../pages/verse-options-pop-over/verse-options-pop-over';
 import { FavouritePage } from './../pages/favourite/favourite';
 import { ZeroPadPipe } from './../pipes/zero-pad/zero-pad';
 import { ReadBookPage } from './../pages/read-book/read-book';
-import { ProfilePage } from './../pages/profile/profile';
 import { BiblePage } from './../pages/bible/bible';
 import { TabsPage } from './../pages/tabs/tabs';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,7 +15,7 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
-import { SpeakPage } from '../pages/speak/speak';
+import { SearchPage } from '../pages/search/search';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { IonicStorageModule } from '@ionic/storage';
@@ -31,8 +31,8 @@ import { BibleProvider } from '../providers/bible/bible';
     HomePage,
     TabsPage,
     BiblePage,
-    ProfilePage,
-    SpeakPage,
+    MorePage,
+    SearchPage,
     ReadBookPage,
     FavouritePage,
     ZeroPadPipe,
@@ -52,8 +52,8 @@ import { BibleProvider } from '../providers/bible/bible';
     HomePage,
     TabsPage,
     BiblePage,
-    SpeakPage,
-    ProfilePage,
+    SearchPage,
+    MorePage,
     ReadBookPage,
     FavouritePage,
     VerseOptionsPopOverPage,

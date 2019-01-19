@@ -1,4 +1,4 @@
-import { BookData } from './../../models/bookdata';
+import { BookData } from '../../models/book-data';
 import { BibleProvider } from './../../providers/bible/bible';
 import { ReadBookPage } from './../read-book/read-book';
 import { Component } from '@angular/core';

@@ -1,7 +1,7 @@
 import { Storage } from '@ionic/storage';
 import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media';
 import { FavouritePage } from './../favourite/favourite';
-import { DailyVerse } from './../../models/daily-verse';
+import { RandomScripture } from '../../models/random-scripture';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BibleProvider } from '../../providers/bible/bible';
@@ -15,8 +15,8 @@ export class HomePage
 {
   public booksAnimationConfig: Object;
   currentDate: string;
-  votd: DailyVerse;
-  dailyBibleVerse: BehaviorSubject<DailyVerse> = new BehaviorSubject<DailyVerse>(null);
+  votd: RandomScripture;
+  dailyBibleVerse: BehaviorSubject<RandomScripture> = new BehaviorSubject<RandomScripture>(null);
   private anim: any;
   darkMode: boolean;
   recentlyReadBooks: string[] = [];
@@ -89,9 +89,9 @@ export class HomePage
       {
         let randomTextIndex = Math.floor((Math.random() * bookText.length) + 1);
         let randomVerse = bookText[randomTextIndex];
-        let dailyVerse: DailyVerse =
+        let dailyVerse: RandomScripture =
         {
-          data: randomVerse,
+          scripture: randomVerse,
           expires: Date.now() + (60 * 60 * 1000) * 24
         }
 

@@ -1,9 +1,9 @@
 import { Storage } from '@ionic/storage';
 import { ToastController } from 'ionic-angular';
-import { BookData } from './../../models/bookdata';
+import { BookData } from '../../models/book-data';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BibleBook } from '../../models/bible-book';
+import { Scripture } from '../../models/scripture';
 import { AnimationData } from '../../models/animation';
 
 
@@ -70,7 +70,7 @@ export class BibleProvider
 
   getBibleBook()
   {
-    return this.http.get<BibleBook[]>(this.kjvBibleUrl);
+    return this.http.get<Scripture[]>(this.kjvBibleUrl);
   }
 
   getRecentlyReadBooks()

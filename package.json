@@ -34,7 +34,6 @@
     "cordova-clipboard": "^1.2.1",
     "cordova-plugin-appcenter-analytics": "^0.2.2",
     "cordova-plugin-appcenter-crashes": "^0.2.2",
-    "cordova-plugin-appcenter-push": "^0.2.2",
     "cordova-plugin-appcenter-shared": "^0.2.2",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
@@ -73,8 +72,7 @@
       "cordova-plugin-streaming-media": {},
       "cordova-clipboard": {},
       "cordova-plugin-appcenter-analytics": {},
-      "cordova-plugin-appcenter-crashes": {},
-      "cordova-plugin-appcenter-push": {}
+      "cordova-plugin-appcenter-crashes": {}
     },
     "platforms": [
       "android"

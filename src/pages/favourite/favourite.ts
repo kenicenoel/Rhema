@@ -37,17 +37,13 @@ export class FavouritePage {
 
   getFavourites()
   {
-    this.favouritesProvider.getAllFavoriteVerses()
-    .then(favourites =>
-    {
-      this.favourites = favourites;
-    });
+    this.favouritesProvider.getFavourites();
   }
 
   unfavourite(favourite: Favourite)
   {
-    this.favouritesProvider.unfavoriteVerse(favourite);
-    this.navCtrl.push(FavouritePage);
+    this.favouritesProvider.removeFromFavourites(favourite);
+    this.navCtrl.setRoot(FavouritePage);
   }
 
 }

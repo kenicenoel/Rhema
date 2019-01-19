@@ -1,13 +1,13 @@
-import { BibleProvider } from './../../providers/bible/bible';
+import { BibleProvider } from '../../providers/bible/bible';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
-  selector: 'page-profile',
-  templateUrl: 'profile.html',
+  selector: 'page-more',
+  templateUrl: 'more.html',
 })
-export class ProfilePage {
+export class MorePage {
 
   darkMode: boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private bibleProvider: BibleProvider) {}

@@ -1,5 +1,5 @@
-import { ProfilePage } from './../profile/profile';
-import { SpeakPage } from './../speak/speak';
+import { MorePage } from './../More/more';
+import { SearchPage } from './../search/search';
 import { BiblePage } from './../bible/bible';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
@@ -15,8 +15,8 @@ export class TabsPage
 
   homePage = HomePage;
   biblePage = BiblePage;
-  speakPage = SpeakPage;
-  profilePage = ProfilePage
+  searchPage = SearchPage;
+  morePage = MorePage
 
   darkMode: boolean = false;
   constructor(private bibleProvider: BibleProvider)

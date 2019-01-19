@@ -1,4 +1,4 @@
-export interface BibleBook 
+export interface Scripture 
 {
   chapter: number;
   verse: number;

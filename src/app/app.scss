@@ -1,9 +1,9 @@
-@import './assets/fonts/InterUI/inter-ui.css';
+// @import './assets/fonts/InterUI/inter-ui.css';
 
-*
-{
-  font-family: 'Inter UI','Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-}
+// *
+// {
+//   font-family: 'Inter UI','Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+// }
 
 * ::-webkit-scrollbar {
   display: none;
@@ -86,35 +86,72 @@ section
 
 .ion-ios-customHome,
 .ion-md-customHome {
-  content: url('../assets/imgs/tabs/mobile.svg');
+  content: url('../assets/imgs/tabs/tab-apps.svg');
   width: 24px;
   height: 24px;
   // padding: 6px 4px 2px;
-  opacity: 0.9;
+  // opacity: 0.9;
 }
 .ion-ios-customBook,
 .ion-md-customBook {
-  content: url('../assets/imgs/tabs/collection.svg');
+  content: url('../assets/imgs/tabs/tab-book.svg');
   width: 24px;
   height: 24px;
   // padding: 6px 4px 2px;
-  opacity: 0.9;
+  // opacity: 0.9;
 }
 
-.ion-ios-customSpeak,
-.ion-md-customSpeak {
-  content: url('../assets/imgs/tabs/mic.svg');
+.ion-ios-customSearch,
+.ion-md-customSearch {
+  content: url('../assets/imgs/tabs/tab-search.svg');
   width: 24px;
   height: 24px;
   // padding: 6px 4px 2px;
-  opacity: 0.9;
+  // opacity: 0.9;
 }
 
-.ion-ios-customProfile,
-.ion-md-customProfile {
-  content: url('../assets/imgs/tabs/circle-10.svg');
+.ion-ios-customMore,
+.ion-md-customMore {
+  content: url('../assets/imgs/tabs/tab-more.svg');
   width: 24px;
   height: 24px;
   // padding: 6px 4px 2px;
-  opacity: 0.9;
+  // opacity: 0.9;
+}
+
+// Light Versions
+
+.ion-ios-customHomeLight,
+.ion-md-customHomeLight {
+  content: url('../assets/imgs/tabs/tab-apps-light.svg');
+  width: 24px;
+  height: 24px;
+  // padding: 6px 4px 2px;
+  // opacity: 0.9;
+}
+.ion-ios-customBookLight,
+.ion-md-customBookLight {
+  content: url('../assets/imgs/tabs/tab-book-light.svg');
+  width: 24px;
+  height: 24px;
+  // padding: 6px 4px 2px;
+  // opacity: 0.9;
+}
+
+.ion-ios-customSearchLight,
+.ion-md-customSearchLight {
+  content: url('../assets/imgs/tabs/tab-search-light.svg');
+  width: 24px;
+  height: 24px;
+  // padding: 6px 4px 2px;
+  // opacity: 0.9;
+}
+
+.ion-ios-customMoreLight,
+.ion-md-customMoreLight {
+  content: url('../assets/imgs/tabs/tab-more-light.svg');
+  width: 24px;
+  height: 24px;
+  // padding: 6px 4px 2px;
+  // opacity: 0.9;
 }

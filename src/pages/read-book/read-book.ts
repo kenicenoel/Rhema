@@ -2,7 +2,7 @@ import { Storage } from '@ionic/storage';
 import { BibleProvider } from './../../providers/bible/bible';
 import { Favourite } from './../../models/favourite';
 import { FavouriteProvider } from './../../providers/favourite/favourite';
-import { BibleBook } from './../../models/bible-book';
+import { Scripture } from '../../models/scripture';
 import { Component } from '@angular/core';
 import { NavController, NavParams, PopoverController, AlertController, Platform } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
@@ -18,7 +18,7 @@ export class ReadBookPage
 {
 
   bookName: string;
-  selectedBook: BibleBook[];
+  selectedBook: Scripture[];
   showMenu: boolean = false;
   showFooterMenu: boolean = false;
   chapter: number = -1;
@@ -52,7 +52,7 @@ export class ReadBookPage
   getDarkModeEnabled()
   {
     this.bibleProvider.getDarkModeEnabled()
-    .then(status =>
+      .then(status =>
       {
         this.darkMode = status == 'enabled' ? true : false;
 
@@ -83,13 +83,9 @@ export class ReadBookPage
       )
   }
 
-  getBookFavourites()
+  getFavouritesForBook()
   {
-    this.favouriteProvider.getFavouritesForBook(this.bookName)
-      .then(favourites =>
-      {
-        this.favourites = favourites;
-      })
+    this.favourites = this.favouriteProvider.getFavouritesByBookName(this.bookName);
   }
 
   toggleMenu()
@@ -167,7 +163,7 @@ export class ReadBookPage
     }
   }
 
-  copy(passage: BibleBook)
+  copy(passage: Scripture)
   {
     let chapter = passage.chapter;
     let verse = passage.verse;
@@ -176,53 +172,19 @@ export class ReadBookPage
     this.bibleProvider.showToast("Copied verse to your phone's clipboard.");
   }
 
-  favourite(passage: BibleBook)
+  favourite(passage: Scripture)
   {
-
-    let chapter = passage.chapter;
-    let verse = passage.verse;
-    let text = passage.text;
-    let id = this.bookName.substr(0, 3) + chapter + verse;
-    var favourite: Favourite = {
-      id: id,
-      bookName: this.bookName,
-      text: text,
-      chapter: chapter,
-      verse: verse,
-      created: new Date()
-    };
-
-    if (this.favouriteProvider.isFavorite(favourite))
-    {
-      this.favouriteProvider.favoriteVerse(favourite);
-    }
-    else
-    {
-      this.favouriteProvider.favoriteVerse(favourite);
-    }
-
+    let favourite = new Favourite(passage);
+    this.favouriteProvider.addToFavourites(favourite);
   }
 
-  isFavorite(passage: BibleBook)
+  isFavorite(passage: Scripture)
   {
-    let chapter = passage.chapter;
-    let verseNumber = passage.verse;
-    let scriptureText = passage.text;
-    let id = this.bookName.substr(0, 3) + chapter + verseNumber;
-    var favourite: Favourite = {
-      id: id,
-      bookName: this.bookName,
-      text: scriptureText,
-      chapter: chapter,
-      verse: verseNumber,
-      created: new Date()
-    };
+    let favourite = new Favourite(passage);
     return this.favouriteProvider.isFavorite(favourite);
-
-
   }
 
-  share(passage: BibleBook)
+  share(passage: Scripture)
   {
     let chapter = passage.chapter;
     let reference = passage.verse;
@@ -242,7 +204,7 @@ export class ReadBookPage
     alert.present();
   }
 
-  showOptionsPopOver(myEvent)
+  showOptionsPopOver(myEvent: any)
   {
     let popover = this.popoverCtrl.create(ReadOptionsPopOverPage, { verses: this.selectedBook });
     popover.present({
