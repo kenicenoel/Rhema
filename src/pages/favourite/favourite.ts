@@ -1,3 +1,4 @@
+import { Scripture } from './../../models/scripture';
 import { BibleProvider } from './../../providers/bible/bible';
 import { FavouriteProvider } from './../../providers/favourite/favourite';
 import { Favourite } from './../../models/favourite';
@@ -11,7 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 export class FavouritePage {
 
-  favourites: Favourite[] = [];
+  favourites: Scripture[] = [];
   darkMode: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, private favouritesProvider: FavouriteProvider, private bibleProvider: BibleProvider) {}
 
@@ -35,14 +36,18 @@ export class FavouritePage {
     this.getFavourites();
   }
 
-  getFavourites()
+ getFavourites()
   {
-    this.favouritesProvider.getFavourites();
+   this.bibleProvider.getBibleBook()
+     .subscribe(passages =>
+     {
+      //  this.favourites = passages.filter(passage => passage.isFavourite == true)
+    } )
   }
 
-  unfavourite(favourite: Favourite)
+  unfavourite(passage: Scripture)
   {
-    this.favouritesProvider.removeFromFavourites(favourite);
+    
     this.navCtrl.setRoot(FavouritePage);
   }
 

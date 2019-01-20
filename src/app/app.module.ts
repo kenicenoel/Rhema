@@ -1,6 +1,6 @@
+import { FavouriteComponent } from './../components/favourite/favourite';
 import { MorePage } from './../pages/More/more';
 import { ReadOptionsPopOverPage } from './../pages/read-options-pop-over/read-options-pop-over';
-import { VerseOptionsPopOverPage } from './../pages/verse-options-pop-over/verse-options-pop-over';
 import { FavouritePage } from './../pages/favourite/favourite';
 import { ZeroPadPipe } from './../pipes/zero-pad/zero-pad';
 import { ReadBookPage } from './../pages/read-book/read-book';
@@ -33,10 +33,10 @@ import { BibleProvider } from '../providers/bible/bible';
     BiblePage,
     MorePage,
     SearchPage,
-    ReadBookPage,
     FavouritePage,
+    ReadBookPage,
     ZeroPadPipe,
-    VerseOptionsPopOverPage,
+    FavouriteComponent,
     ReadOptionsPopOverPage
   ],
   imports: [
@@ -52,11 +52,11 @@ import { BibleProvider } from '../providers/bible/bible';
     HomePage,
     TabsPage,
     BiblePage,
+    FavouriteComponent,
     SearchPage,
     MorePage,
-    ReadBookPage,
     FavouritePage,
-    VerseOptionsPopOverPage,
+    ReadBookPage,
     ReadOptionsPopOverPage
   ],
   providers: [

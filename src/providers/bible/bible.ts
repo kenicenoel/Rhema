@@ -12,7 +12,7 @@ export class BibleProvider
 {
 
 
-  bookdataUrl: string = "assets/bibles/bookdata.json";
+  bookdataUrl: string = "assets/bibles/kjv-specs.json";
   kjvBibleUrl: string = "assets/bibles/kjv.json";
   darkModeEnabled: string;
   recentlyReadBooks: string[] = [];
@@ -48,6 +48,10 @@ export class BibleProvider
     {
       key: 'speak',
       anim: 'assets/imgs/anim/wakeup_speaking.json'
+    },
+    {
+      key: 'search',
+      anim: 'assets/imgs/anim/search.json'
     }
   ]
   constructor(public http: HttpClient, private toastCtrl: ToastController, private storage: Storage)
@@ -86,7 +90,7 @@ export class BibleProvider
     }
     if (this.recentlyReadBooks != null && this.recentlyReadBooks != undefined && this.recentlyReadBooks.length == 5)
     {
-      this.recentlyReadBooks.pop();
+      this.recentlyReadBooks.shift();
     }
     let isInArray = this.recentlyReadBooks.indexOf(bookName);
     if (isInArray == -1)
@@ -108,7 +112,7 @@ export class BibleProvider
 
   }
 
-
+  
   showToast(messageToShow: string)
   {
     let toast = this.toastCtrl.create({

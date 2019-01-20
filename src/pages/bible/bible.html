@@ -9,14 +9,7 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content [class.darkMode]="darkMode" padding>   
-    <ion-searchbar
-    [(ngModel)]="searchText"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
-    placeholder="Search the bible"
-    (ionCancel)="onCancel($event)">
-  </ion-searchbar>
+<ion-content [class.darkMode]="darkMode" padding>
   <div class="chapters">
       <ion-grid *ngIf="displayMode == 'cards'">
         <ion-row>

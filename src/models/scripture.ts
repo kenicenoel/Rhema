@@ -6,4 +6,5 @@ export interface Scripture
   translation_id: string;
   book_id: string;
   book_name: string;
+  isFavourite: boolean;
 }

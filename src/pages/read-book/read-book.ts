@@ -1,8 +1,9 @@
+
+import { Scripture } from './../../models/scripture';
 import { Storage } from '@ionic/storage';
 import { BibleProvider } from './../../providers/bible/bible';
 import { Favourite } from './../../models/favourite';
 import { FavouriteProvider } from './../../providers/favourite/favourite';
-import { Scripture } from '../../models/scripture';
 import { Component } from '@angular/core';
 import { NavController, NavParams, PopoverController, AlertController, Platform } from 'ionic-angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
@@ -33,12 +34,12 @@ export class ReadBookPage
   }
   favourites: Favourite[] = [];
   loadingAnimationConfig: Object;
-  private anim: any;
   darkMode: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public bibleProvider: BibleProvider,
-    private tts: TextToSpeech, private popoverCtrl: PopoverController, private clipboard: Clipboard,
-    private alertCtrl: AlertController, private socialSharing: SocialSharing, public favouriteProvider: FavouriteProvider,
-    private platform: Platform, private storage: Storage)
+    private tts: TextToSpeech, private popoverCtrl: PopoverController, private alertCtrl: AlertController,
+    private platform: Platform,  private clipboard: Clipboard,
+    private socialSharing: SocialSharing,
+    public favouriteProvider: FavouriteProvider)
   {
     this.bookName = navParams.get('book');
     this.loadingAnimationConfig = this.bibleProvider.getAnimation("loading", true);
@@ -81,11 +82,6 @@ export class ReadBookPage
       },
         error => console.log(error)
       )
-  }
-
-  getFavouritesForBook()
-  {
-    this.favourites = this.favouriteProvider.getFavouritesByBookName(this.bookName);
   }
 
   toggleMenu()
@@ -163,39 +159,7 @@ export class ReadBookPage
     }
   }
 
-  copy(passage: Scripture)
-  {
-    let chapter = passage.chapter;
-    let verse = passage.verse;
-    let text = passage.text;
-    this.clipboard.copy(`${this.bookName} Chapter ${chapter} verse ${verse}\n${text}.`);
-    this.bibleProvider.showToast("Copied verse to your phone's clipboard.");
-  }
-
-  favourite(passage: Scripture)
-  {
-    let favourite = new Favourite(passage);
-    this.favouriteProvider.addToFavourites(favourite);
-  }
-
-  isFavorite(passage: Scripture)
-  {
-    let favourite = new Favourite(passage);
-    return this.favouriteProvider.isFavorite(favourite);
-  }
-
-  share(passage: Scripture)
-  {
-    let chapter = passage.chapter;
-    let reference = passage.verse;
-    let text = passage.text;
-    let footer = "Shared from Rhema Bible App!"
-    let textToShare = `${this.bookName} Chapter ${chapter} verse ${reference}\n${text}.\n${footer}`;
-    this.socialSharing.share(textToShare, null, null, null);
-  }
-
-
-
+  
   showAlert(message: string)
   {
     let alert = this.alertCtrl.create({
@@ -221,9 +185,32 @@ export class ReadBookPage
     })
   }
 
+  
+  
+  onCopy(passage: Scripture)
+  {
+    let chapter = passage.chapter;
+    let verse = passage.verse;
+    let text = passage.text;
+    let bookName = passage.book_name;
+    this.clipboard.copy(`${bookName} Chapter ${chapter} verse ${verse}\n${text}.`);
+    this.bibleProvider.showToast("Copied verse to your phone's clipboard.");
+  }
+
+
+  onShare(passage: Scripture)
+  {
+    let chapter = passage.chapter;
+    let reference = passage.verse;
+    let text = passage.text;
+    let bookName = passage.book_name;
+    let footer = "Shared from Rhema Bible App!"
+    let textToShare = `${bookName} Chapter ${chapter} verse ${reference}\n${text}.\n${footer}`;
+    this.socialSharing.share(textToShare, "Check out this passage of scripture", null, null);
+  }
+
   handleAnimation(anim: any) 
   {
-    this.anim = anim;
   }
 
 }

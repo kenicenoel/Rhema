@@ -8,58 +8,52 @@ const STORAGE_KEY = 'favouriteVerses';
 export class FavouriteProvider
 {
 
-  favouritesList: Favourite[] = [];
+
   constructor(public storage: Storage, private bibleProvider: BibleProvider)
   {
-    this.getAll();
   }
 
- private getAll() 
-  {
-    this.storage.get(STORAGE_KEY)
-      .then((favourites: Favourite[]) => this.favouritesList = favourites || []);
-  }
+  // private getAll() 
+  // {
+  //   this.storage.get(STORAGE_KEY)
+  //     .then((favourites: Favourite[]) => this.favouritesList = favourites || []);
+  // }
 
-  getFavourites = () => this.favouritesList || [];
+  // getFavourites = () => this.favouritesList || [];
 
-  isFavorite(favourite: Favourite) 
-  {
-    if (this.favouritesList.length == 0)
-    {
-      return false;
-    }
-    let indexResult = this.favouritesList.findIndex(fav => fav.isSame(favourite));
-    if (indexResult != -1) { return true; }
-    return false;
-  }
+  // isFavorite(favourite: Favourite) 
+  // {
+  //   // if (this.favouritesList.length == 0)
+  //   // {
+  //   //   return false;
+  //   // }
+  //   let indexResult = this.favouritesList.findIndex(fav =>  fav.scripture.text == favourite.scripture.text && fav.scripture.book_name == favourite.scripture.book_name);
+  //   if (indexResult != -1) { return true; }
+  //   return false;
+  // }
 
-  addToFavourites(favourite: Favourite) 
-  {
-    if (!this.isFavorite(favourite))
-    {
-      this.favouritesList.push(favourite);
-      this.bibleProvider.showToast("Added to favourites");
-      this.storage.set(STORAGE_KEY, this.favouritesList);
-    }
-    else
-    {
-      this.bibleProvider.showToast("You already favourited this scripture.");
-    }
+  // addToFavourites(favourite: Favourite) 
+  // {
+  //   if (!this.isFavorite(favourite))
+  //   {
+  //     this.favouritesList.push(favourite);
+  //     this.storage.set(STORAGE_KEY, this.favouritesList);
+  //     this.bibleProvider.showToast("Added to favourites");
+  //   }
+  // }
 
-  }
+  // removeFromFavourites(favourite: Favourite) 
+  // {
+  //   let indexResult = this.favouritesList.findIndex(fav => fav.isSame(favourite));
+  //   if (indexResult != -1)
+  //   {
+  //     this.favouritesList.splice(indexResult, 1);
+  //     this.storage.set(STORAGE_KEY, this.favouritesList);
+  //   }
+  // }
 
-  removeFromFavourites(favourite: Favourite) 
-  {
-    let indexResult = this.favouritesList.findIndex(fav => fav.isSame(favourite));
-    if (indexResult != -1)
-    {
-      this.favouritesList.splice(indexResult, 1);
-      this.storage.set(STORAGE_KEY, this.favouritesList);
-    }
-  }
+  // getFavouritesByBookName = (bookName: string) => this.favouritesList.filter(favourite => favourite.scripture.book_name == bookName);
 
-  getFavouritesByBookName = (bookName: string) => this.favouritesList.filter(favourite => favourite.scripture.book_name == bookName);
-
-  deleteAll = () => this.storage.remove(STORAGE_KEY);
+  // deleteAll = () => this.storage.remove(STORAGE_KEY);
 
 }

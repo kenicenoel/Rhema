@@ -1,23 +1,38 @@
 <ion-header no-border>
     <ion-toolbar [color]="darkMode ? 'dark' : 'light'">
-        <ion-title class="subtitle" text-center>Listen</ion-title>
+        <ion-title class="subtitle" text-center>Search the bible</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content padding [class.darkMode]="darkMode">
   <div class="container">
     <section>
-      <button *ngIf="!isListening else listening" padding class="startSpeech" (click)="toggleListening()" ion-button clear large >
-        <img  class="micImage" src="assets/imgs/ui/audio-91.svg">
-      </button>
-      <ng-template #listening> 
+      <ion-searchbar
+      [(ngModel)]="searchTerm"
+      [showCancelButton]="shouldShowCancel"
+     [formControl]="searchControl"
+      placeholder="Search the entire bible"
+      (ionCancel)="onCancel()">
+    </ion-searchbar>
+      <div *ngIf="!filteredScripture || filteredScripture?.length == 0"> 
           <lottie-animation-view
-          [options]="speakAnimationConfig"
+          [options]="searchAnimationConfig"
           [width]="300"
           [height]="500"
           (animCreated)="handleAnimation($event)">
         </lottie-animation-view>
-        </ng-template>
-      <p class="status">{{ status }}</p>
+      </div>
+
+      <div class="filteredScripture" *ngIf="filteredScripture?.length > 0">
+        <ng-container class="chapter" *ngFor="let scripture of filteredScripture">
+            <div class="bibleCard">
+                <p class="reference">{{ scripture.book_name }} {{ scripture.chapter }}: {{ scripture.verse }}</p>
+                <p class="verse verseDetails selectable">
+                    {{ scripture.text }}
+                </p>
+
+            </div>
+        </ng-container>
+    </div>
     </section>
   </div>
 </ion-content>

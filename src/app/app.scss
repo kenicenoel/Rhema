@@ -79,10 +79,37 @@ section
 //  font-weight: 600;
 }
 
-// ion-tabs
-// {
-//   background: #ffffff;
-// }
+.bibleCard
+{
+ //    border-radius: 5px;
+    border-bottom: 1px solid #e9e0e0;
+}
+
+ .verse
+ {
+     padding: 10px;
+     margin: 5px;
+ }
+
+ .verseNumber
+ {
+     font-weight: 500;
+     padding: 10px;
+     color: #ff006a;
+ }
+
+ .verseDetails
+    {
+        padding: 10px;
+        
+    }
+
+ .scriptureCard
+ {
+     // margin-bottom: 3px;
+     border-bottom: 1px solid #cccccc;
+     background: #ffffff;
+ }
 
 .ion-ios-customHome,
 .ion-md-customHome {

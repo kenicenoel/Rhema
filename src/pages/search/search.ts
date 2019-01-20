@@ -1,28 +1,30 @@
+import { Scripture } from './../../models/scripture';
 import { BibleProvider } from './../../providers/bible/bible';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import * as SDK from 'microsoft-speech-browser-sdk';
-
-const BING_SPEECH_API_KEY = "2cf1e40d197347e48ccc7ae4d66dbe5c";
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html',
 })
-export class SearchPage {
+export class SearchPage
+{
 
-  status: string = "Ready to listen";
-  isListening: boolean = false;
-  speechRecognizer: SDK.Recognizer;
-  speakAnimationConfig: Object;
+  searchAnimationConfig: Object;
+  searchTerm: string;
+  searchControl: FormControl;
   private anim: any;
   darkMode: boolean;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController, private bibleProvider: BibleProvider)
-   {
-    this.speechRecognizer = this.recognizerSetup(SDK, SDK.RecognitionMode.Interactive, "en-US", SDK.SpeechResultFormat.Simple, BING_SPEECH_API_KEY);
-    this.speakAnimationConfig = this.bibleProvider.getAnimation("speak", true);
+  fullBibleText: Scripture[];
+   filteredScripture: Scripture[] = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private bibleProvider: BibleProvider)
+  {
+    this.searchAnimationConfig = this.bibleProvider.getAnimation("search", true);
+    this.searchControl = new FormControl();
+    this.getBookData();
   }
-  
+
   ionViewWillEnter()
   {
     this.getDarkModeEnabled();
@@ -31,130 +33,55 @@ export class SearchPage {
   getDarkModeEnabled()
   {
     this.bibleProvider.getDarkModeEnabled()
-    .then(status =>
+      .then(status =>
       {
         this.darkMode = status == 'enabled' ? true : false;
 
       });
   }
 
-  ionViewDidEnter() 
+  ionViewDidLoad() 
   {
-    console.log(this.speechRecognizer);
-  }
-
-  recognizerSetup(SDK, recognitionMode, language, format, subscriptionKey) {
-    let recognizerConfig = new SDK.RecognizerConfig(
-      new SDK.SpeechConfig(
-        new SDK.Context(
-          new SDK.OS(navigator.userAgent, "Browser", null),
-          new SDK.Device("SpeechSample", "SpeechSample", "1.0.00000"))),
-      recognitionMode, // SDK.RecognitionMode.Interactive  (Options - Interactive/Conversation/Dictation)
-      language, // Supported languages are specific to each recognition mode Refer to docs.
-      format); // SDK.SpeechResultFormat.Simple (Options - Simple/Detailed)
-
-    // Alternatively use SDK.CognitiveTokenAuthentication(fetchCallback, fetchOnExpiryCallback) for token auth
-    let authentication = new SDK.CognitiveSubscriptionKeyAuthentication(subscriptionKey);
-
-    return SDK.CreateRecognizer(recognizerConfig, authentication);
-  }
-
-  toggleListening()
-  {
-    if(this.isListening)
+    
+    // this.setFilteredScripture();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search =>
     {
-      this.recognizerStop(this.speechRecognizer);
-      this.isListening = false;
-    }
-    else
-    {
-      if(this.speechRecognizer)
-      {
-        this.recognizerStart(this.speechRecognizer);
-        this.isListening = true;
-      }
-      else
-      {
-        let alert = this.alert.create({
-          message: 'Sorry, but the speech recognizer isn\'t quite ready yet.'
-        });
-        alert.present();
-  
-      }
-    }
-   
-  }
-
-  recognizerStart(recognizer) {
-    recognizer.Recognize((event) => {
-        /*
-            Alternative syntax for typescript devs.
-            if (event instanceof SDK.RecognitionTriggeredEvent)
-        */
-        switch (event.Name) {
-            case "RecognitionTriggeredEvent" :
-                this.status = "Initializing";
-                break;
-            case "ListeningStartedEvent" :
-                this.status = "Listening";
-                break;
-            case "RecognitionStartedEvent" :
-                this.status = "Recognizing";
-                break;
-            case "SpeechStartDetectedEvent" :
-                this.status = "Listening_DetectedSpeech_Recognizing";
-                console.log(JSON.stringify(event.Result)); // check console for other information in result
-                break;
-            case "SpeechHypothesisEvent" :
-                // UpdateRecognizedHypothesis(event.Result.Text);
-                console.log(JSON.stringify(event.Result)); // check console for other information in result
-                break;
-            case "SpeechFragmentEvent" :
-                // UpdateRecognizedHypothesis(event.Result.Text);
-                console.log(JSON.stringify(event.Result)); // check console for other information in result
-                break;
-            case "SpeechEndDetectedEvent" :
-                this.onSpeechEndDetected();
-                this.status = "Adding final touches";
-                console.log(JSON.stringify(event.Result)); // check console for other information in result
-                break;
-            case "SpeechSimplePhraseEvent" :
-                this.status = JSON.stringify(event.Result, null, 3);
-                break;
-            case "SpeechDetailedPhraseEvent" :
-                this.status = JSON.stringify(event.Result, null, 3);
-                break;
-            case "RecognitionEndedEvent" :
-                this.onComplete();
-                this.status = "Idle";
-                console.log(JSON.stringify(event)); // Debug information
-                break;
-        }
+      this.setFilteredScripture();
     })
-    .On(() => {
-        // The request succeeded. Nothing to do here.
-    },
-    (error) => {
-        console.error(error);
-    });
-}
-
-onSpeechEndDetected()
-{
-
-}
-
-  recognizerStop(recognizer) 
-  {
-    // recognizer.AudioSource.Detach(audioNodeId) can be also used here. (audioNodeId is part of ListeningStartedEvent)
-    recognizer.AudioSource.TurnOff();
   }
-  
-  onComplete()
+
+  getBookData()
   {
-    this.isListening = false;
-    this.recognizerStop(this.speechRecognizer);
+    this.bibleProvider.getBibleBook()
+      .subscribe(bibleText => 
+      {
+        this.fullBibleText = bibleText;
+      },
+        error => console.log(error)
+      )
   }
+
+  filterBible()
+  {
+    if (this.searchTerm && this.searchTerm !== "" )
+    {
+      return this.fullBibleText.filter((bibleText) =>
+      {
+        return bibleText.text.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      })
+    }
+  }
+
+  setFilteredScripture()
+  {
+    this.filteredScripture = this.filterBible();
+  }
+
+  onCancel()
+  {
+    this.filteredScripture = [];
+  }
+
 
   handleAnimation(anim: any) 
   {

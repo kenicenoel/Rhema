@@ -1,4 +1,4 @@
-<ion-header no-border>
+<ion-header no-border> 
     <ion-toolbar [color]="darkMode ? 'dark' : 'light'">
         <ion-buttons start>
             <button class="card-action" ion-button clear (click)="returnToBooks()">
@@ -24,8 +24,7 @@
         <div class="container" *ngIf="chapter == -1; else filter">
             <div *ngFor="let passage of selectedBook; let i = index">
                 <p class="chapterNumber" *ngIf="i == 0 || selectedBook[i-1].chapter != selectedBook[i].chapter">Chapter
-                    {{
-                    passage.chapter }}</p>
+                    {{ passage.chapter }}</p>
                 <div class="bibleCard">
                     <ng-container class="chapter">
                         <p class="verse verseDetails selectable">
@@ -33,7 +32,9 @@
                             {{ passage.text }}
                         </p>
                     </ng-container>
+                    <!-- <favourite [isFavourite]="passage.isFavourite" (change)="onFavouriteChanged()"></favourite> -->
                 </div>
+               
             </div>
         </div>
         <ng-template #filter>
@@ -46,6 +47,7 @@
                             {{ passage.text }}
                         </p>
                     </div>
+                    <!-- <favourite [isFavourite]="passage.isFavourite" (change)="onFavouriteChanged()"></favourite> -->
                 </ng-container>
             </div>
         </ng-template>
